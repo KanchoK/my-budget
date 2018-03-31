@@ -8,6 +8,10 @@ Gradle is used as build tool for the project.
 
 ### Prerequisites
 
+You need to install and setup JDK if you didn't already **(used version JDK 8)**
+
+You need to install Gradle **(used version 4.6)**
+
 You need to install MySQL 5.7 and setup the database for the project. To do this you need to:
 
 - Install MySQL 5.7 - https://dev.mysql.com/downloads/mysql/
