@@ -4,6 +4,10 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
+    <welcome-file-list>
+        <welcome-file>/dist/index.html</welcome-file>
+    </welcome-file-list>
+
     <servlet>
         <servlet-name>RestApp</servlet-name>
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
@@ -20,7 +24,7 @@
 
     <error-page>
         <error-code>404</error-code>
-        <location>/index.html</location>
+        <location>/dist/index.html</location>
     </error-page>
 
     <resource-ref>

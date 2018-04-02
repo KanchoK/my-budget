@@ -58,3 +58,6 @@ gradle-app.setting
 *.zip
 *.sar
 *.class
+
+# Exclude webapp dist folder
+!src/main/webapp/dist
