@@ -1,0 +1,14 @@
+<h2>My budgets</h2>
+<button data-bind="click: toggleNewBudgetForm">+ New Budget</button>
+
+<div data-bind="visible: newBudgetForm()" class="new-Budget-form">
+    <input placeholder="Name" data-bind="textInput: form.name" />
+    <button data-bind="click: addBudget">Done!</button>
+</div>
+
+<div class="budgets-container" data-bind="foreach: budgets">
+    <div class="budget" data-bind="click: open">
+        <span class="name" data-bind="text: name"></span>
+        <button class="btn-remove" data-bind="click: function() { $parent.removeBudget($data) }, clickBubble: false">Remove budget</button>
+    </div>
+</div>

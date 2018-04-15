@@ -1,0 +1,6 @@
+<div class="category">
+    <div><span> Category name: </span><span data-bind="text: name"></span></div>
+    <div><span> Money planned: </span><span data-bind="text: moneyPlanned"></span></div>
+    <div><span> Money spent: </span><span data-bind="text: moneySpent"></span></div>
+    <div><span> Difference: </span><span data-bind="text: difference(), style: { color: difference() > 0 ? 'green' : 'red' }"></span></div>
+</div>

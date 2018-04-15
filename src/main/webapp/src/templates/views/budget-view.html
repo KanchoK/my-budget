@@ -1,0 +1,20 @@
+<h2>Categories</h2>
+
+<button data-bind="click: toggleNewCategoryForm">Add category</button>
+
+<div data-bind="visible: newCategoryForm()" class="new-category-form">
+    <input placeholder="Name" data-bind="textInput: form.name" />
+    <input type="number" min="0" placeholder="Planned amount" data-bind="textInput: form.planned" />
+    <button data-bind="click: addCategory">Done!</button>
+</div>
+
+<div data-bind="foreach: categories">
+    <div class="category-wrap">
+        <div data-bind="component: {
+            name: 'category',
+            params: params
+        }"></div>
+        <a data-bind="attr: { href: url }">Manage payments</a>
+        <button data-bind="click: function() { $parent.removeCategory($data) }">Remove category</button>
+    </div>
+</div>

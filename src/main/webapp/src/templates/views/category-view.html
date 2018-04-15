@@ -1,0 +1,20 @@
+<h2>Payments</h2>
+
+<button data-bind="click: toggleNewPaymentForm">Add payment</button>
+
+<div data-bind="visible: newPaymentForm()">
+    <input placeholder="Name" data-bind="textInput: form.name" />
+    <input placeholder="Description" data-bind="textInput: form.description" />
+    <input type="number" min="0" placeholder="Amount" data-bind="textInput: form.amount" />
+    <button data-bind="click: addPayment">Done!</button>
+</div>
+
+<div data-bind="foreach: payments">
+    <div class="category-wrap">
+        <div data-bind="component: {
+            name: 'payment',
+            params: params
+        }"></div>
+        <button data-bind="click: function() { $parent.removePayment($data) }">Remove payment</button>
+    </div>
+</div>
