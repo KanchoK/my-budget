@@ -16,6 +16,14 @@ import uni.fmi.service.impl.UserServiceImpl;
 import org.glassfish.jersey.internal.inject.AbstractBinder;
 
 import javax.inject.Singleton;
+import uni.fmi.persistence.dao.CategoryDao;
+import uni.fmi.persistence.dao.PaymentDao;
+import uni.fmi.persistence.dao.impl.CategoryDaoImpl;
+import uni.fmi.persistence.dao.impl.PaymentDaoImpl;
+import uni.fmi.service.CategoryService;
+import uni.fmi.service.PaymentService;
+import uni.fmi.service.impl.CategoryServiceImpl;
+import uni.fmi.service.impl.PaymentServiceImpl;
 
 public class Binder extends AbstractBinder {
 
@@ -29,5 +37,9 @@ public class Binder extends AbstractBinder {
         bind(UserDaoImpl.class).to(UserDao.class);
         bind(BudgetDaoImpl.class).to(BudgetDao.class);
         bind(DatabaseManager.class).to(DatabaseManager.class).in(Singleton.class);
+        bind(CategoryDaoImpl.class).to(CategoryDao.class);
+        bind(PaymentDaoImpl.class).to(PaymentDao.class);
+        bind(CategoryServiceImpl.class).to(CategoryService.class);
+        bind(PaymentServiceImpl.class).to(PaymentService.class);
     }
 }
