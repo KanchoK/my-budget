@@ -1,18 +1,30 @@
 const path = require('path');
+const DIST = './src/main/webapp/dist'
+const WriteFilePlugin = require('write-file-webpack-plugin');
 
 module.exports = {
-  entry: './src/js/index.js',
+  entry: './static/js/index.js',
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, DIST),
     filename: 'bundle.js'
   },
   devtool: 'source-map',
   mode: 'development',
+  plugins: [
+    new WriteFilePlugin()
+  ],
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
-    inline: true,
+    contentBase: path.resolve(__dirname, DIST),
+    port: 10000,
+    proxy: {
+        '/api': {
+            target: 'http://localhost:8080',
+            secure: false,
+            pathRewrite: {"^/api" : ""}
+        }
+    },
     historyApiFallback: {
-        index: './dist/index.html'
+        index: 'index.html'
     }
   },
     module: {
