@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Secured
 @Path("budgets")
@@ -53,6 +54,18 @@ public class BudgetManager {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode())
                     .entity(statusMessage).build();
         }
+    }
+
+    @GET
+    @Path("getAll")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getBudgetsForUser(@HeaderParam("userId") int userId) {
+        List<Budget> budgetsForUser = budgetService.getBudgetsForUser(userId);
+
+        LOG.info("Budgets successfully retrieved: " + budgetsForUser);
+
+        return Response.status(Response.Status.OK.getStatusCode())
+                .entity(budgetsForUser).build();
     }
 
     @GET
