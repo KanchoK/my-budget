@@ -57,9 +57,9 @@ public class BudgetManager {
     }
 
     @GET
-    @Path("getAll")
+    @Path("{userId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getBudgetsForUser(@HeaderParam("userId") int userId) {
+    public Response getBudgetsForUser(@PathParam("userId") int userId) {
         List<Budget> budgetsForUser = budgetService.getBudgetsForUser(userId);
 
         LOG.info("Budgets successfully retrieved: " + budgetsForUser);
@@ -69,10 +69,10 @@ public class BudgetManager {
     }
 
     @GET
-    @Path("get")
+    @Path("{userId}/{validForMonth}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getBudget(@HeaderParam("validForMonth") String month,
-                              @HeaderParam("userId") int userId) {
+    public Response getBudget(@PathParam("validForMonth") String month,
+                              @PathParam("userId") int userId) {
         Budget result = budgetService.getBudgetForUserAndMonth(month, userId);
 
         LOG.info("Budget successfully retrieved: " + result);
@@ -82,9 +82,9 @@ public class BudgetManager {
     }
 
     @DELETE
-    @Path("remove")
+    @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getBudget(@HeaderParam("id") int id) {
+    public Response getBudget(@PathParam("id") int id) {
         boolean result = budgetService.removeBudget(id);
 
         LOG.info("Budget successfully deleted: " + result);
