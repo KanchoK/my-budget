@@ -8,10 +8,10 @@ class Register {
         $.ajax({
             type: "POST",
             url: "http://localhost:8080/my-budget/rest/users/registration",
-            data: {
+            data: JSON.stringify({
                 "username": this.username(),
                 "password": this.password()
-            },
+            }),
             contentType: "application/json"
         });
     }
