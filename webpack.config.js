@@ -1,5 +1,5 @@
 const path = require('path');
-const DIST = './src/main/webapp/dist'
+const DIST = 'webpack-dist'
 const WriteFilePlugin = require('write-file-webpack-plugin');
 
 module.exports = {
