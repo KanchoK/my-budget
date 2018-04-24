@@ -29994,11 +29994,11 @@ class Register {
     register () {
         $.ajax({
             type: "POST",
-            url: "http://localhost:8080/my-budget/rest/users/registration",
-            data: {
+            url: "/api/users/registration",
+            data: JSON.stringify({
                 "username": this.username(),
                 "password": this.password()
-            },
+            }),
             contentType: "application/json"
         });
     }

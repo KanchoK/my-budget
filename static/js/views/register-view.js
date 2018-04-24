@@ -7,7 +7,7 @@ class Register {
     register () {
         $.ajax({
             type: "POST",
-            url: "http://localhost:8080/my-budget/rest/users/registration",
+            url: "/api/users/registration",
             data: JSON.stringify({
                 "username": this.username(),
                 "password": this.password()
