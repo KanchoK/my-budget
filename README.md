@@ -18,9 +18,14 @@ You need to install MySQL 5.7 and setup the database for the project. To do this
 - Run *createDB.sql* script from the *sql* folder of the project, in order to create the database and the user with access to it
 - Run *init.sql* script from the *sql* folder of the project, in order to create the initial tables and data
 
-1. To start the application use:
+1. To start the backend use:
     ``` bash
     gradlew appRun
     ```
     The application should be available on: 
     > http://localhost:8080/my-budget
+    
+2. To start the frontend:
+    1. install node.js (used v8.10.0 but probably later versions will work too) - https://nodejs.org/en/download/
+    2. npm install
+    3. npm run start
