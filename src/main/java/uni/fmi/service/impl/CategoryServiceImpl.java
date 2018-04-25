@@ -5,10 +5,12 @@
  */
 package uni.fmi.service.impl;
 
-import javax.inject.Inject;
 import uni.fmi.model.Category;
 import uni.fmi.persistence.dao.CategoryDao;
 import uni.fmi.service.CategoryService;
+
+import javax.inject.Inject;
+import java.util.List;
 
 public class CategoryServiceImpl implements CategoryService {
     
@@ -19,6 +21,11 @@ public class CategoryServiceImpl implements CategoryService {
     public boolean createCategory(Category category) {
         int categoryId = categoryDao.createCategory(category);
         return categoryId > 0;
+    }
+
+    @Override
+    public List<Category> getCategoriesForBudget(int categoryId) {
+        return categoryDao.getCategoriesForBudget(categoryId);
     }
 
     @Override

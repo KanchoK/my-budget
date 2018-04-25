@@ -17,6 +17,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Secured
 @Path("categories")
@@ -59,6 +60,18 @@ public class CategoryManager {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode())
                     .entity(statusMessage).build();
         }
+    }
+
+    @GET
+    @Path("{budgetId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getBudgetsForUser(@PathParam("budgetId") int budgetId) {
+        List<Category> categoriesForBudget = categoryService.getCategoriesForBudget(budgetId);
+
+        LOG.info("Budgets successfully retrieved: " + categoriesForBudget);
+
+        return Response.status(Response.Status.OK.getStatusCode())
+                .entity(categoriesForBudget).build();
     }
 
     @DELETE
