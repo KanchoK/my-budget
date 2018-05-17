@@ -1,61 +1,56 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package uni.fmi.endpoint;
 
+import java.math.BigDecimal;
 import org.apache.log4j.Logger;
 import uni.fmi.annotation.Secured;
-import uni.fmi.model.Category;
+import uni.fmi.model.MonthlyIncome;
 import uni.fmi.model.StatusMessage;
 import uni.fmi.model.StatusMessageBuilder;
-import uni.fmi.service.CategoryService;
+import uni.fmi.service.MonthlyIncomeService;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.math.BigDecimal;
 import java.util.List;
 
 @Secured
-@Path("categories")
-public class CategoryManager {
-    
-    private static final Logger LOG = Logger.getLogger(CategoryManager.class);
+@Path("monthly-incomes")
+public class MonthlyIncomeManager {
+
+    private static final Logger LOG = Logger.getLogger(MonthlyIncomeManager.class);
 
     @Inject
-    private CategoryService categoryService;
+    private MonthlyIncomeService monthlyIncomeService;
 
     @POST
     @Path("create")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createCategory(Category category) {
-        LOG.info("Category creation initiated...");
-        if (category.getName() == null || category.getName().equals("")
-                || category.getPlannedAmount().compareTo(BigDecimal.ZERO) != 1
-                || category.getBudget() == null || category.getBudget().getId() <= 0) {
+    public Response createMonthlyIncome(MonthlyIncome monthlyIncome) {
+        LOG.info("MonthlyIncome creation initiated...");
+        if ( monthlyIncome.getValidForMonth() == null || monthlyIncome.getValidForMonth().equals("")
+                || monthlyIncome.getMonthlyIncome().compareTo(BigDecimal.ZERO) != 1
+                || monthlyIncome.getUser() == null || monthlyIncome.getUser().getId() <= 0) {
             StatusMessage statusMessage = new StatusMessageBuilder()
                     .status(Response.Status.PRECONDITION_FAILED.getStatusCode())
-                    .message("Category must have Name, Planned Amount and Budget!").build();
+                    .message("Monthly income must have MonthlyIncome, Valid Month and User!").build();
             LOG.info("Service status message: " + statusMessage);
             return Response.status(Response.Status.PRECONDITION_FAILED.getStatusCode())
                     .entity(statusMessage).build();
         }
 
-        if (categoryService.createCategory(category)) {
+        if (monthlyIncomeService.createMonthlyIncome(monthlyIncome)) {
             StatusMessage statusMessage = new StatusMessageBuilder()
                     .status(Response.Status.OK.getStatusCode())
-                    .message("Category was created successfully.").build();
+                    .message("Monthly income was created successfully.").build();
             LOG.info("Service status message: " + statusMessage);
             return Response.status(Response.Status.OK.getStatusCode())
                     .entity(statusMessage).build();
         } else {
             StatusMessage statusMessage = new StatusMessageBuilder()
                     .status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode())
-                    .message("There was some problem with category creation!").build();
+                    .message("There was some problem with monthly income creation!").build();
             LOG.info("Service status message: " + statusMessage);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode())
                     .entity(statusMessage).build();
@@ -63,24 +58,24 @@ public class CategoryManager {
     }
 
     @GET
-    @Path("{budgetId}")
+    @Path("{userId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCategoriesForBudget(@PathParam("budgetId") int budgetId) {
-        List<Category> categoriesForBudget = categoryService.getCategoriesForBudget(budgetId);
+    public Response getMonthlyIncomesForUser(@PathParam("userId") int userId) {
+        List<MonthlyIncome> monthlyIncomesForUser = monthlyIncomeService.getMonthlyIncomesForUser(userId);
 
-        LOG.info("Budgets successfully retrieved: " + categoriesForBudget);
+        LOG.info("Monthly incomes successfully retrieved: " + monthlyIncomesForUser);
 
         return Response.status(Response.Status.OK.getStatusCode())
-                .entity(categoriesForBudget).build();
+                .entity(monthlyIncomesForUser).build();
     }
 
     @DELETE
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response removeCategory(@PathParam("id") int id) {
-        boolean result = categoryService.removeCategory(id);
+    public Response removeMonthlyIncome(@PathParam("id") int id) {
+        boolean result = monthlyIncomeService.removeMonthlyIncome(id);
 
-        LOG.info("Category successfully deleted: " + result);
+        LOG.info("Monthly income successfully deleted: " + result);
 
         return Response.status(Response.Status.OK.getStatusCode())
                 .build();

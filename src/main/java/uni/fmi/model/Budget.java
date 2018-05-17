@@ -6,8 +6,8 @@ public class Budget {
 
     private int id;
     private String name;
-    private BigDecimal plannedAmount;
-    private BigDecimal spentAmount;
+    private BigDecimal plannedAmount = BigDecimal.ZERO;
+    private BigDecimal spentAmount = BigDecimal.ZERO;
     private String validForMonth;
     private User user;
 

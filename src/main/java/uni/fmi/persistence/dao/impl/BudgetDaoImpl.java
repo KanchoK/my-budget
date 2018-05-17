@@ -20,7 +20,7 @@ public class BudgetDaoImpl implements BudgetDao {
 
     private static final String ADD_BUDGET_STATEMENT = "INSERT INTO budgets(name, validForMonth, userId) " +
                                                 "VALUES (?, ?, ?)";
-    private static final String GET_BUDGETS_STATEMENT =
+    private static final String GET_BUDGETS_FOR_USER_STATEMENT =
             "SELECT b.id, b.name, b.plannedAmount, b.spentAmount, b.validForMonth, u.id, u.username " +
                     "FROM budgets AS b " +
                     "INNER JOIN users AS u " +
@@ -64,7 +64,7 @@ public class BudgetDaoImpl implements BudgetDao {
 
         try (Connection conn = databaseManager.getDataSource().getConnection();
              PreparedStatement preparedStatement = conn
-                     .prepareStatement(GET_BUDGETS_STATEMENT)) {
+                     .prepareStatement(GET_BUDGETS_FOR_USER_STATEMENT)) {
 
             preparedStatement.setInt(1, userId);
             try (ResultSet rs = preparedStatement.executeQuery()) {
@@ -80,8 +80,8 @@ public class BudgetDaoImpl implements BudgetDao {
     }
 
     @Override
-    public Budget getBudgetForMonthAndUserId(String month, int userId) {
-        Budget budget = null;
+    public List<Budget> getBudgetsForUserAndMonth(int userId, String month) {
+          List<Budget> budgets = new ArrayList<>();
 
         try (Connection conn = databaseManager.getDataSource().getConnection();
              PreparedStatement preparedStatement = conn
@@ -90,15 +90,15 @@ public class BudgetDaoImpl implements BudgetDao {
             preparedStatement.setString(1, month);
             preparedStatement.setInt(2, userId);
             try (ResultSet rs = preparedStatement.executeQuery()) {
-                if (rs.next()) {
-                    budget = buildBudgetFromResultSet(rs);
+                while (rs.next()) {
+                    budgets.add(buildBudgetFromResultSet(rs));
                 }
             }
         } catch (SQLException e) {
             LOG.error("Exception was thrown", e);
         }
 
-        return budget;
+        return budgets;
     }
 
     @Override
@@ -127,4 +127,13 @@ public class BudgetDaoImpl implements BudgetDao {
                 rs.getString("b.validForMonth"),
                 user);
     }
+    
+//     private Budget buildAllBudgetFromResultSet(ResultSet rs) throws SQLException {
+//        return new Budget(rs.getInt("b.id"),
+//                rs.getString("b.name"),
+//                rs.getBigDecimal("b.plannedAmount"),
+//                rs.getBigDecimal("b.spentAmount"),
+//                rs.getString("b.validForMonth"),
+//                user);
+//    }
 }

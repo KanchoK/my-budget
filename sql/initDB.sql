@@ -3,7 +3,9 @@ USE my_budget;
 DROP TABLE IF EXISTS payments;
 DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS budgets;
+DROP TABLE IF EXISTS monthly_incomes;
 DROP TABLE IF EXISTS users;
+
 
 CREATE TABLE users (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -12,6 +14,20 @@ CREATE TABLE users (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+create table monthly_incomes
+(
+	id int auto_increment
+		primary key,
+	monthlyIncome decimal not null,
+	validForMonth varchar(15) not null,
+	userId int not null,
+	constraint userId_validForMonth_UNIQUE
+		unique (userId, validForMonth),
+	constraint user_monthly_incomes
+		foreign key (userId) references my_budget.users (id)
+)
+;
 
 create table budgets
 (
@@ -24,7 +40,7 @@ create table budgets
 	userId int not null,
 	constraint name_UNIQUE
 		unique (name),
-	constraint user
+	constraint user_budgets
 		foreign key (userId) references my_budget.users (id)
 )
 ;
@@ -49,6 +65,8 @@ create table payments
 	id int auto_increment
 		primary key,
 	title varchar(50) not null,
+    `comment`  varchar(150) null,
+	`date` varchar(15) not null,
 	amount decimal not null,
 	categoryId int not null,
 	constraint title_UNIQUE
@@ -60,6 +78,10 @@ create table payments
 
 create index id_idx
 	on budgets (userId)
+;
+
+create index id_idx
+	on monthly_incomes (userId)
 ;
 
 create index id_idx

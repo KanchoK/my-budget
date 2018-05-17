@@ -13,7 +13,7 @@ public interface CategoryService {
     
     boolean createCategory(Category category);
 
-    List<Category> getCategoriesForBudget(int categoryId);
+    List<Category> getCategoriesForBudget(int budgetId);
 
     boolean removeCategory(int id);
 }

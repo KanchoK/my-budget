@@ -18,8 +18,8 @@ import java.math.BigDecimal;
 public class Category{
     private int id;
     private String name;
-    private BigDecimal plannedAmount;
-    private BigDecimal spentAmount;
+    private BigDecimal plannedAmount = BigDecimal.ZERO;
+    private BigDecimal spentAmount = BigDecimal.ZERO;
     private Budget budget;
 
     public Category() {

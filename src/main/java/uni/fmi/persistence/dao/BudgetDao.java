@@ -8,8 +8,8 @@ public interface BudgetDao {
     int createBudget(Budget budget);
 
     List<Budget> getBudgetsForUser(int userId);
-
-    Budget getBudgetForMonthAndUserId(String month, int userId);
+    
+    List<Budget> getBudgetsForUserAndMonth(int userId, String month);
 
     boolean removeBudget(int id);
 }

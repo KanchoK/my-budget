@@ -25,7 +25,7 @@ public class CategoryDaoImpl implements CategoryDao{
 
     private static final String ADD_CATEGORY_STATEMENT = "INSERT INTO categories(name, plannedAmount, budgetId) " +
                                                 "VALUES (?, ?, ?)";
-    private static final String GET_CATEGORIES_STATEMENT =
+    private static final String GET_CATEGORIES_FOR_BUDGET_STATEMENT =
             "SELECT c.id, c.name, c.plannedAmount, c.spentAmount, b.id, b.validForMonth, b.name " +
                     "FROM categories AS c " +
                     "INNER JOIN budgets AS b " +
@@ -57,14 +57,14 @@ public class CategoryDaoImpl implements CategoryDao{
     }
 
     @Override
-    public List<Category> getCategoriesForBudget(int categoryId) {
+    public List<Category> getCategoriesForBudget(int budgetId) {
         List<Category> categories = new ArrayList<>();
 
         try (Connection conn = databaseManager.getDataSource().getConnection();
              PreparedStatement preparedStatement = conn
-                     .prepareStatement(GET_CATEGORIES_STATEMENT)) {
+                     .prepareStatement(GET_CATEGORIES_FOR_BUDGET_STATEMENT)) {
 
-            preparedStatement.setInt(1, categoryId);
+            preparedStatement.setInt(1, budgetId);
             try (ResultSet rs = preparedStatement.executeQuery()) {
                 while (rs.next()) {
                     categories.add(buildCategoryFromResultSet(rs));

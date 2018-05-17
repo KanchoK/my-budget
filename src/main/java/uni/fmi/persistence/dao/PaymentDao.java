@@ -12,7 +12,7 @@ import java.util.List;
 public interface PaymentDao {
     int createPayment(Payment payment);
 
-    List<Payment> getPaymentsForCategory(int paymentId);
+    List<Payment> getPaymentsForCategory(int categoryId);
 
     boolean removePayment(int id);
 }

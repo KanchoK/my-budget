@@ -9,7 +9,7 @@ public interface BudgetService {
 
     List<Budget> getBudgetsForUser(int userId);
 
-    Budget getBudgetForUserAndMonth(String month, int userId);
+    List<Budget> getBudgetsForUserAndMonth(int userId, String month);
 
     boolean removeBudget(int id);
 }

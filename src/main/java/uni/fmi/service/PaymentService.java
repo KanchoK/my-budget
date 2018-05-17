@@ -13,7 +13,7 @@ public interface PaymentService {
     
     boolean createPayment(Payment payment);
 
-    List<Payment> getPaymentsForCategory(int paymentId);
+    List<Payment> getPaymentsForCategory(int categoryId);
 
     boolean removePayment(int id);
 }

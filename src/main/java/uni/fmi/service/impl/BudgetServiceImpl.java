@@ -24,8 +24,8 @@ public class BudgetServiceImpl implements BudgetService {
     }
 
     @Override
-    public Budget getBudgetForUserAndMonth(String month, int userId) {
-        return budgetDao.getBudgetForMonthAndUserId(month, userId);
+    public List<Budget> getBudgetsForUserAndMonth(int userId, String month) {
+        return budgetDao.getBudgetsForUserAndMonth(userId, month);
     }
 
     @Override

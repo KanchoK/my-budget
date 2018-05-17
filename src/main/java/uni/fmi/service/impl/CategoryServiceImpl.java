@@ -24,8 +24,8 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<Category> getCategoriesForBudget(int categoryId) {
-        return categoryDao.getCategoriesForBudget(categoryId);
+    public List<Category> getCategoriesForBudget(int budgetId) {
+        return categoryDao.getCategoriesForBudget(budgetId);
     }
 
     @Override

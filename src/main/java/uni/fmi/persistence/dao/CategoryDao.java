@@ -12,7 +12,9 @@ import java.util.List;
 public interface CategoryDao {
     int createCategory(Category category);
 
-    List<Category> getCategoriesForBudget(int categoryId);
+    List<Category> getCategoriesForBudget(int budgetId);
+    
+//    List<Category> getCategoriesForUserAndMonth(int userId, String month);
 
     boolean removeCategory(int id);
 }

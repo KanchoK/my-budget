@@ -71,20 +71,20 @@ public class BudgetManager {
     @GET
     @Path("{userId}/{validForMonth}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getBudget(@PathParam("validForMonth") String month,
+    public Response getBudgetsForUserAndMonth(@PathParam("validForMonth") String month,
                               @PathParam("userId") int userId) {
-        Budget result = budgetService.getBudgetForUserAndMonth(month, userId);
+        List<Budget> budgetsForUserAndMonth = budgetService.getBudgetsForUserAndMonth(userId, month);
 
-        LOG.info("Budget successfully retrieved: " + result);
+        LOG.info("Budget successfully retrieved: " + budgetsForUserAndMonth);
 
         return Response.status(Response.Status.OK.getStatusCode())
-                .entity(result).build();
+                .entity(budgetsForUserAndMonth).build();
     }
 
     @DELETE
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getBudget(@PathParam("id") int id) {
+    public Response removeBudget(@PathParam("id") int id) {
         boolean result = budgetService.removeBudget(id);
 
         LOG.info("Budget successfully deleted: " + result);
