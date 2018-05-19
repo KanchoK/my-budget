@@ -26,11 +26,22 @@ public class CategoryDaoImpl implements CategoryDao{
     private static final String ADD_CATEGORY_STATEMENT = "INSERT INTO categories(name, plannedAmount, budgetId) " +
                                                 "VALUES (?, ?, ?)";
     private static final String GET_CATEGORIES_FOR_BUDGET_STATEMENT =
-            "SELECT c.id, c.name, c.plannedAmount, c.spentAmount, b.id, b.validForMonth, b.name " +
+            "SELECT c.id, c.name, c.plannedAmount, c.spentAmount, " +
+            "b.id, b.validForMonth, b.name, b.plannedAmount, b.spentAmount " +
                     "FROM categories AS c " +
                     "INNER JOIN budgets AS b " +
                     "ON c.budgetId = b.id " +
-                    "WHERE c.budgetId=?";
+                    "WHERE c.budgetId = ?";
+    
+    private static final String GET_CATEGORIES_FOR_USER_AND_MONTH_STATEMENT =
+            "SELECT c.id, c.name, c.plannedAmount, c.spentAmount, " +
+            "b.id, b.validForMonth, b.name, b.plannedAmount, b.spentAmount " +
+                    "FROM categories AS c " +
+                    "INNER JOIN budgets AS b " +
+                    "ON c.budgetId = b.id " +
+                    "INNER JOIN users AS u " +
+                    "ON b.userId = u.id " +
+                    "WHERE u.id = ? AND b.validForMonth = ?";
     private static final String REMOVE_CATEGORY_STATEMENT = "DELETE FROM categories WHERE id=?";
     
     @Override
@@ -76,6 +87,28 @@ public class CategoryDaoImpl implements CategoryDao{
 
         return categories;
     }
+    
+    @Override
+    public List<Category> getCategoriesForUserAndMonth(int userId, String month){
+          List<Category> categories = new ArrayList<>();
+
+        try (Connection conn = databaseManager.getDataSource().getConnection();
+             PreparedStatement preparedStatement = conn
+                     .prepareStatement(GET_CATEGORIES_FOR_USER_AND_MONTH_STATEMENT)) {
+
+            preparedStatement.setInt(1, userId);
+            preparedStatement.setString(2, month);
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                while (rs.next()) {
+                    categories.add(buildCategoryFromResultSet(rs));
+                }
+            }
+        } catch (SQLException e) {
+            LOG.error("Exception was thrown", e);
+        }
+
+        return categories;
+    }
 
     @Override
     public boolean removeCategory(int id) {
@@ -94,8 +127,11 @@ public class CategoryDaoImpl implements CategoryDao{
 
     private Category buildCategoryFromResultSet(ResultSet rs) throws SQLException {
         Budget budget = new Budget(rs.getInt("b.id"),
+                rs.getString("b.name"),
+                rs.getBigDecimal("b.plannedAmount"),
+                rs.getBigDecimal("b.spentAmount"),
                 rs.getString("b.validForMonth"),
-                rs.getString("b.name"));
+                null);
 
         return new Category(rs.getInt("c.id"),
                 rs.getString("c.name"),

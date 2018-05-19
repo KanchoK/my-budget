@@ -13,7 +13,7 @@ public class Payment {
     private String date;
     private BigDecimal amount = BigDecimal.ZERO;
     private Category category;
-    private String comment = "";
+    private String comment = ""; 
 
 
     public Payment() {
@@ -28,10 +28,11 @@ public class Payment {
         this.category = category;
     }
     
-     public Payment(int id, String title,String date, BigDecimal amount,
+     public Payment(int id, String title, String date, BigDecimal amount,
             Category category, String comment) {
         this.id = id;
         this.title = title;
+        this.date = date;
         this.amount = amount;
         this.category = category;
         this.comment = comment;

@@ -25,13 +25,13 @@ public class MonthlyIncomeDaoImpl implements MonthlyIncomeDao {
                     "FROM monthly_incomes AS m " +
                     "INNER JOIN users AS u " +
                     "ON m.userId = u.id " +
-                    "WHERE m.userId=?";
+                    "WHERE m.userId = ?";
     private static final String GET_MONTHLY_INCOME_STATEMENT =
             "SELECT m.id, m.monthlyIncome, m.validForMonth, u.id, u.username " +
-            "FROM monthly_incomes AS m " +
-            "INNER JOIN users AS u " +
+                "FROM monthly_incomes AS m " +
+                "INNER JOIN users AS u " +
                 "ON m.userId = u.id " +
-            "WHERE m.validForMonth=? AND m.userId=?";
+                "WHERE m.validForMonth = ? AND m.userId = ?";
     private static final String REMOVE_MONTHLY_INCOME_STATEMENT = "DELETE FROM monthly_incomes WHERE id=?";
 
 
@@ -88,7 +88,7 @@ public class MonthlyIncomeDaoImpl implements MonthlyIncomeDao {
                      .prepareStatement(GET_MONTHLY_INCOME_STATEMENT)) {
 
             preparedStatement.setString(1, month);
-            preparedStatement.setInt(2, userId);
+            preparedStatement.setInt(2, userId);           
             try (ResultSet rs = preparedStatement.executeQuery()) {
                 if (rs.next()) {
                     monthlyIncome = buildMonthlyIncomeFromResultSet(rs);

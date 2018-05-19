@@ -14,6 +14,8 @@ public interface CategoryService {
     boolean createCategory(Category category);
 
     List<Category> getCategoriesForBudget(int budgetId);
+    
+    List<Category> getCategoriesForUserAndMonth(int userId, String month);
 
     boolean removeCategory(int id);
 }

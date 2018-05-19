@@ -27,6 +27,11 @@ public class CategoryServiceImpl implements CategoryService {
     public List<Category> getCategoriesForBudget(int budgetId) {
         return categoryDao.getCategoriesForBudget(budgetId);
     }
+    
+    @Override
+    public List<Category> getCategoriesForUserAndMonth(int userId, String month) {
+        return categoryDao.getCategoriesForUserAndMonth(userId, month);
+    }
 
     @Override
     public boolean removeCategory(int id) {
