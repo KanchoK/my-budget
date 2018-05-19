@@ -68,7 +68,20 @@ public class CategoryManager {
     public Response getCategoriesForBudget(@PathParam("budgetId") int budgetId) {
         List<Category> categoriesForBudget = categoryService.getCategoriesForBudget(budgetId);
 
-        LOG.info("Budgets successfully retrieved: " + categoriesForBudget);
+        LOG.info("Budgets for categoriy's id successfully retrieved: " + categoriesForBudget);
+
+        return Response.status(Response.Status.OK.getStatusCode())
+                .entity(categoriesForBudget).build();
+    }
+    
+    @GET
+    @Path("{userId}/{validForMonth}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getCategoriesForUserAndMonth(@PathParam("userId") int userId,
+            @PathParam("validForMonth") String validForMonth) {
+        List<Category> categoriesForBudget = categoryService.getCategoriesForUserAndMonth(userId, validForMonth);
+
+        LOG.info("Budgets for user's id and month successfully retrieved: " + categoriesForBudget);
 
         return Response.status(Response.Status.OK.getStatusCode())
                 .entity(categoriesForBudget).build();

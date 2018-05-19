@@ -16,6 +16,8 @@ import javax.inject.Inject;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import uni.fmi.model.Budget;
+import uni.fmi.model.User;
 
 public class PaymentDaoImpl implements PaymentDao{
         
@@ -27,11 +29,16 @@ public class PaymentDaoImpl implements PaymentDao{
     private static final String ADD_PAYMENT_STATEMENT = "INSERT INTO payments(title, date, amount, categoryId) " +
                                                 "VALUES (?, ?, ?, ?)";
     private static final String GET_PAYMENTS_FOR_CATEGORY_STATEMENT =
-            "SELECT p.id, p.title, p.date, p.amount, c.id, c.name, c.budgetId" +
+            "SELECT p.id, p.title, p.date, p.amount, p.comment, c.id, c.name, " +
+                    "c.plannedAmount, c.spentAmount, b.id, b.validForMonth, b.name, " +
+                    "b.plannedAmount, b.spentAmount " +
                     "FROM payments AS p " +
                     "INNER JOIN categories AS c " +
                     "ON p.categoryId = c.id " +
+                    "INNER JOIN budgets AS b " +
+                    "ON c.budgetId = b.id " +
                     "WHERE p.categoryId = ?";
+    
     private static final String REMOVE_PAYMENT_STATEMENT = "DELETE FROM payments WHERE id=?";
     
     private static final String ALTER_CATEGORY_SPEND_AMOUNT_FOR_CREATED_PAYMENT_STATEMENT =
@@ -153,14 +160,27 @@ public class PaymentDaoImpl implements PaymentDao{
     }
 
     private Payment buildPaymentFromResultSet(ResultSet rs) throws SQLException {
+        User user = new User();
+        
+        Budget budget = new Budget(rs.getInt("b.id"),
+                rs.getString("b.name"),
+                rs.getBigDecimal("b.plannedAmount"),
+                rs.getBigDecimal("b.spentAmount"),
+                rs.getString("b.validForMonth"),
+                user);
+        
         Category category = new Category(rs.getInt("c.id"),
-                rs.getString("c.name"));
+                rs.getString("c.name"),
+                rs.getBigDecimal("c.plannedAmount"),
+                rs.getBigDecimal("c.spentAmount"),
+                budget);
 
         return new Payment(rs.getInt("p.id"),
                 rs.getString("p.title"),
                 rs.getString("p.date"),
                 rs.getBigDecimal("p.amount"),
-                category);
+                category,
+                rs.getString("p.comment"));
     }
     
     private void addPaymentAmountToCategory(int categoryId, BigDecimal amount){

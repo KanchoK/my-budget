@@ -63,10 +63,23 @@ public class MonthlyIncomeManager {
     public Response getMonthlyIncomesForUser(@PathParam("userId") int userId) {
         List<MonthlyIncome> monthlyIncomesForUser = monthlyIncomeService.getMonthlyIncomesForUser(userId);
 
-        LOG.info("Monthly incomes successfully retrieved: " + monthlyIncomesForUser);
+        LOG.info("Monthly incomes for user's id successfully retrieved: " + monthlyIncomesForUser);
 
         return Response.status(Response.Status.OK.getStatusCode())
                 .entity(monthlyIncomesForUser).build();
+    }
+    
+    @GET
+    @Path("{userId}/{validForMonth}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getMonthlyIncomesForUserAndMonth(@PathParam("userId") int userId,
+            @PathParam("validForMonth") String validForMonth) {
+        MonthlyIncome monthlyIncomesForUserForMonth = monthlyIncomeService.getMonthlyIncomeForUserAndMonth(userId, validForMonth);
+
+        LOG.info("Monthly income for user's id and month successfully retrieved: " + monthlyIncomesForUserForMonth);
+
+        return Response.status(Response.Status.OK.getStatusCode())
+                .entity(monthlyIncomesForUserForMonth).build();
     }
 
     @DELETE

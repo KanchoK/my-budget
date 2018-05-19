@@ -8,7 +8,7 @@ DROP TABLE IF EXISTS users;
 
 
 CREATE TABLE users (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(170) NOT NULL AUTO_INCREMENT,
   `username` varchar(45) NOT NULL,
   `password` varchar(60) NOT NULL,
   PRIMARY KEY (`id`),
@@ -34,8 +34,8 @@ create table budgets
 	id int auto_increment
 		primary key,
 	name varchar(50) not null,
-	plannedAmount decimal null,
-	spentAmount decimal null,
+	plannedAmount decimal(5,2) null,
+	spentAmount decimal(5,2) null,
 	validForMonth varchar(15) null,
 	userId int not null,
 	constraint name_UNIQUE
@@ -50,11 +50,11 @@ create table categories
 	id int auto_increment
 		primary key,
 	name varchar(50) not null,
-	plannedAmount decimal null,
-	spentAmount decimal null,
+	plannedAmount decimal(5,2) null,
+	spentAmount decimal(5,2) null,
 	budgetId int not null,
-	constraint name_UNIQUE
-		unique (name),
+	constraint name_budgetId_UNIQUE
+		unique (name, budgetId),
 	constraint budget
 		foreign key (budgetId) references my_budget.budgets (id)
 )
@@ -67,7 +67,7 @@ create table payments
 	title varchar(50) not null,
     `comment`  varchar(150) null,
 	`date` varchar(15) not null,
-	amount decimal not null,
+	amount decimal(5,2) not null,
 	categoryId int not null,
 	constraint title_UNIQUE
 		unique (title),
