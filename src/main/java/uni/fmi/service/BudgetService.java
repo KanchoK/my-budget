@@ -8,8 +8,12 @@ public interface BudgetService {
     boolean createBudget(Budget budget);
 
     List<Budget> getBudgetsForUser(int userId);
+    
+    Budget getBudgetForId(int budgetId);
 
     List<Budget> getBudgetsForUserAndMonth(int userId, String month);
+    
+    Budget copyBudgetForUserBudgetAndMonth(int userId, int budgetId, String month);
 
     boolean removeBudget(int id);
 }

@@ -11,6 +11,7 @@ import uni.fmi.service.CategoryService;
 
 import javax.inject.Inject;
 import java.util.List;
+import uni.fmi.model.Budget;
 
 public class CategoryServiceImpl implements CategoryService {
     
@@ -31,6 +32,11 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public List<Category> getCategoriesForUserAndMonth(int userId, String month) {
         return categoryDao.getCategoriesForUserAndMonth(userId, month);
+    }
+    
+    @Override
+    public List<Category> copyCategoriesForUserBudgetAndMonth(int userId, int budgetId, String month, Budget budget) {
+        return categoryDao.copyCategoriesForUserBudgetAndMonth(userId, budgetId, month, budget);
     }
 
     @Override

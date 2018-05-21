@@ -8,6 +8,7 @@ package uni.fmi.persistence.dao;
 import uni.fmi.model.Category;
 
 import java.util.List;
+import uni.fmi.model.Budget;
 
 public interface CategoryDao {
     int createCategory(Category category);
@@ -15,6 +16,8 @@ public interface CategoryDao {
     List<Category> getCategoriesForBudget(int budgetId);
     
     List<Category> getCategoriesForUserAndMonth(int userId, String month);
+    
+    List<Category> copyCategoriesForUserBudgetAndMonth(int userId, int budgetId, String month, Budget budget);
 
     boolean removeCategory(int id);
 }

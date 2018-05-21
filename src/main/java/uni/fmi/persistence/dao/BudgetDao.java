@@ -10,6 +10,10 @@ public interface BudgetDao {
     List<Budget> getBudgetsForUser(int userId);
     
     List<Budget> getBudgetsForUserAndMonth(int userId, String month);
+    
+    Budget getBudgetForId(int budgetId);
+    
+    Budget copyBudgetForUserBudgetAndMonth(int userId,int budgetId, String month);
 
     boolean removeBudget(int id);
 }

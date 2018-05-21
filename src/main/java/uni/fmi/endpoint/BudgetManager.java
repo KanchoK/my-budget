@@ -67,7 +67,19 @@ public class BudgetManager {
         return Response.status(Response.Status.OK.getStatusCode())
                 .entity(budgetsForUser).build();
     }
-
+    
+//    @GET
+//    @Path("{budgetId}")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Response getBudgetForId(@PathParam("budgetId") int budgetId) {
+//        Budget budgetForId = budgetService.getBudgetForId(budgetId);
+//
+//        LOG.info("Budget for id = " + budgetId + " is successfully retrieved: " + budgetForId);
+//
+//        return Response.status(Response.Status.OK.getStatusCode())
+//                .entity(budgetForId).build();
+//    }
+    
     @GET
     @Path("{userId}/{validForMonth}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -80,6 +92,19 @@ public class BudgetManager {
         return Response.status(Response.Status.OK.getStatusCode())
                 .entity(budgetsForUserAndMonth).build();
     }
+    
+//    @GET 
+//    @Path("copy/{userId}/{validForMonth}/{budgetId}")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Response copyBudgetUserBudgetAndMonth(@PathParam("validForMonth") String month,
+//        @PathParam("userId") int userId, @PathParam("budgetId") int budgetId){
+//        Budget copiedBudgetUserBudgetAndMonth = budgetService.copyBudgetUserBudgetAndMonth(userId, budgetId, month);
+//
+//        LOG.info("Copied budget for " + month + " successfully retrieved: " + copiedBudgetUserBudgetAndMonth);
+//
+//        return Response.status(Response.Status.OK.getStatusCode())
+//                .entity(copiedBudgetUserBudgetAndMonth).build();
+//    }
 
     @DELETE
     @Path("{id}")

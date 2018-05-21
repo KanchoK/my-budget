@@ -38,8 +38,8 @@ create table budgets
 	spentAmount decimal(5,2) null,
 	validForMonth varchar(15) null,
 	userId int not null,
-	constraint name_UNIQUE
-		unique (name),
+	constraint name_validForMonth_UNIQUE
+		unique (name, validForMonth),
 	constraint user_budgets
 		foreign key (userId) references my_budget.users (id)
 )

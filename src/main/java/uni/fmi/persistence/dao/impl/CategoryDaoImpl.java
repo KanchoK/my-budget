@@ -5,6 +5,7 @@
  */
 package uni.fmi.persistence.dao.impl;
 
+import java.math.BigDecimal;
 import org.apache.log4j.Logger;
 import uni.fmi.model.Budget;
 import uni.fmi.model.Category;
@@ -14,6 +15,7 @@ import uni.fmi.persistence.dao.CategoryDao;
 import javax.inject.Inject;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class CategoryDaoImpl implements CategoryDao{
@@ -23,8 +25,9 @@ public class CategoryDaoImpl implements CategoryDao{
     @Inject
     private DatabaseManager databaseManager;
 
-    private static final String ADD_CATEGORY_STATEMENT = "INSERT INTO categories(name, plannedAmount, budgetId) " +
-                                                "VALUES (?, ?, ?)";
+    private static final String ADD_CATEGORY_STATEMENT = "INSERT INTO categories(name, plannedAmount, spentAmount, budgetId) " +
+                                                "VALUES (?, ?, ?, ?)";
+    
     private static final String GET_CATEGORIES_FOR_BUDGET_STATEMENT =
             "SELECT c.id, c.name, c.plannedAmount, c.spentAmount, " +
             "b.id, b.validForMonth, b.name, b.plannedAmount, b.spentAmount " +
@@ -42,6 +45,7 @@ public class CategoryDaoImpl implements CategoryDao{
                     "INNER JOIN users AS u " +
                     "ON b.userId = u.id " +
                     "WHERE u.id = ? AND b.validForMonth = ?";
+    
     private static final String REMOVE_CATEGORY_STATEMENT = "DELETE FROM categories WHERE id=?";
     
     @Override
@@ -54,7 +58,8 @@ public class CategoryDaoImpl implements CategoryDao{
 
             preparedStatement.setString(1, category.getName());
             preparedStatement.setBigDecimal(2, category.getPlannedAmount());
-            preparedStatement.setInt(3, category.getBudget().getId());
+            preparedStatement.setBigDecimal(3, BigDecimal.ZERO);
+            preparedStatement.setInt(4, category.getBudget().getId());
             preparedStatement.executeUpdate();
 
             try (ResultSet rs = preparedStatement.getGeneratedKeys()) {
@@ -90,7 +95,7 @@ public class CategoryDaoImpl implements CategoryDao{
     
     @Override
     public List<Category> getCategoriesForUserAndMonth(int userId, String month){
-          List<Category> categories = new ArrayList<>();
+        List<Category> categories = new ArrayList<>();
 
         try (Connection conn = databaseManager.getDataSource().getConnection();
              PreparedStatement preparedStatement = conn
@@ -108,6 +113,43 @@ public class CategoryDaoImpl implements CategoryDao{
         }
 
         return categories;
+    }
+    
+    @Override
+    public List<Category> copyCategoriesForUserBudgetAndMonth(int userId, int budgetId, String month, Budget budget){
+        List<Category> newCategories = new ArrayList<>();
+        List<Category> categories = getCategoriesForUserAndMonth(userId, month);
+        
+        LOG.info("Categories to copy:" + categories.toString());
+        LOG.info("budgetId " + budgetId);
+        LOG.info("budget.getId() " + budget.getId());
+        
+        Object[] categoriesByBudgetId = categories
+                .stream()
+                .filter(a -> a.getBudget().getId() == budgetId)
+                .toArray();
+
+//        int maxCategoryId = categories
+//                .stream()
+//                .max(Comparator.comparing(Category::getId))
+//                .get()
+//                .getId();
+        
+//        LOG.info("Max category id = " + maxCategoryId);
+        LOG.info("Categories by budget id = " + budgetId + " are: "+ categoriesByBudgetId);
+        
+        for (Object object : categoriesByBudgetId){
+            Category category = ((Category)object);
+            category.setBudget(budget);
+            category.setSpentAmount(BigDecimal.ZERO);
+//            maxCategoryId += 1;
+            int newCategoryId = createCategory(category);
+            LOG.info("Created category with id = " + newCategoryId);
+            category.setId(1);
+            newCategories.add(category);
+        }
+        
+        return newCategories;
     }
 
     @Override
