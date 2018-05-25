@@ -1,5 +1,6 @@
 package uni.fmi.endpoint;
 
+import java.math.BigDecimal;
 import org.apache.log4j.Logger;
 import uni.fmi.annotation.Secured;
 import uni.fmi.model.Budget;
@@ -105,6 +106,37 @@ public class BudgetManager {
 //        return Response.status(Response.Status.OK.getStatusCode())
 //                .entity(copiedBudgetUserBudgetAndMonth).build();
 //    }
+    
+    @GET
+    @Path("plannedAmount/{userId}/{validForMonth}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getBudgetsPlannedAmountForUserAndMonth(@PathParam("validForMonth") String month,
+                              @PathParam("userId") int userId) {
+        BigDecimal budgetsPlannedAmount = budgetService.getBudgetsPlannedAmountForUserAndMonth(userId, month);
+        LOG.info(budgetsPlannedAmount);
+
+        LOG.info("Overall planned amount for user with id = " + userId + 
+                " and month = " + month + " successfully retrieved: " + 
+                budgetsPlannedAmount);
+
+        return Response.status(Response.Status.OK.getStatusCode())
+                .entity(budgetsPlannedAmount).build();
+    }
+    
+    @GET
+    @Path("spentAmount/{userId}/{validForMonth}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getBudgetsSpentAmountForUserAndMonth(@PathParam("validForMonth") String month,
+                              @PathParam("userId") int userId) {
+        BigDecimal budgetsSpentAmount = budgetService.getBudgetsSpentAmountForUserAndMonth(userId, month);
+
+        LOG.info("Overall spent amount for user with id = " + userId + 
+                " and month = " + month + " successfully retrieved: " + 
+                budgetsSpentAmount);
+
+        return Response.status(Response.Status.OK.getStatusCode())
+                .entity(budgetsSpentAmount).build();
+    }
 
     @DELETE
     @Path("{id}")

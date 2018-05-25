@@ -73,6 +73,21 @@ public class PaymentManager{
         return Response.status(Response.Status.OK.getStatusCode())
                 .entity(paymentsForCategory).build();
     }
+    
+    @GET
+    @Path("{userId}/{validForMonth}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPaymentsForUserAndMonth(@PathParam("userId") int userId,
+            @PathParam("validForMonth") String month) {
+        List<Payment> paymentsForCategory = paymentService.getPaymentsForUserAndMonth(userId, month);
+
+        LOG.info("Payments for user and month successfully retrieved: " + paymentsForCategory);
+
+        return Response.status(Response.Status.OK.getStatusCode())
+                .entity(paymentsForCategory).build();
+    }
+    
+    
 
     @DELETE
     @Path("{id}")

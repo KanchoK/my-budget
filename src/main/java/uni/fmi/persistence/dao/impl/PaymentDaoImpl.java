@@ -39,6 +39,19 @@ public class PaymentDaoImpl implements PaymentDao{
                     "ON c.budgetId = b.id " +
                     "WHERE p.categoryId = ?";
     
+     private static final String GET_PAYMENTS_FOR_USER_AND_MONTH_STATEMENT =
+            "SELECT p.id, p.title, p.date, p.amount, p.comment, c.id, c.name, " +
+                    "c.plannedAmount, c.spentAmount, b.id, b.validForMonth, b.name, " +
+                    "b.plannedAmount, b.spentAmount " +
+                    "FROM payments AS p " +
+                    "INNER JOIN categories AS c " +
+                    "ON p.categoryId = c.id " +
+                    "INNER JOIN budgets AS b " +
+                    "ON c.budgetId = b.id " +
+                    "INNER JOIN users AS u " +
+                    "ON b.userId = u.id " +
+                    "WHERE u.id = ? AND b.validForMonth = ?";
+    
     private static final String REMOVE_PAYMENT_STATEMENT = "DELETE FROM payments WHERE id=?";
     
     private static final String ALTER_CATEGORY_SPEND_AMOUNT_FOR_CREATED_PAYMENT_STATEMENT =
@@ -113,6 +126,28 @@ public class PaymentDaoImpl implements PaymentDao{
                      .prepareStatement(GET_PAYMENTS_FOR_CATEGORY_STATEMENT)) {
 
             preparedStatement.setInt(1, categoryId);
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                while (rs.next()) {
+                    payments.add(buildPaymentFromResultSet(rs));
+                }
+            }
+        } catch (SQLException e) {
+            LOG.error("Exception was thrown", e);
+        }
+
+        return payments;
+    }
+    
+    @Override
+    public List<Payment> getPaymentsForUserAndMonth(int userId, String month){
+    List<Payment> payments = new ArrayList<>();
+
+        try (Connection conn = databaseManager.getDataSource().getConnection();
+             PreparedStatement preparedStatement = conn
+                     .prepareStatement(GET_PAYMENTS_FOR_USER_AND_MONTH_STATEMENT)) {
+
+            preparedStatement.setInt(1, userId);
+            preparedStatement.setString(2, month);
             try (ResultSet rs = preparedStatement.executeQuery()) {
                 while (rs.next()) {
                     payments.add(buildPaymentFromResultSet(rs));

@@ -14,6 +14,8 @@ public interface PaymentService {
     boolean createPayment(Payment payment);
 
     List<Payment> getPaymentsForCategory(int categoryId);
+    
+    List<Payment> getPaymentsForUserAndMonth(int userId, String month);
 
     boolean removePayment(int id);
 }

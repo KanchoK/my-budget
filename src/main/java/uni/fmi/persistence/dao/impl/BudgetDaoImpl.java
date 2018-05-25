@@ -1,6 +1,7 @@
 package uni.fmi.persistence.dao.impl;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import org.apache.log4j.Logger;
 import uni.fmi.model.Budget;
 import uni.fmi.model.User;
@@ -23,26 +24,31 @@ public class BudgetDaoImpl implements BudgetDao {
 
     private static final String ADD_BUDGET_EXTENDED_STATEMENT = "INSERT INTO budgets(name, validForMonth, plannedAmount, spentAmount, userId) "
             + "VALUES (?, ?, ?, ?, ?)";
+    
     private static final String ADD_BUDGET_STATEMENT = "INSERT INTO budgets(name, validForMonth, userId) "
             + "VALUES (?, ?, ?)";
+    
     private static final String GET_BUDGETS_FOR_USER_STATEMENT
             = "SELECT b.id, b.name, b.plannedAmount, b.spentAmount, b.validForMonth, u.id, u.username "
             + "FROM budgets AS b "
             + "INNER JOIN users AS u "
             + "ON b.userId = u.id "
             + "WHERE b.userId=?";
+    
     private static final String GET_BUDGET_FOR_USER_AND_MONTH_STATEMENT
             = "SELECT b.id, b.name, b.plannedAmount, b.spentAmount, b.validForMonth, u.id, u.username "
             + "FROM budgets AS b "
             + "INNER JOIN users AS u "
             + "ON b.userId = u.id "
             + "WHERE b.validForMonth=? AND b.userId=?";
+    
      private static final String GET_BUDGET_FOR_ID_STATEMENT
             = "SELECT b.id, b.name, b.plannedAmount, b.spentAmount, b.validForMonth, u.id, u.username "
             + "FROM budgets AS b "
             + "INNER JOIN users AS u "
             + "ON b.userId = u.id "
             + "WHERE b.id = ?";
+     
     private static final String REMOVE_BUDGET_STATEMENT = "DELETE FROM budgets WHERE id=?";
 
     @Override
@@ -176,6 +182,34 @@ public class BudgetDaoImpl implements BudgetDao {
         newBudget.setId(newBudgetId);
 
         return newBudget;
+    }
+    
+    @Override
+    public BigDecimal getBudgetsPlannedAmountForUserAndMonth(int userId, String month){
+        List<Budget> budgetsForUserAndMonth = getBudgetsForUserAndMonth(userId, month);
+        BigDecimal plannedAmountSum = BigDecimal.ZERO;
+        
+        for(Budget budget:budgetsForUserAndMonth){
+            plannedAmountSum = plannedAmountSum.add(budget.getPlannedAmount(), 
+                    MathContext.DECIMAL32);
+        }
+        
+        return plannedAmountSum;
+    }
+    
+    @Override
+    public BigDecimal getBudgetsSpentAmountForUserAndMonth(int userId, String month){
+        List<Budget> budgetsForUserAndMonth = getBudgetsForUserAndMonth(userId, month);
+        BigDecimal spentAmountSum = BigDecimal.ZERO;
+        
+        for(Budget budget:budgetsForUserAndMonth){
+            spentAmountSum = spentAmountSum.add(budget.getSpentAmount(),
+                    MathContext.DECIMAL32);
+//            LOG.info(budget.getId() + " " + budget.getPlannedAmount());
+        }
+//        LOG.info(spentAmountSum);
+        
+        return spentAmountSum;
     }
 
     @Override
