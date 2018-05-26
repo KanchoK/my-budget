@@ -1,8 +1,8 @@
+require('../../scss/overview.scss');
+
 import * as auth from "../auth";
-
 const { Budget } = require('../budget.vm');
-
-const d = new Date();
+const common = require('../common');
 
 class HomeView {
     constructor(ctx) {
@@ -12,7 +12,9 @@ class HomeView {
         // New category form
         this.newBudgetForm = ko.observable(false);
         this.form = {
-            name: ko.observable('')
+            name: ko.observable(''),
+            month: ko.observable(''),
+            plannedAmount: ko.observable(''),
         };
 
         this.getBudgetsFromApi();
@@ -23,30 +25,45 @@ class HomeView {
     }
 
     getBudgetsFromApi () {
-        const apiResponse = [
-            {
-                'id': 1,
-                'name': 'First Budget'
-            },
-            {
-                'id': 2,
-                'name': 'Second Budget'
+        $.ajax({
+            type: "GET",
+            url: `/api/budgets/${sessionStorage.getItem('USER_ID')}/${common.getMonthString()}`,
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('USER_SESSION_TOKEN')
             }
-        ];
-
-        this.budgets(apiResponse
-            .map(item => new Budget(item))
-        );
+        })
+            .then(res => {
+                res && this.budgets(res.map(item => new Budget(item)));
+            })
     }
 
     addBudget () {
         const params = {
-            'name': this.form.name()
-        }
-        const newBudget = new Budget(params);
-        this.budgets.unshift(newBudget);
+            'name': this.form.name(),
+            'month': this.form.month(),
+            'plannedAmount': this.form.plannedAmount()
+        };
 
-        this.resetNewBudgetForm();
+        $.ajax({
+            type: "POST",
+            url: `/api/budgets/create`,
+            data: JSON.stringify({
+                "name": this.form.name(),
+                "validForMonth": this.form.month(),
+                "user": {
+                    "id": sessionStorage.getItem('USER_ID')
+                }
+            }),
+            contentType: "application/json",
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('USER_SESSION_TOKEN')
+            }
+        })
+        .then(() => {
+            const newBudget = new Budget(params);
+            this.budgets.unshift(newBudget);
+            this.resetNewBudgetForm();
+        })
     }
 
     resetNewBudgetForm () {
@@ -84,23 +101,20 @@ class Overview {
         this.editMonthly(!this.editMonthly());
     }
 
-    getMonthString () {
-        const m = d.getMonth() + 1;
-        const mStr = m < 10 ? '0' + m.toString() : m.toString();
-        return mStr + '-' + d.getFullYear();
-    }
-
     saveMonthly () {
         $.ajax({
             type: "POST",
             url: `/api/monthly-incomes/create`,
             data: JSON.stringify({
                 "monthlyIncome": this.setMonthly(),
-                "validForMonth": this.getMonthString(),
+                "validForMonth": common.getMonthString(),
                 "user": {
                     "id": sessionStorage.getItem('USER_ID')
                 }
             }),
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('USER_SESSION_TOKEN')
+            },
             contentType: "application/json"
         })
     }
@@ -108,7 +122,7 @@ class Overview {
     getIncome () {
         $.ajax({
             type: "GET",
-            url: `/api/monthly-incomes/${sessionStorage.getItem('USER_ID')}/${this.getMonthString()}`,
+            url: `/api/monthly-incomes/${sessionStorage.getItem('USER_ID')}/${common.getMonthString()}`,
             headers: {
                 'Authorization': 'Bearer ' + sessionStorage.getItem('USER_SESSION_TOKEN')
             }

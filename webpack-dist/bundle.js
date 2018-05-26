@@ -2643,6 +2643,25 @@ exports.push([module.i, ".budget {\n  height: 50px;\n  line-height: 50px;\n  bor
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./static/scss/overview.scss":
+/*!******************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/sass-loader/lib/loader.js!./static/scss/overview.scss ***!
+  \******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".overview {\n  margin: 40px auto;\n  font-size: 18px;\n  display: flex; }\n\n.wrap {\n  width: 150px;\n  display: flex;\n  flex-direction: column; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./static/scss/style.scss":
 /*!***************************************************************************************************!*\
   !*** ./node_modules/css-loader!./node_modules/sass-loader/lib/loader.js!./static/scss/style.scss ***!
@@ -3633,7 +3652,7 @@ module.exports = "<div class=\"category\">\r\n    <div><span> Category name: </s
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"overview\">\r\n    <div class=\"wrap\">\r\n        <div class=\"title\" data-bind=\"text: monthlyIncome\">Monthly income</div>\r\n        <div class=\"money\"></div>\r\n        <button data-bind=\"click: toggleEdit\">Edit</button>\r\n        <input type=\"number\" data-bind=\"visible: editMonthly, textInput: setMonthly\" />\r\n        <button data-bind=\"visible: editMonthly, click: saveMonthly\">Save</button>\r\n    </div>\r\n    <div class=\"wrap\">\r\n        <div class=\"title\" data-bind=\"text: monthlyPlanned\">Monthly planned</div>\r\n        <div class=\"money\"></div>\r\n    </div>\r\n    <div class=\"wrap\">\r\n        <div class=\"title\" data-bind=\"text: monthlySpent\">Monthly spent</div>\r\n        <div class=\"money\"></div>\r\n    </div>\r\n    <div class=\"wrap\">\r\n        <div class=\"title\">Monthly diff</div>\r\n        <div class=\"money\" data-bind=\"text: monthlyDiff\"></div>\r\n    </div>\r\n\r\n</div>";
+module.exports = "<div class=\"overview\">\r\n    <div class=\"wrap\">\r\n        <div class=\"title\">Monthly income</div>\r\n        <div class=\"money\" data-bind=\"text: monthlyIncome\"></div>\r\n        <button data-bind=\"click: toggleEdit\">Edit</button>\r\n        <input type=\"number\" data-bind=\"visible: editMonthly, textInput: setMonthly\" />\r\n        <button data-bind=\"visible: editMonthly, click: saveMonthly\">Save</button>\r\n    </div>\r\n    <div class=\"wrap\">\r\n        <div class=\"title\" >Monthly planned</div>\r\n        <div class=\"money\" data-bind=\"text: monthlyPlanned\"></div>\r\n    </div>\r\n    <div class=\"wrap\">\r\n        <div class=\"title\">Monthly spent</div>\r\n        <div class=\"money\" data-bind=\"text: monthlySpent\"></div>\r\n    </div>\r\n    <div class=\"wrap\">\r\n        <div class=\"title\">Monthly diff</div>\r\n        <div class=\"money\" data-bind=\"text: monthlyDiff\"></div>\r\n    </div>\r\n</div>";
 
 /***/ }),
 
@@ -3677,7 +3696,7 @@ module.exports = "<h2>Payments</h2>\r\n\r\n<button data-bind=\"click: toggleNewP
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h2>Dashboard</h2>\r\n<button class=\"btn--default\" data-bind=\"click: toggleNewBudgetForm\">+ New Budget</button>\r\n<button class=\"btn--default\" data-bind=\"click: logout\">Logout</button>\r\n\r\n<div data-bind=\"visible: newBudgetForm()\" class=\"new-Budget-form\">\r\n    <input placeholder=\"Name\" data-bind=\"textInput: form.name\" />\r\n    <button data-bind=\"click: addBudget\">Done!</button>\r\n</div>\r\n\r\n<overview></overview>\r\n\r\n<div class=\"budgets-container\" data-bind=\"foreach: budgets\">\r\n    <div class=\"budget\" data-bind=\"click: open\">\r\n        <span class=\"name\" data-bind=\"text: name\"></span>\r\n        <button class=\"btn-remove\" data-bind=\"click: function() { $parent.removeBudget($data) }, clickBubble: false\">Remove budget</button>\r\n    </div>\r\n</div>";
+module.exports = "<h2>Dashboard</h2>\r\n<button class=\"btn--default\" data-bind=\"click: toggleNewBudgetForm\">+ New Budget</button>\r\n<button class=\"btn--default\" data-bind=\"click: logout\">Logout</button>\r\n\r\n<div data-bind=\"visible: newBudgetForm()\" class=\"new-Budget-form\">\r\n    <input class=\"btn--default\" placeholder=\"Name\" data-bind=\"textInput: form.name\" />\r\n    <input class=\"btn--default\" placeholder=\"Date mm-yyyy\" data-bind=\"textInput: form.month\" />\r\n    <input class=\"btn--default\" placeholder=\"Amount\" data-bind=\"textInput: form.plannedAmount\" />\r\n    <button class=\"btn--default\" data-bind=\"click: addBudget\">Add budget</button>\r\n</div>\r\n\r\n<overview></overview>\r\n\r\n<div class=\"budgets-container\" data-bind=\"foreach: budgets\">\r\n    <div class=\"budget\" data-bind=\"click: open\">\r\n        <span class=\"name\" data-bind=\"text: name\"></span>\r\n        <button class=\"btn-remove\" data-bind=\"click: function() { $parent.removeBudget($data) }, clickBubble: false\">Remove budget</button>\r\n    </div>\r\n</div>";
 
 /***/ }),
 
@@ -31768,6 +31787,8 @@ class Budget {
         this.params = params;
         this.id = params.id;
         this.name = params.name;
+        this.month = params.month;
+        this.plannedAmount = params.plannedAmount;
         this.url = `/budgets/${this.id}`;
     }
 
@@ -31834,6 +31855,27 @@ ko.components.register('category', {
 });
 
 module.exports = { Category };
+
+/***/ }),
+
+/***/ "./static/js/common.js":
+/*!*****************************!*\
+  !*** ./static/js/common.js ***!
+  \*****************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+const d = new Date();
+
+const common = {
+    getMonthString: function () {
+        const m = d.getMonth() + 1;
+        const mStr = m < 10 ? '0' + m.toString() : m.toString();
+        return mStr + '-' + d.getFullYear();
+    }
+};
+
+module.exports = common;
 
 /***/ }),
 
@@ -32135,11 +32177,11 @@ ko.components.register('category-view', {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../auth */ "./static/js/auth.js");
 /* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_auth__WEBPACK_IMPORTED_MODULE_0__);
+__webpack_require__(/*! ../../scss/overview.scss */ "./static/scss/overview.scss");
 
 
 const { Budget } = __webpack_require__(/*! ../budget.vm */ "./static/js/budget.vm.js");
-
-const d = new Date();
+const common = __webpack_require__(/*! ../common */ "./static/js/common.js");
 
 class HomeView {
     constructor(ctx) {
@@ -32149,7 +32191,9 @@ class HomeView {
         // New category form
         this.newBudgetForm = ko.observable(false);
         this.form = {
-            name: ko.observable('')
+            name: ko.observable(''),
+            month: ko.observable(''),
+            plannedAmount: ko.observable(''),
         };
 
         this.getBudgetsFromApi();
@@ -32160,30 +32204,45 @@ class HomeView {
     }
 
     getBudgetsFromApi () {
-        const apiResponse = [
-            {
-                'id': 1,
-                'name': 'First Budget'
-            },
-            {
-                'id': 2,
-                'name': 'Second Budget'
+        $.ajax({
+            type: "GET",
+            url: `/api/budgets/${sessionStorage.getItem('USER_ID')}/${common.getMonthString()}`,
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('USER_SESSION_TOKEN')
             }
-        ];
-
-        this.budgets(apiResponse
-            .map(item => new Budget(item))
-        );
+        })
+            .then(res => {
+                res && this.budgets(res.map(item => new Budget(item)));
+            })
     }
 
     addBudget () {
         const params = {
-            'name': this.form.name()
-        }
-        const newBudget = new Budget(params);
-        this.budgets.unshift(newBudget);
+            'name': this.form.name(),
+            'month': this.form.month(),
+            'plannedAmount': this.form.plannedAmount()
+        };
 
-        this.resetNewBudgetForm();
+        $.ajax({
+            type: "POST",
+            url: `/api/budgets/create`,
+            data: JSON.stringify({
+                "name": this.form.name(),
+                "validForMonth": this.form.month(),
+                "user": {
+                    "id": sessionStorage.getItem('USER_ID')
+                }
+            }),
+            contentType: "application/json",
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('USER_SESSION_TOKEN')
+            }
+        })
+        .then(() => {
+            const newBudget = new Budget(params);
+            this.budgets.unshift(newBudget);
+            this.resetNewBudgetForm();
+        })
     }
 
     resetNewBudgetForm () {
@@ -32221,23 +32280,20 @@ class Overview {
         this.editMonthly(!this.editMonthly());
     }
 
-    getMonthString () {
-        const m = d.getMonth() + 1;
-        const mStr = m < 10 ? '0' + m.toString() : m.toString();
-        return mStr + '-' + d.getFullYear();
-    }
-
     saveMonthly () {
         $.ajax({
             type: "POST",
             url: `/api/monthly-incomes/create`,
             data: JSON.stringify({
                 "monthlyIncome": this.setMonthly(),
-                "validForMonth": this.getMonthString(),
+                "validForMonth": common.getMonthString(),
                 "user": {
                     "id": sessionStorage.getItem('USER_ID')
                 }
             }),
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('USER_SESSION_TOKEN')
+            },
             contentType: "application/json"
         })
     }
@@ -32245,7 +32301,7 @@ class Overview {
     getIncome () {
         $.ajax({
             type: "GET",
-            url: `/api/monthly-incomes/${sessionStorage.getItem('USER_ID')}/${this.getMonthString()}`,
+            url: `/api/monthly-incomes/${sessionStorage.getItem('USER_ID')}/${common.getMonthString()}`,
             headers: {
                 'Authorization': 'Bearer ' + sessionStorage.getItem('USER_SESSION_TOKEN')
             }
@@ -32376,6 +32432,36 @@ ko.components.register('register-view', {
 
 
 var content = __webpack_require__(/*! !../../node_modules/css-loader!../../node_modules/sass-loader/lib/loader.js!./budget.scss */ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./static/scss/budget.scss");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./static/scss/overview.scss":
+/*!***********************************!*\
+  !*** ./static/scss/overview.scss ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../node_modules/css-loader!../../node_modules/sass-loader/lib/loader.js!./overview.scss */ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./static/scss/overview.scss");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 

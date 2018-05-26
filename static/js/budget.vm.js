@@ -6,6 +6,8 @@ class Budget {
         this.params = params;
         this.id = params.id;
         this.name = params.name;
+        this.month = params.month;
+        this.plannedAmount = params.plannedAmount;
         this.url = `/budgets/${this.id}`;
     }
 

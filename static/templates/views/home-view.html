@@ -3,8 +3,10 @@
 <button class="btn--default" data-bind="click: logout">Logout</button>
 
 <div data-bind="visible: newBudgetForm()" class="new-Budget-form">
-    <input placeholder="Name" data-bind="textInput: form.name" />
-    <button data-bind="click: addBudget">Done!</button>
+    <input class="btn--default" placeholder="Name" data-bind="textInput: form.name" />
+    <input class="btn--default" placeholder="Date mm-yyyy" data-bind="textInput: form.month" />
+    <input class="btn--default" placeholder="Amount" data-bind="textInput: form.plannedAmount" />
+    <button class="btn--default" data-bind="click: addBudget">Add budget</button>
 </div>
 
 <overview></overview>
