@@ -2,9 +2,9 @@
     <div class="wrap">
         <div class="title">Monthly income</div>
         <div class="money" data-bind="text: monthlyIncome"></div>
-        <button data-bind="click: toggleEdit">Edit</button>
-        <input type="number" data-bind="visible: editMonthly, textInput: setMonthly" />
-        <button data-bind="visible: editMonthly, click: saveMonthly">Save</button>
+        <button class="btn--default" data-bind="click: toggleEdit">Edit</button>
+        <input class="input--default" type="number" data-bind="visible: editMonthly, textInput: setMonthly" style="margin-top: 7px;"/>
+        <button class="btn--default" data-bind="visible: editMonthly, click: saveMonthly">Save</button>
     </div>
     <div class="wrap">
         <div class="title" >Monthly planned</div>

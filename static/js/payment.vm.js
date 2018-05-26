@@ -3,16 +3,22 @@ class Payment {
         this.params = params;
         this.id = params.id;
         this.name = params.name;
-        this.description = params.description;
+        this.budget = params.budget;
+        this.category = params.category;
+        this.date = params.date;
         this.amount = params.amount;
+        this.description = params.description;
     }
 
     static fromApi(data) {
         return new Payment({
             'id': data.id,
-            'name': data.name,
-            'description': data.description,
+            'name': data.title,
+            'budget': data.budget,
+            'category': data.category.name,
+            'date': data.date,
             'amount': data.amount,
+            'description': data.description,
         });
     }
 

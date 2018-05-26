@@ -5,21 +5,21 @@ class Category {
         this.params = params;
         this.id = params.id;
         this.name = params.name;
-        this.moneyPlanned = ko.observable(params.moneyPlanned);
-        this.moneySpent = ko.observable(0);
-        this.url = `/categories/${this.id}/`
+        this.budget = params.budget;
+        this.plannedAmount = params.plannedAmount;
+        this.spentAmount = params.spentAmount;
 
         this.difference = ko.computed(
-            () => this.moneyPlanned() - this.moneySpent()
+            () => parseInt(this.spentAmount ? this.spentAmount*100 / this.plannedAmount : 0) + '%'
         )
     }
 
     static fromApi(data) {
         return new Category({
-            'id': data.id,
-            'name': data.name,
-            'moneyPlanned': data.moneyPlanned,
-            'moneySpent': data.moneySpent
+            id: data.id,
+            name: data.name,
+            plannedAmount: data.plannedAmount,
+            spentAmount: data.spentAmount
         });
     }
 
@@ -27,11 +27,10 @@ class Category {
         return {
             "id": category.id,
             "name": category.name,
-            "moneyPlanned": category.moneyPlanned(),
-            "moneySpent": category.moneySpent()
+            "plannedAmount": category.plannedAmount(),
+            "spentAmount": category.spentAmount()
         }
     }
-
 }
 
 ko.components.register('category', {

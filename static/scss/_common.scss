@@ -25,6 +25,7 @@
     @include active-hover;
     @include text-collapse;
 
+    background-color: white;
     height: 42px;
 }
 
@@ -36,6 +37,14 @@
 .input--default {
     @include box-props;
     height: 42px;
+
+    &:hover {
+        cursor: text;
+    }
+}
+
+.textarea--default {
+    @include box-props;
 }
 
 .input--wrap {
@@ -46,4 +55,59 @@
     div {
         width: 150px;
     }
+}
+
+.list-item {
+    height: 40px;
+    line-height: 40px;
+    border-bottom: 1px solid lightgrey;
+    display: flex;
+
+    .attrs {
+        flex: 1;
+        display: flex;
+    }
+
+    .attr {
+        flex: 1;
+        margin-left: 5px;
+    }
+
+    .btn-remove {
+        flex-shrink: 0;
+        align-self: center;
+        margin: 0 5px;
+        height: 32px;
+    }
+
+    &:hover {
+        cursor: pointer;
+        background-color: lightgreen;
+    }
+}
+
+.item-selected {
+    background: rgba(lightgreen, 0.5);
+}
+
+.layover {
+    background: rgba(lightgrey, 0.5);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.creation-form {
+    display:flex;
+    flex-direction: column;
+
+    padding: 20px;
+    border: 1px solid grey;
+    background-color: white;
 }

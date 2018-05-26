@@ -1,19 +1,104 @@
 <h2>Dashboard</h2>
-<button class="btn--default" data-bind="click: toggleNewBudgetForm">+ New Budget</button>
-<button class="btn--default" data-bind="click: logout">Logout</button>
-
-<div data-bind="visible: newBudgetForm()" class="new-Budget-form">
-    <input class="btn--default" placeholder="Name" data-bind="textInput: form.name" />
-    <input class="btn--default" placeholder="Date mm-yyyy" data-bind="textInput: form.month" />
-    <input class="btn--default" placeholder="Amount" data-bind="textInput: form.plannedAmount" />
-    <button class="btn--default" data-bind="click: addBudget">Add budget</button>
-</div>
+<button class="btn--default" data-bind="click: logout" style="float: right;">Logout</button>
 
 <overview></overview>
 
-<div class="budgets-container" data-bind="foreach: budgets">
-    <div class="budget" data-bind="click: open">
-        <span class="name" data-bind="text: name"></span>
-        <button class="btn-remove" data-bind="click: function() { $parent.removeBudget($data) }, clickBubble: false">Remove budget</button>
+<div class="layover" data-bind="visible: newBudgetForm(), click: toggleNewBudgetForm">
+    <div class="creation-form" data-bind="click: function () {}, clickBubble: false;">
+        <input class="input--default" placeholder="Name" data-bind="textInput: form.name" />
+        <input class="input--default" placeholder="Date mm-yyyy" data-bind="textInput: form.month" />
+        <input class="input--default" placeholder="Amount" data-bind="textInput: form.plannedAmount" />
+        <button class="btn--default" data-bind="click: addBudget">Add budget</button>
     </div>
 </div>
+
+
+<div class="budgets-container">
+    <h2>Budgets</h2>
+    <button class="btn--default" data-bind="click: toggleNewBudgetForm">+ New Budget</button>
+    <div class="list" data-bind="foreach: budgets">
+        <div class="list-item" data-bind="click: function() { $parent.selectBudget($data) }, css: { 'item-selected': $parent.selectedBudget() && $parent.selectedBudget().id === id }">
+            <div class="attrs">
+                <span class="attr" data-bind="text: name"></span>
+                <span class="attr" data-bind="text: month"></span>
+                <span class="attr" data-bind="text: plannedAmount"></span>
+                <span class="attr" data-bind="text: spentAmount"></span>
+                <span class="attr" data-bind="text: percSpent"></span>
+            </div>
+            <button class="btn--default btn-remove" data-bind="click: function() { $parent.removeBudget($data) }, clickBubble: false">Remove budget</button>
+        </div>
+    </div>
+</div>
+
+
+<!--Categories-->
+<!-- ko if: budgets().length -->
+
+<div class="layover" data-bind="visible: newCategoryForm(), click: toggleNewCategoryForm">
+    <div class="creation-form" data-bind="click: function () {}, clickBubble: false;">
+        <input class="input--default" placeholder="Name" data-bind="textInput: categoryForm.name" />
+        <input disabled class="input--default" placeholder="Budget" data-bind="textInput: categoryForm.budget" />
+        <input class="input--default" placeholder="Planned Amount" data-bind="textInput: categoryForm.plannedAmount" />
+        <button class="btn--default" data-bind="click: addCategory">Add category</button>
+    </div>
+</div>
+
+<div class="categories-container">
+    <h2>Categories for <u data-bind="text: selectedBudget() && selectedBudget().name"></u></h2>
+    <button class="btn--default" data-bind="click: toggleNewCategoryForm">+ New category</button>
+    <div class="list" data-bind="foreach: categories">
+        <div class="list-item" data-bind="click: function() { $parent.selectCategory($data) }, css: { 'item-selected': $parent.selectedCategory() && $parent.selectedCategory().id === id }">
+            <div class="attrs">
+                <span class="attr" data-bind="text: name"></span>
+                <span class="attr" data-bind="text: budget"></span>
+                <span class="attr" data-bind="text: plannedAmount"></span>
+                <span class="attr" data-bind="text: spentAmount"></span>
+                <span class="attr" data-bind="text: difference"></span>
+            </div>
+            <button class="btn--default btn-remove" data-bind="click: function() { $parent.removeCategory(id) }, clickBubble: false">Remove category</button>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- /ko -->
+
+
+<!--Payments-->
+<!-- ko if: categories().length -->
+
+<div class="layover" data-bind="visible: newPaymentForm(), click: toggleNewPaymentForm">
+    <div class="creation-form" data-bind="click: function () {}, clickBubble: false;">
+        <input class="input--default" placeholder="Name" data-bind="textInput: paymentForm.name" />
+        <input disabled class="input--default" placeholder="Budget" data-bind="textInput: paymentForm.budget" />
+        <input disabled class="input--default" placeholder="Category" data-bind="textInput: paymentForm.category" />
+        <input disabled class="input--default" placeholder="Date" data-bind="textInput: paymentForm.date" />
+        <input class="input--default" placeholder="Planned Amount" data-bind="textInput: paymentForm.plannedAmount" />
+        <textarea class="textarea--default" placeholder="Description" data-bind="textInput: paymentForm.description"></textarea>
+        <button class="btn--default" data-bind="click: addPayment">Add payment</button>
+
+    </div>
+</div>
+
+<div class="payments-container">
+    <h2>Payments for "
+        <u data-bind="text: selectedBudget() && selectedBudget().name"></u>
+        <u data-bind="text: selectedCategory() && selectedCategory().name"></u>"
+    </h2>
+    <button class="btn--default" data-bind="click: toggleNewPaymentForm">+ New payment</button>
+    <div class="list" data-bind="foreach: payments">
+        <div class="list-item">
+            <div class="attrs">
+                <span class="attr" data-bind="text: name"></span>
+                <span class="attr" data-bind="text: budget"></span>
+                <span class="attr" data-bind="text: category"></span>
+                <span class="attr" data-bind="text: amount"></span>
+                <span class="attr" data-bind="text: description"></span>
+            </div>
+            <button class="btn--default btn-remove" data-bind="click: function() { $parent.removePayment(id) }, clickBubble: false">Remove payment</button>
+        </div>
+    </div>
+</div>
+
+<!-- /ko -->

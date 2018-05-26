@@ -1,0 +1,25 @@
+@mixin container-mixin {
+    width: 47%;
+    height: 500px;
+    float: left;
+    display: flex;
+    flex-direction: column;
+
+    .list {
+        flex: 1;
+        overflow-y: scroll;
+    }
+}
+
+.budgets-container {
+    @include container-mixin;
+    margin-right: 6%;
+}
+
+.categories-container {
+    @include container-mixin;
+}
+
+.payments-container {
+    width: 100%;
+}

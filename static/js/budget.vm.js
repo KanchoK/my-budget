@@ -8,6 +8,12 @@ class Budget {
         this.name = params.name;
         this.month = params.month;
         this.plannedAmount = params.plannedAmount;
+        this.spentAmount = params.spentAmount;
+        this.percSpent = ko.computed(() => {
+            const perc = parseInt(this.spentAmount ? this.spentAmount * 100 / this.plannedAmount : 0);
+            return perc + '%';
+        });
+
         this.url = `/budgets/${this.id}`;
     }
 

@@ -2636,7 +2636,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, ".budget {\n  height: 50px;\n  line-height: 50px;\n  border-bottom: 1px solid lightgrey; }\n  .budget .name {\n    margin-left: 5px; }\n  .budget .btn-remove {\n    float: right;\n    margin-top: 12px;\n    margin-right: 5px; }\n  .budget:hover {\n    cursor: pointer;\n    background-color: lightgreen; }\n\n.category-wrap {\n  margin: 3px 10px;\n  padding: 7px;\n  background-color: #e8e8e8; }\n", ""]);
+exports.push([module.i, ".category-wrap {\n  margin: 3px 10px;\n  padding: 7px;\n  background-color: #e8e8e8; }\n", ""]);
 
 // exports
 
@@ -2674,7 +2674,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, ".flex-row {\n  display: flex; }\n\n.flex-center {\n  display: flex;\n  align-items: center; }\n\n.flex-start {\n  display: flex;\n  align-items: flex-start; }\n\n.pad-top-7 {\n  padding-top: 7px; }\n\n.btn--default {\n  padding: 0 7px;\n  margin: 0 7px;\n  border: 1px solid lightgrey;\n  background-color: white;\n  border-radius: 3px;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  height: 42px; }\n  .btn--default:hover {\n    cursor: pointer;\n    background: rgba(144, 238, 144, 0.5); }\n\n.select--lang {\n  padding: 0 7px;\n  margin: 0 7px;\n  border: 1px solid lightgrey;\n  background-color: white;\n  border-radius: 3px;\n  height: 42px; }\n\n.input--default {\n  padding: 0 7px;\n  margin: 0 7px;\n  border: 1px solid lightgrey;\n  background-color: white;\n  border-radius: 3px;\n  height: 42px; }\n\n.input--wrap {\n  margin-top: 10px;\n  display: flex;\n  align-items: center; }\n  .input--wrap div {\n    width: 150px; }\n\n.registration-form {\n  display: flex;\n  flex-direction: column;\n  width: 600px; }\n\n.btn--default {\n  margin-top: 10px;\n  align-self: flex-start; }\n\n.budget {\n  height: 50px;\n  line-height: 50px;\n  border-bottom: 1px solid lightgrey; }\n  .budget .name {\n    margin-left: 5px; }\n  .budget .btn-remove {\n    float: right;\n    margin-top: 12px;\n    margin-right: 5px; }\n  .budget:hover {\n    cursor: pointer;\n    background-color: lightgreen; }\n\n.category-wrap {\n  margin: 3px 10px;\n  padding: 7px;\n  background-color: #e8e8e8; }\n\na {\n  font-size: 55px;\n  background: red; }\n", ""]);
+exports.push([module.i, ".flex-row {\n  display: flex; }\n\n.flex-center {\n  display: flex;\n  align-items: center; }\n\n.flex-start {\n  display: flex;\n  align-items: flex-start; }\n\n.pad-top-7 {\n  padding-top: 7px; }\n\n.btn--default {\n  padding: 0 7px;\n  margin: 0 7px;\n  border: 1px solid lightgrey;\n  background-color: white;\n  border-radius: 3px;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  background-color: white;\n  height: 42px; }\n  .btn--default:hover {\n    cursor: pointer;\n    background: rgba(144, 238, 144, 0.5); }\n\n.select--lang {\n  padding: 0 7px;\n  margin: 0 7px;\n  border: 1px solid lightgrey;\n  background-color: white;\n  border-radius: 3px;\n  height: 42px; }\n\n.input--default {\n  padding: 0 7px;\n  margin: 0 7px;\n  border: 1px solid lightgrey;\n  background-color: white;\n  border-radius: 3px;\n  height: 42px; }\n  .input--default:hover {\n    cursor: text; }\n\n.textarea--default {\n  padding: 0 7px;\n  margin: 0 7px;\n  border: 1px solid lightgrey;\n  background-color: white;\n  border-radius: 3px; }\n\n.input--wrap {\n  margin-top: 10px;\n  display: flex;\n  align-items: center; }\n  .input--wrap div {\n    width: 150px; }\n\n.list-item {\n  height: 40px;\n  line-height: 40px;\n  border-bottom: 1px solid lightgrey;\n  display: flex; }\n  .list-item .attrs {\n    flex: 1;\n    display: flex; }\n  .list-item .attr {\n    flex: 1;\n    margin-left: 5px; }\n  .list-item .btn-remove {\n    flex-shrink: 0;\n    align-self: center;\n    margin: 0 5px;\n    height: 32px; }\n  .list-item:hover {\n    cursor: pointer;\n    background-color: lightgreen; }\n\n.item-selected {\n  background: rgba(144, 238, 144, 0.5); }\n\n.layover {\n  background: rgba(211, 211, 211, 0.5);\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  display: flex;\n  align-items: center;\n  justify-content: center; }\n\n.creation-form {\n  display: flex;\n  flex-direction: column;\n  padding: 20px;\n  border: 1px solid grey;\n  background-color: white; }\n\n.budgets-container {\n  width: 47%;\n  height: 500px;\n  float: left;\n  display: flex;\n  flex-direction: column;\n  margin-right: 6%; }\n  .budgets-container .list {\n    flex: 1;\n    overflow-y: scroll; }\n\n.categories-container {\n  width: 47%;\n  height: 500px;\n  float: left;\n  display: flex;\n  flex-direction: column; }\n  .categories-container .list {\n    flex: 1;\n    overflow-y: scroll; }\n\n.payments-container {\n  width: 100%; }\n\n.registration-form {\n  display: flex;\n  flex-direction: column;\n  width: 600px; }\n\n.btn--default {\n  margin-top: 10px;\n  align-self: flex-start; }\n\n.category-wrap {\n  margin: 3px 10px;\n  padding: 7px;\n  background-color: #e8e8e8; }\n\na {\n  font-size: 55px;\n  background: red; }\n", ""]);
 
 // exports
 
@@ -3652,7 +3652,7 @@ module.exports = "<div class=\"category\">\r\n    <div><span> Category name: </s
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"overview\">\r\n    <div class=\"wrap\">\r\n        <div class=\"title\">Monthly income</div>\r\n        <div class=\"money\" data-bind=\"text: monthlyIncome\"></div>\r\n        <button data-bind=\"click: toggleEdit\">Edit</button>\r\n        <input type=\"number\" data-bind=\"visible: editMonthly, textInput: setMonthly\" />\r\n        <button data-bind=\"visible: editMonthly, click: saveMonthly\">Save</button>\r\n    </div>\r\n    <div class=\"wrap\">\r\n        <div class=\"title\" >Monthly planned</div>\r\n        <div class=\"money\" data-bind=\"text: monthlyPlanned\"></div>\r\n    </div>\r\n    <div class=\"wrap\">\r\n        <div class=\"title\">Monthly spent</div>\r\n        <div class=\"money\" data-bind=\"text: monthlySpent\"></div>\r\n    </div>\r\n    <div class=\"wrap\">\r\n        <div class=\"title\">Monthly diff</div>\r\n        <div class=\"money\" data-bind=\"text: monthlyDiff\"></div>\r\n    </div>\r\n</div>";
+module.exports = "<div class=\"overview\">\r\n    <div class=\"wrap\">\r\n        <div class=\"title\">Monthly income</div>\r\n        <div class=\"money\" data-bind=\"text: monthlyIncome\"></div>\r\n        <button class=\"btn--default\" data-bind=\"click: toggleEdit\">Edit</button>\r\n        <input class=\"input--default\" type=\"number\" data-bind=\"visible: editMonthly, textInput: setMonthly\" style=\"margin-top: 7px;\"/>\r\n        <button class=\"btn--default\" data-bind=\"visible: editMonthly, click: saveMonthly\">Save</button>\r\n    </div>\r\n    <div class=\"wrap\">\r\n        <div class=\"title\" >Monthly planned</div>\r\n        <div class=\"money\" data-bind=\"text: monthlyPlanned\"></div>\r\n    </div>\r\n    <div class=\"wrap\">\r\n        <div class=\"title\">Monthly spent</div>\r\n        <div class=\"money\" data-bind=\"text: monthlySpent\"></div>\r\n    </div>\r\n    <div class=\"wrap\">\r\n        <div class=\"title\">Monthly diff</div>\r\n        <div class=\"money\" data-bind=\"text: monthlyDiff\"></div>\r\n    </div>\r\n</div>";
 
 /***/ }),
 
@@ -3696,7 +3696,7 @@ module.exports = "<h2>Payments</h2>\r\n\r\n<button data-bind=\"click: toggleNewP
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h2>Dashboard</h2>\r\n<button class=\"btn--default\" data-bind=\"click: toggleNewBudgetForm\">+ New Budget</button>\r\n<button class=\"btn--default\" data-bind=\"click: logout\">Logout</button>\r\n\r\n<div data-bind=\"visible: newBudgetForm()\" class=\"new-Budget-form\">\r\n    <input class=\"btn--default\" placeholder=\"Name\" data-bind=\"textInput: form.name\" />\r\n    <input class=\"btn--default\" placeholder=\"Date mm-yyyy\" data-bind=\"textInput: form.month\" />\r\n    <input class=\"btn--default\" placeholder=\"Amount\" data-bind=\"textInput: form.plannedAmount\" />\r\n    <button class=\"btn--default\" data-bind=\"click: addBudget\">Add budget</button>\r\n</div>\r\n\r\n<overview></overview>\r\n\r\n<div class=\"budgets-container\" data-bind=\"foreach: budgets\">\r\n    <div class=\"budget\" data-bind=\"click: open\">\r\n        <span class=\"name\" data-bind=\"text: name\"></span>\r\n        <button class=\"btn-remove\" data-bind=\"click: function() { $parent.removeBudget($data) }, clickBubble: false\">Remove budget</button>\r\n    </div>\r\n</div>";
+module.exports = "<h2>Dashboard</h2>\r\n<button class=\"btn--default\" data-bind=\"click: logout\" style=\"float: right;\">Logout</button>\r\n\r\n<overview></overview>\r\n\r\n<div class=\"layover\" data-bind=\"visible: newBudgetForm(), click: toggleNewBudgetForm\">\r\n    <div class=\"creation-form\" data-bind=\"click: function () {}, clickBubble: false;\">\r\n        <input class=\"input--default\" placeholder=\"Name\" data-bind=\"textInput: form.name\" />\r\n        <input class=\"input--default\" placeholder=\"Date mm-yyyy\" data-bind=\"textInput: form.month\" />\r\n        <input class=\"input--default\" placeholder=\"Amount\" data-bind=\"textInput: form.plannedAmount\" />\r\n        <button class=\"btn--default\" data-bind=\"click: addBudget\">Add budget</button>\r\n    </div>\r\n</div>\r\n\r\n\r\n<div class=\"budgets-container\">\r\n    <h2>Budgets</h2>\r\n    <button class=\"btn--default\" data-bind=\"click: toggleNewBudgetForm\">+ New Budget</button>\r\n    <div class=\"list\" data-bind=\"foreach: budgets\">\r\n        <div class=\"list-item\" data-bind=\"click: function() { $parent.selectBudget($data) }, css: { 'item-selected': $parent.selectedBudget() && $parent.selectedBudget().id === id }\">\r\n            <div class=\"attrs\">\r\n                <span class=\"attr\" data-bind=\"text: name\"></span>\r\n                <span class=\"attr\" data-bind=\"text: month\"></span>\r\n                <span class=\"attr\" data-bind=\"text: plannedAmount\"></span>\r\n                <span class=\"attr\" data-bind=\"text: spentAmount\"></span>\r\n                <span class=\"attr\" data-bind=\"text: percSpent\"></span>\r\n            </div>\r\n            <button class=\"btn--default btn-remove\" data-bind=\"click: function() { $parent.removeBudget($data) }, clickBubble: false\">Remove budget</button>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n\r\n<!--Categories-->\r\n<!-- ko if: budgets().length -->\r\n\r\n<div class=\"layover\" data-bind=\"visible: newCategoryForm(), click: toggleNewCategoryForm\">\r\n    <div class=\"creation-form\" data-bind=\"click: function () {}, clickBubble: false;\">\r\n        <input class=\"input--default\" placeholder=\"Name\" data-bind=\"textInput: categoryForm.name\" />\r\n        <input disabled class=\"input--default\" placeholder=\"Budget\" data-bind=\"textInput: categoryForm.budget\" />\r\n        <input class=\"input--default\" placeholder=\"Planned Amount\" data-bind=\"textInput: categoryForm.plannedAmount\" />\r\n        <button class=\"btn--default\" data-bind=\"click: addCategory\">Add category</button>\r\n    </div>\r\n</div>\r\n\r\n<div class=\"categories-container\">\r\n    <h2>Categories for <u data-bind=\"text: selectedBudget() && selectedBudget().name\"></u></h2>\r\n    <button class=\"btn--default\" data-bind=\"click: toggleNewCategoryForm\">+ New category</button>\r\n    <div class=\"list\" data-bind=\"foreach: categories\">\r\n        <div class=\"list-item\" data-bind=\"click: function() { $parent.selectCategory($data) }, css: { 'item-selected': $parent.selectedCategory() && $parent.selectedCategory().id === id }\">\r\n            <div class=\"attrs\">\r\n                <span class=\"attr\" data-bind=\"text: name\"></span>\r\n                <span class=\"attr\" data-bind=\"text: budget\"></span>\r\n                <span class=\"attr\" data-bind=\"text: plannedAmount\"></span>\r\n                <span class=\"attr\" data-bind=\"text: spentAmount\"></span>\r\n                <span class=\"attr\" data-bind=\"text: difference\"></span>\r\n            </div>\r\n            <button class=\"btn--default btn-remove\" data-bind=\"click: function() { $parent.removeCategory(id) }, clickBubble: false\">Remove category</button>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n\r\n\r\n<!-- /ko -->\r\n\r\n\r\n<!--Payments-->\r\n<!-- ko if: categories().length -->\r\n\r\n<div class=\"layover\" data-bind=\"visible: newPaymentForm(), click: toggleNewPaymentForm\">\r\n    <div class=\"creation-form\" data-bind=\"click: function () {}, clickBubble: false;\">\r\n        <input class=\"input--default\" placeholder=\"Name\" data-bind=\"textInput: paymentForm.name\" />\r\n        <input disabled class=\"input--default\" placeholder=\"Budget\" data-bind=\"textInput: paymentForm.budget\" />\r\n        <input disabled class=\"input--default\" placeholder=\"Category\" data-bind=\"textInput: paymentForm.category\" />\r\n        <input disabled class=\"input--default\" placeholder=\"Date\" data-bind=\"textInput: paymentForm.date\" />\r\n        <input class=\"input--default\" placeholder=\"Planned Amount\" data-bind=\"textInput: paymentForm.plannedAmount\" />\r\n        <textarea class=\"textarea--default\" placeholder=\"Description\" data-bind=\"textInput: paymentForm.description\"></textarea>\r\n        <button class=\"btn--default\" data-bind=\"click: addPayment\">Add payment</button>\r\n\r\n    </div>\r\n</div>\r\n\r\n<div class=\"payments-container\">\r\n    <h2>Payments for \"\r\n        <u data-bind=\"text: selectedBudget() && selectedBudget().name\"></u>\r\n        <u data-bind=\"text: selectedCategory() && selectedCategory().name\"></u>\"\r\n    </h2>\r\n    <button class=\"btn--default\" data-bind=\"click: toggleNewPaymentForm\">+ New payment</button>\r\n    <div class=\"list\" data-bind=\"foreach: payments\">\r\n        <div class=\"list-item\">\r\n            <div class=\"attrs\">\r\n                <span class=\"attr\" data-bind=\"text: name\"></span>\r\n                <span class=\"attr\" data-bind=\"text: budget\"></span>\r\n                <span class=\"attr\" data-bind=\"text: category\"></span>\r\n                <span class=\"attr\" data-bind=\"text: amount\"></span>\r\n                <span class=\"attr\" data-bind=\"text: description\"></span>\r\n            </div>\r\n            <button class=\"btn--default btn-remove\" data-bind=\"click: function() { $parent.removePayment(id) }, clickBubble: false\">Remove payment</button>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<!-- /ko -->\r\n";
 
 /***/ }),
 
@@ -31733,6 +31733,109 @@ module.exports.setLogLevel = function(level) {
 
 /***/ }),
 
+/***/ "./static/js/api/category.js":
+/*!***********************************!*\
+  !*** ./static/js/api/category.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+const categoryApi = {
+    create: function (name, plannedAmount, budgetId) {
+        return $.ajax({
+            type: "POST",
+            url: `/api/categories/create`,
+            data: JSON.stringify({
+                "name": name,
+                "plannedAmount": plannedAmount,
+                "budget": {
+                    "id": budgetId
+                }
+            }),
+            contentType: "application/json",
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('USER_SESSION_TOKEN')
+            }
+        })
+    },
+    getCategoriesByBudget: function (id) {
+        return $.ajax({
+            type: "GET",
+            url: `/api/categories/${id}`,
+            contentType: "application/json",
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('USER_SESSION_TOKEN')
+            }
+        })
+    },
+    deleteCategory: function (id) {
+        return $.ajax({
+            type: "DELETE",
+            url: `/api/categories/${id}`,
+            contentType: "application/json",
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('USER_SESSION_TOKEN')
+            }
+        })
+    }
+};
+
+module.exports = categoryApi;
+
+/***/ }),
+
+/***/ "./static/js/api/payment.js":
+/*!**********************************!*\
+  !*** ./static/js/api/payment.js ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+const paymentApi = {
+    create: function (name, date, amount, categoryId) {
+        return $.ajax({
+            type: "POST",
+            url: `/api/payments/create`,
+            data: JSON.stringify({
+                "title": name,
+                "date": date,
+                "amount": amount,
+                "category": {
+                    "id": categoryId
+                }
+            }),
+            contentType: "application/json",
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('USER_SESSION_TOKEN')
+            }
+        })
+    },
+    getByCategoryId: function (id) {
+        return $.ajax({
+            type: "GET",
+            url: `/api/payments/${id}`,
+            contentType: "application/json",
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('USER_SESSION_TOKEN')
+            }
+        })
+    },
+    delete: function (id) {
+        return $.ajax({
+            type: "DELETE",
+            url: `/api/payments/${id}`,
+            contentType: "application/json",
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('USER_SESSION_TOKEN')
+            }
+        })
+    }
+};
+
+module.exports = paymentApi;
+
+/***/ }),
+
 /***/ "./static/js/auth.js":
 /*!***************************!*\
   !*** ./static/js/auth.js ***!
@@ -31789,6 +31892,12 @@ class Budget {
         this.name = params.name;
         this.month = params.month;
         this.plannedAmount = params.plannedAmount;
+        this.spentAmount = params.spentAmount;
+        this.percSpent = ko.computed(() => {
+            const perc = parseInt(this.spentAmount ? this.spentAmount * 100 / this.plannedAmount : 0);
+            return perc + '%';
+        });
+
         this.url = `/budgets/${this.id}`;
     }
 
@@ -31820,21 +31929,21 @@ class Category {
         this.params = params;
         this.id = params.id;
         this.name = params.name;
-        this.moneyPlanned = ko.observable(params.moneyPlanned);
-        this.moneySpent = ko.observable(0);
-        this.url = `/categories/${this.id}/`
+        this.budget = params.budget;
+        this.plannedAmount = params.plannedAmount;
+        this.spentAmount = params.spentAmount;
 
         this.difference = ko.computed(
-            () => this.moneyPlanned() - this.moneySpent()
+            () => parseInt(this.spentAmount ? this.spentAmount*100 / this.plannedAmount : 0) + '%'
         )
     }
 
     static fromApi(data) {
         return new Category({
-            'id': data.id,
-            'name': data.name,
-            'moneyPlanned': data.moneyPlanned,
-            'moneySpent': data.moneySpent
+            id: data.id,
+            name: data.name,
+            plannedAmount: data.plannedAmount,
+            spentAmount: data.spentAmount
         });
     }
 
@@ -31842,11 +31951,10 @@ class Category {
         return {
             "id": category.id,
             "name": category.name,
-            "moneyPlanned": category.moneyPlanned(),
-            "moneySpent": category.moneySpent()
+            "plannedAmount": category.plannedAmount(),
+            "spentAmount": category.spentAmount()
         }
     }
-
 }
 
 ko.components.register('category', {
@@ -31872,6 +31980,11 @@ const common = {
         const m = d.getMonth() + 1;
         const mStr = m < 10 ? '0' + m.toString() : m.toString();
         return mStr + '-' + d.getFullYear();
+    },
+    getDate: function () {
+        const date = d.getDate() + 1;
+        const dateStr = date < 10 ? '0' + date.toString() : date.toString();
+        return dateStr + '-' + this.getMonthString();
     }
 };
 
@@ -31935,16 +32048,22 @@ class Payment {
         this.params = params;
         this.id = params.id;
         this.name = params.name;
-        this.description = params.description;
+        this.budget = params.budget;
+        this.category = params.category;
+        this.date = params.date;
         this.amount = params.amount;
+        this.description = params.description;
     }
 
     static fromApi(data) {
         return new Payment({
             'id': data.id,
-            'name': data.name,
-            'description': data.description,
+            'name': data.title,
+            'budget': data.budget,
+            'category': data.category.name,
+            'date': data.date,
             'amount': data.amount,
+            'description': data.description,
         });
     }
 
@@ -32178,22 +32297,54 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../auth */ "./static/js/auth.js");
 /* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_auth__WEBPACK_IMPORTED_MODULE_0__);
 __webpack_require__(/*! ../../scss/overview.scss */ "./static/scss/overview.scss");
+__webpack_require__(/*! ../../scss/budget.scss */ "./static/scss/budget.scss");
+
+const categoryApi = __webpack_require__(/*! ../api/category */ "./static/js/api/category.js");
+const paymentApi = __webpack_require__(/*! ../api/payment */ "./static/js/api/payment.js");
 
 
 const { Budget } = __webpack_require__(/*! ../budget.vm */ "./static/js/budget.vm.js");
+const { Category } = __webpack_require__(/*! ../category.vm */ "./static/js/category.vm.js");
+const { Payment } = __webpack_require__(/*! ../payment.vm */ "./static/js/payment.vm.js");
 const common = __webpack_require__(/*! ../common */ "./static/js/common.js");
 
 class HomeView {
     constructor(ctx) {
         this.router = ctx.router;
+
         this.budgets = ko.observableArray([]);
+        this.selectedBudget = ko.observable();
+
+        this.categories = ko.observableArray([]);
+        this.selectedCategory = ko.observable();
+
+        this.payments = ko.observableArray([]);
+        this.selectedPayment = ko.observable();
 
         // New category form
         this.newBudgetForm = ko.observable(false);
+        this.newCategoryForm = ko.observable(false);
+        this.newPaymentForm = ko.observable(false);
+
         this.form = {
-            name: ko.observable(''),
-            month: ko.observable(''),
-            plannedAmount: ko.observable(''),
+            name: ko.observable('May budget'),
+            month: ko.observable(common.getMonthString()),
+            plannedAmount: ko.observable(200),
+        };
+
+        this.categoryForm = {
+            name: ko.observable('Category'),
+            budget: ko.computed(() => this.selectedBudget() && this.selectedBudget().name),
+            plannedAmount: ko.observable(50)
+        };
+
+        this.paymentForm = {
+            name: ko.observable('Payment'),
+            budget: ko.computed(() => this.selectedBudget() && this.selectedBudget().name),
+            category: ko.computed(() => this.selectedCategory() && this.selectedCategory().name),
+            date: ko.observable(common.getDate()),
+            plannedAmount: ko.observable(50),
+            description: ko.observable('')
         };
 
         this.getBudgetsFromApi();
@@ -32201,6 +32352,14 @@ class HomeView {
 
     toggleNewBudgetForm () {
         this.newBudgetForm(!this.newBudgetForm());
+    }
+
+    toggleNewCategoryForm () {
+        this.newCategoryForm(!this.newCategoryForm());
+    }
+
+    toggleNewPaymentForm () {
+        this.newPaymentForm(!this.newPaymentForm());
     }
 
     getBudgetsFromApi () {
@@ -32213,6 +32372,17 @@ class HomeView {
         })
             .then(res => {
                 res && this.budgets(res.map(item => new Budget(item)));
+                this.selectedBudget(res[0]);
+                categoryApi.getCategoriesByBudget(res[0].id)
+                    .then(cats => {
+                        this.categories(cats.map(c => Category.fromApi(c)));
+                        this.selectedCategory(cats[0]);
+                        paymentApi.getByCategoryId(cats[0].id)
+                            .then(pays => {
+                                this.payments(pays.map(p => Payment.fromApi(p)));
+                                this.selectedPayment(pays[0]);
+                            })
+                    });
             })
     }
 
@@ -32229,6 +32399,7 @@ class HomeView {
             data: JSON.stringify({
                 "name": this.form.name(),
                 "validForMonth": this.form.month(),
+                "plannedAmount": this.form.plannedAmount(),
                 "user": {
                     "id": sessionStorage.getItem('USER_ID')
                 }
@@ -32238,11 +32409,25 @@ class HomeView {
                 'Authorization': 'Bearer ' + sessionStorage.getItem('USER_SESSION_TOKEN')
             }
         })
-        .then(() => {
-            const newBudget = new Budget(params);
-            this.budgets.unshift(newBudget);
-            this.resetNewBudgetForm();
-        })
+            .then(() => {
+                const newBudget = new Budget(params);
+                this.budgets.unshift(newBudget);
+                this.resetNewBudgetForm();
+            })
+    }
+
+    addCategory () {
+        categoryApi.create(this.categoryForm.name(), this.categoryForm.plannedAmount(), this.selectedBudget().id)
+            .then(() => this.categories.unshift(Category.fromApi(data)));
+    }
+
+    addPayment () {
+        paymentApi.create(
+            this.paymentForm.name(),
+            this.paymentForm.date(),
+            this.paymentForm.plannedAmount(),
+            this.selectedCategory().id
+        ).then(data => this.payments.unshift(Payment.fromApi(data)));
     }
 
     resetNewBudgetForm () {
@@ -32251,11 +32436,44 @@ class HomeView {
     }
 
     removeBudget (budget) {
-        this.budgets.remove(budget);
+        $.ajax({
+            type: "DELETE",
+            url: `/api/budgets/${budget.id}`,
+            contentType: "application/json",
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('USER_SESSION_TOKEN')
+            }
+        })
+            .then(() => {
+                this.budgets.remove(budget);
+            })
+
     }
 
-    open (budget) {
-        this.router.update(budget.url);
+    removeCategory (id) {
+        categoryApi.deleteCategory(id)
+            .then(() => this.categories(this.categories().filter(c => c.id !== id)));
+    }
+
+    removePayment (id) {
+        paymentApi.delete(id)
+            .then(() => this.payments(this.payments().filter(p => p.id !== id)));
+    }
+
+    selectBudget (budget) {
+        categoryApi.getCategoriesByBudget(budget.id)
+            .then(res => {
+                this.selectedBudget(budget);
+                this.categories(res.map(category => Category.fromApi(category)))
+            });
+    }
+
+    selectCategory (category) {
+        paymentApi.getByCategoryId(category.id)
+            .then(res => {
+                this.selectedCategory(category);
+                this.payments(res.map(payment => Payment.fromApi(payment)))
+            });
     }
 
     logout () {
@@ -32265,15 +32483,45 @@ class HomeView {
 
 class Overview {
     constructor () {
-        this.monthlyIncome = '';
-        this.monthlyPlanned = '';
-        this.monthlySpent = '';
-        this.monthlyDiff = '';
+        this.monthlyIncome = ko.observable('');
+        this.monthlyPlanned = ko.observable('');
+        this.monthlySpent = ko.observable('');
+        this.monthlyDiff = ko.computed(() => this.monthlyPlanned() - this.monthlySpent());
 
         this.editMonthly = ko.observable(false);
         this.setMonthly = ko.observable('');
 
         this.getIncome();
+        this.getPlanned();
+        this.getSpent();
+    }
+
+    getPlanned () {
+        $.ajax({
+            type: "GET",
+            url: `/api/budgets/plannedAmount/${sessionStorage.getItem('USER_ID')}/${common.getMonthString()}`,
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('USER_SESSION_TOKEN')
+            },
+            contentType: "application/json"
+        })
+            .then(data => {
+                this.monthlyPlanned(data);
+            })
+    }
+
+    getSpent () {
+        $.ajax({
+            type: "GET",
+            url: `/api/budgets/spentAmount/${sessionStorage.getItem('USER_ID')}/${common.getMonthString()}`,
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('USER_SESSION_TOKEN')
+            },
+            contentType: "application/json"
+        })
+            .then(data => {
+                this.monthlySpent(data);
+            })
     }
 
     toggleEdit () {
@@ -32296,6 +32544,9 @@ class Overview {
             },
             contentType: "application/json"
         })
+            .then(() => {
+                this.monthlyIncome(this.setMonthly());
+            })
     }
 
     getIncome () {
@@ -32307,7 +32558,7 @@ class Overview {
             }
         })
             .then(res => {
-                console.log(res)
+                this.monthlyIncome(res.monthlyIncome);
             })
     }
 }

@@ -1,20 +1,52 @@
 require('../../scss/overview.scss');
+require('../../scss/budget.scss');
+
+const categoryApi = require('../api/category');
+const paymentApi = require('../api/payment');
 
 import * as auth from "../auth";
 const { Budget } = require('../budget.vm');
+const { Category } = require('../category.vm');
+const { Payment } = require('../payment.vm');
 const common = require('../common');
 
 class HomeView {
     constructor(ctx) {
         this.router = ctx.router;
+
         this.budgets = ko.observableArray([]);
+        this.selectedBudget = ko.observable();
+
+        this.categories = ko.observableArray([]);
+        this.selectedCategory = ko.observable();
+
+        this.payments = ko.observableArray([]);
+        this.selectedPayment = ko.observable();
 
         // New category form
         this.newBudgetForm = ko.observable(false);
+        this.newCategoryForm = ko.observable(false);
+        this.newPaymentForm = ko.observable(false);
+
         this.form = {
-            name: ko.observable(''),
-            month: ko.observable(''),
-            plannedAmount: ko.observable(''),
+            name: ko.observable('May budget'),
+            month: ko.observable(common.getMonthString()),
+            plannedAmount: ko.observable(200),
+        };
+
+        this.categoryForm = {
+            name: ko.observable('Category'),
+            budget: ko.computed(() => this.selectedBudget() && this.selectedBudget().name),
+            plannedAmount: ko.observable(50)
+        };
+
+        this.paymentForm = {
+            name: ko.observable('Payment'),
+            budget: ko.computed(() => this.selectedBudget() && this.selectedBudget().name),
+            category: ko.computed(() => this.selectedCategory() && this.selectedCategory().name),
+            date: ko.observable(common.getDate()),
+            plannedAmount: ko.observable(50),
+            description: ko.observable('')
         };
 
         this.getBudgetsFromApi();
@@ -22,6 +54,14 @@ class HomeView {
 
     toggleNewBudgetForm () {
         this.newBudgetForm(!this.newBudgetForm());
+    }
+
+    toggleNewCategoryForm () {
+        this.newCategoryForm(!this.newCategoryForm());
+    }
+
+    toggleNewPaymentForm () {
+        this.newPaymentForm(!this.newPaymentForm());
     }
 
     getBudgetsFromApi () {
@@ -34,6 +74,17 @@ class HomeView {
         })
             .then(res => {
                 res && this.budgets(res.map(item => new Budget(item)));
+                this.selectedBudget(res[0]);
+                categoryApi.getCategoriesByBudget(res[0].id)
+                    .then(cats => {
+                        this.categories(cats.map(c => Category.fromApi(c)));
+                        this.selectedCategory(cats[0]);
+                        paymentApi.getByCategoryId(cats[0].id)
+                            .then(pays => {
+                                this.payments(pays.map(p => Payment.fromApi(p)));
+                                this.selectedPayment(pays[0]);
+                            })
+                    });
             })
     }
 
@@ -50,6 +101,7 @@ class HomeView {
             data: JSON.stringify({
                 "name": this.form.name(),
                 "validForMonth": this.form.month(),
+                "plannedAmount": this.form.plannedAmount(),
                 "user": {
                     "id": sessionStorage.getItem('USER_ID')
                 }
@@ -59,11 +111,25 @@ class HomeView {
                 'Authorization': 'Bearer ' + sessionStorage.getItem('USER_SESSION_TOKEN')
             }
         })
-        .then(() => {
-            const newBudget = new Budget(params);
-            this.budgets.unshift(newBudget);
-            this.resetNewBudgetForm();
-        })
+            .then(() => {
+                const newBudget = new Budget(params);
+                this.budgets.unshift(newBudget);
+                this.resetNewBudgetForm();
+            })
+    }
+
+    addCategory () {
+        categoryApi.create(this.categoryForm.name(), this.categoryForm.plannedAmount(), this.selectedBudget().id)
+            .then(() => this.categories.unshift(Category.fromApi(data)));
+    }
+
+    addPayment () {
+        paymentApi.create(
+            this.paymentForm.name(),
+            this.paymentForm.date(),
+            this.paymentForm.plannedAmount(),
+            this.selectedCategory().id
+        ).then(data => this.payments.unshift(Payment.fromApi(data)));
     }
 
     resetNewBudgetForm () {
@@ -72,11 +138,44 @@ class HomeView {
     }
 
     removeBudget (budget) {
-        this.budgets.remove(budget);
+        $.ajax({
+            type: "DELETE",
+            url: `/api/budgets/${budget.id}`,
+            contentType: "application/json",
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('USER_SESSION_TOKEN')
+            }
+        })
+            .then(() => {
+                this.budgets.remove(budget);
+            })
+
     }
 
-    open (budget) {
-        this.router.update(budget.url);
+    removeCategory (id) {
+        categoryApi.deleteCategory(id)
+            .then(() => this.categories(this.categories().filter(c => c.id !== id)));
+    }
+
+    removePayment (id) {
+        paymentApi.delete(id)
+            .then(() => this.payments(this.payments().filter(p => p.id !== id)));
+    }
+
+    selectBudget (budget) {
+        categoryApi.getCategoriesByBudget(budget.id)
+            .then(res => {
+                this.selectedBudget(budget);
+                this.categories(res.map(category => Category.fromApi(category)))
+            });
+    }
+
+    selectCategory (category) {
+        paymentApi.getByCategoryId(category.id)
+            .then(res => {
+                this.selectedCategory(category);
+                this.payments(res.map(payment => Payment.fromApi(payment)))
+            });
     }
 
     logout () {
@@ -86,15 +185,45 @@ class HomeView {
 
 class Overview {
     constructor () {
-        this.monthlyIncome = '';
-        this.monthlyPlanned = '';
-        this.monthlySpent = '';
-        this.monthlyDiff = '';
+        this.monthlyIncome = ko.observable('');
+        this.monthlyPlanned = ko.observable('');
+        this.monthlySpent = ko.observable('');
+        this.monthlyDiff = ko.computed(() => this.monthlyPlanned() - this.monthlySpent());
 
         this.editMonthly = ko.observable(false);
         this.setMonthly = ko.observable('');
 
         this.getIncome();
+        this.getPlanned();
+        this.getSpent();
+    }
+
+    getPlanned () {
+        $.ajax({
+            type: "GET",
+            url: `/api/budgets/plannedAmount/${sessionStorage.getItem('USER_ID')}/${common.getMonthString()}`,
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('USER_SESSION_TOKEN')
+            },
+            contentType: "application/json"
+        })
+            .then(data => {
+                this.monthlyPlanned(data);
+            })
+    }
+
+    getSpent () {
+        $.ajax({
+            type: "GET",
+            url: `/api/budgets/spentAmount/${sessionStorage.getItem('USER_ID')}/${common.getMonthString()}`,
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('USER_SESSION_TOKEN')
+            },
+            contentType: "application/json"
+        })
+            .then(data => {
+                this.monthlySpent(data);
+            })
     }
 
     toggleEdit () {
@@ -117,6 +246,9 @@ class Overview {
             },
             contentType: "application/json"
         })
+            .then(() => {
+                this.monthlyIncome(this.setMonthly());
+            })
     }
 
     getIncome () {
@@ -128,7 +260,7 @@ class Overview {
             }
         })
             .then(res => {
-                console.log(res)
+                this.monthlyIncome(res.monthlyIncome);
             })
     }
 }
