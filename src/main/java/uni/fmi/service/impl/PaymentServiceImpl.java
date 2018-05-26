@@ -24,8 +24,13 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public List<Payment> getPaymentsForCategory(int paymentId) {
-        return paymentDao.getPaymentsForCategory(paymentId);
+    public List<Payment> getPaymentsForCategory(int categoryId) {
+        return paymentDao.getPaymentsForCategory(categoryId);
+    }
+    
+    @Override
+    public List<Payment> getPaymentsForUserAndMonth(int userId, String month){
+        return paymentDao.getPaymentsForUserAndMonth(userId, month);
     }
 
     @Override

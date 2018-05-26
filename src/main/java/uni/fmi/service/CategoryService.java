@@ -8,12 +8,17 @@ package uni.fmi.service;
 import uni.fmi.model.Category;
 
 import java.util.List;
+import uni.fmi.model.Budget;
 
 public interface CategoryService {
     
     boolean createCategory(Category category);
 
-    List<Category> getCategoriesForBudget(int categoryId);
+    List<Category> getCategoriesForBudget(int budgetId);
+    
+    List<Category> getCategoriesForUserAndMonth(int userId, String month);
+    
+    List<Category> copyCategoriesForUserBudgetAndMonth(int userId, int budgetId, String month, Budget budget);
 
     boolean removeCategory(int id);
 }

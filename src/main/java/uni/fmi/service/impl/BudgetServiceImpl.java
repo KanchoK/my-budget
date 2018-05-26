@@ -1,5 +1,6 @@
 package uni.fmi.service.impl;
 
+import java.math.BigDecimal;
 import uni.fmi.model.Budget;
 import uni.fmi.persistence.dao.BudgetDao;
 import uni.fmi.service.BudgetService;
@@ -24,8 +25,28 @@ public class BudgetServiceImpl implements BudgetService {
     }
 
     @Override
-    public Budget getBudgetForUserAndMonth(String month, int userId) {
-        return budgetDao.getBudgetForMonthAndUserId(month, userId);
+    public Budget getBudgetForId(int budgetId){
+        return budgetDao.getBudgetForId(budgetId);
+    }
+    
+    @Override
+    public List<Budget> getBudgetsForUserAndMonth(int userId, String month) {
+        return budgetDao.getBudgetsForUserAndMonth(userId, month);
+    }
+    
+    @Override
+    public Budget copyBudgetForUserBudgetAndMonth(int userId, int budgetId, String month){
+        return budgetDao.copyBudgetForUserBudgetAndMonth(userId, budgetId, month);
+    }
+    
+    @Override
+    public BigDecimal getBudgetsPlannedAmountForUserAndMonth(int userId, String month){
+        return budgetDao.getBudgetsPlannedAmountForUserAndMonth(userId, month);
+    }
+    
+    @Override
+    public BigDecimal getBudgetsSpentAmountForUserAndMonth(int userId, String month){
+        return budgetDao.getBudgetsSpentAmountForUserAndMonth(userId, month);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package uni.fmi.endpoint;
 
+import java.math.BigDecimal;
 import org.apache.log4j.Logger;
 import uni.fmi.annotation.Secured;
 import uni.fmi.model.Budget;
@@ -67,24 +68,80 @@ public class BudgetManager {
         return Response.status(Response.Status.OK.getStatusCode())
                 .entity(budgetsForUser).build();
     }
-
+    
+//    @GET
+//    @Path("{budgetId}")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Response getBudgetForId(@PathParam("budgetId") int budgetId) {
+//        Budget budgetForId = budgetService.getBudgetForId(budgetId);
+//
+//        LOG.info("Budget for id = " + budgetId + " is successfully retrieved: " + budgetForId);
+//
+//        return Response.status(Response.Status.OK.getStatusCode())
+//                .entity(budgetForId).build();
+//    }
+    
     @GET
     @Path("{userId}/{validForMonth}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getBudget(@PathParam("validForMonth") String month,
+    public Response getBudgetsForUserAndMonth(@PathParam("validForMonth") String month,
                               @PathParam("userId") int userId) {
-        Budget result = budgetService.getBudgetForUserAndMonth(month, userId);
+        List<Budget> budgetsForUserAndMonth = budgetService.getBudgetsForUserAndMonth(userId, month);
 
-        LOG.info("Budget successfully retrieved: " + result);
+        LOG.info("Budget successfully retrieved: " + budgetsForUserAndMonth);
 
         return Response.status(Response.Status.OK.getStatusCode())
-                .entity(result).build();
+                .entity(budgetsForUserAndMonth).build();
+    }
+    
+//    @GET 
+//    @Path("copy/{userId}/{validForMonth}/{budgetId}")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public Response copyBudgetUserBudgetAndMonth(@PathParam("validForMonth") String month,
+//        @PathParam("userId") int userId, @PathParam("budgetId") int budgetId){
+//        Budget copiedBudgetUserBudgetAndMonth = budgetService.copyBudgetUserBudgetAndMonth(userId, budgetId, month);
+//
+//        LOG.info("Copied budget for " + month + " successfully retrieved: " + copiedBudgetUserBudgetAndMonth);
+//
+//        return Response.status(Response.Status.OK.getStatusCode())
+//                .entity(copiedBudgetUserBudgetAndMonth).build();
+//    }
+    
+    @GET
+    @Path("plannedAmount/{userId}/{validForMonth}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getBudgetsPlannedAmountForUserAndMonth(@PathParam("validForMonth") String month,
+                              @PathParam("userId") int userId) {
+        BigDecimal budgetsPlannedAmount = budgetService.getBudgetsPlannedAmountForUserAndMonth(userId, month);
+        LOG.info(budgetsPlannedAmount);
+
+        LOG.info("Overall planned amount for user with id = " + userId + 
+                " and month = " + month + " successfully retrieved: " + 
+                budgetsPlannedAmount);
+
+        return Response.status(Response.Status.OK.getStatusCode())
+                .entity(budgetsPlannedAmount).build();
+    }
+    
+    @GET
+    @Path("spentAmount/{userId}/{validForMonth}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getBudgetsSpentAmountForUserAndMonth(@PathParam("validForMonth") String month,
+                              @PathParam("userId") int userId) {
+        BigDecimal budgetsSpentAmount = budgetService.getBudgetsSpentAmountForUserAndMonth(userId, month);
+
+        LOG.info("Overall spent amount for user with id = " + userId + 
+                " and month = " + month + " successfully retrieved: " + 
+                budgetsSpentAmount);
+
+        return Response.status(Response.Status.OK.getStatusCode())
+                .entity(budgetsSpentAmount).build();
     }
 
     @DELETE
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getBudget(@PathParam("id") int id) {
+    public Response removeBudget(@PathParam("id") int id) {
         boolean result = budgetService.removeBudget(id);
 
         LOG.info("Budget successfully deleted: " + result);
