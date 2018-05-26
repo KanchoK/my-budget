@@ -26,6 +26,8 @@ create table monthly_incomes
 		unique (userId, validForMonth),
 	constraint user_monthly_incomes
 		foreign key (userId) references my_budget.users (id)
+        on delete cascade
+        on update cascade
 )
 ;
 
@@ -42,6 +44,8 @@ create table budgets
 		unique (name, validForMonth),
 	constraint user_budgets
 		foreign key (userId) references my_budget.users (id)
+        on delete cascade
+        on update cascade
 )
 ;
 
@@ -57,6 +61,8 @@ create table categories
 		unique (name, budgetId),
 	constraint budget
 		foreign key (budgetId) references my_budget.budgets (id)
+        on delete cascade
+        on update cascade
 )
 ;
 
@@ -73,7 +79,9 @@ create table payments
 		unique (title),
 	constraint category
 		foreign key (categoryId) references my_budget.categories (id)
-)
+        on delete cascade
+        on update cascade
+)        
 ;
 
 create index id_idx

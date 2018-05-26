@@ -20,6 +20,6 @@ VALUES ("Pizza Margarita", "05-02-2018", "from Pizza Victoria", 11.90, 1),
        ("Shopska Salad", "05-02-2018", "from Happy", 2.90, 1),
        ("Beer Shumensko", "05-03-2018", "500 ml, pretty expensive", 5.30, 2),
        ("Coca-Cola", "05-03-2018", "500 ml", 2.50, 2),
-	   ("Hotel Paradise", "05-10-2018", "for 3 day and for 2 people", 150, 2),
-       ("Tarator", "05-11-2018", "from Tavern Misho, pretty expensive", 4.90, 1);
+	   ("Hotel Paradise", "05-10-2018", "for 3 day and for 2 people", 150, 3),
+       ("Tarator", "05-11-2018", "from Tavern Misho, pretty expensive", 4.90, 4);
 
