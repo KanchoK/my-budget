@@ -5,7 +5,6 @@
  */
 package uni.fmi.model;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 //import javax.persistence.Entity;
 //import javax.persistence.GeneratedValue;
@@ -33,6 +32,11 @@ public class Category{
         this.plannedAmount = plannedAmount;
         this.spentAmount = spentAmount;
         this.budget = budget;
+    }
+
+    public Category(int id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public int getId() {

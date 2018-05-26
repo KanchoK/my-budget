@@ -5,23 +5,19 @@
  */
 package uni.fmi.endpoint;
 
-import java.math.BigDecimal;
-import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import org.apache.log4j.Logger;
 import uni.fmi.annotation.Secured;
 import uni.fmi.model.Category;
 import uni.fmi.model.StatusMessage;
 import uni.fmi.model.StatusMessageBuilder;
 import uni.fmi.service.CategoryService;
+
+import javax.inject.Inject;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.math.BigDecimal;
+import java.util.List;
 
 @Secured
 @Path("categories")
@@ -66,10 +62,22 @@ public class CategoryManager {
         }
     }
 
-    @DELETE
-    @Path("remove")
+    @GET
+    @Path("{budgetId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCategory(@HeaderParam("id") int id) {
+    public Response getBudgetsForUser(@PathParam("budgetId") int budgetId) {
+        List<Category> categoriesForBudget = categoryService.getCategoriesForBudget(budgetId);
+
+        LOG.info("Budgets successfully retrieved: " + categoriesForBudget);
+
+        return Response.status(Response.Status.OK.getStatusCode())
+                .entity(categoriesForBudget).build();
+    }
+
+    @DELETE
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response removeCategory(@PathParam("id") int id) {
         boolean result = categoryService.removeCategory(id);
 
         LOG.info("Category successfully deleted: " + result);

@@ -5,16 +5,16 @@
  */
 package uni.fmi.persistence.dao.impl;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import javax.inject.Inject;
 import org.apache.log4j.Logger;
+import uni.fmi.model.Category;
 import uni.fmi.model.Payment;
 import uni.fmi.persistence.DatabaseManager;
 import uni.fmi.persistence.dao.PaymentDao;
+
+import javax.inject.Inject;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PaymentDaoImpl implements PaymentDao{
         
@@ -25,7 +25,12 @@ public class PaymentDaoImpl implements PaymentDao{
 
     private static final String ADD_PAYMENT_STATEMENT = "INSERT INTO payments(title, amount, categoryId) " +
                                                 "VALUES (?, ?, ?)";
-    private static final String GET_PAYMENT_STATEMENT = "";
+    private static final String GET_PAYMENTS_STATEMENT =
+            "SELECT p.id, p.title, p.amount, c.id, c.name " +
+                    "FROM payments AS p " +
+                    "INNER JOIN categories AS c " +
+                    "ON p.categoryId = c.id " +
+                    "WHERE p.categoryId=?";
     private static final String REMOVE_PAYMENT_STATEMENT = "DELETE FROM payments WHERE id=?";
     
      @Override
@@ -52,6 +57,27 @@ public class PaymentDaoImpl implements PaymentDao{
     }
 
     @Override
+    public List<Payment> getPaymentsForCategory(int paymentId) {
+        List<Payment> payments = new ArrayList<>();
+
+        try (Connection conn = databaseManager.getDataSource().getConnection();
+             PreparedStatement preparedStatement = conn
+                     .prepareStatement(GET_PAYMENTS_STATEMENT)) {
+
+            preparedStatement.setInt(1, paymentId);
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                while (rs.next()) {
+                    payments.add(buildPaymentFromResultSet(rs));
+                }
+            }
+        } catch (SQLException e) {
+            LOG.error("Exception was thrown", e);
+        }
+
+        return payments;
+    }
+
+    @Override
     public boolean removePayment(int id) {
         try (Connection conn = databaseManager.getDataSource().getConnection();
              PreparedStatement preparedStatement = conn
@@ -64,5 +90,15 @@ public class PaymentDaoImpl implements PaymentDao{
             return false;
         }
         return true;
+    }
+
+    private Payment buildPaymentFromResultSet(ResultSet rs) throws SQLException {
+        Category category = new Category(rs.getInt("c.id"),
+                rs.getString("c.name"));
+
+        return new Payment(rs.getInt("p.id"),
+                rs.getString("p.title"),
+                rs.getBigDecimal("p.amount"),
+                category);
     }
 }

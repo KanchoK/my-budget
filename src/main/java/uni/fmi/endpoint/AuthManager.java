@@ -1,15 +1,14 @@
 package uni.fmi.endpoint;
 
+import org.apache.log4j.Logger;
 import uni.fmi.model.StatusMessage;
 import uni.fmi.model.StatusMessageBuilder;
 import uni.fmi.model.User;
 import uni.fmi.service.TokenService;
 import uni.fmi.service.UserService;
-import org.apache.log4j.Logger;
 
 import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Configuration;
@@ -30,14 +29,13 @@ public class AuthManager {
     @Inject
     private TokenService tokenService;
 
-    @GET
+    @POST
     @Path("login")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response login(@HeaderParam("username") String username,
-                          @HeaderParam("password") String password) {
+    public Response login(User user) {
         LOG.info("Login initiated...");
-        if (username == null || password == null
-                || username.equals("") || password.equals("")) {
+        if (user.getUsername() == null || user.getPassword() == null
+                || user.getUsername().equals("") || user.getPassword().equals("")) {
             StatusMessage statusMessage = new StatusMessageBuilder()
                     .status(Response.Status.PRECONDITION_FAILED.getStatusCode())
                     .message("Username and password must be present!").build();
@@ -46,7 +44,7 @@ public class AuthManager {
                     .entity(statusMessage).build();
         }
 
-        User user = userService.validateUser(username, password);
+        user = userService.validateUser(user.getUsername(), user.getPassword());
         if (user == null) {
             StatusMessage statusMessage = new StatusMessageBuilder()
                     .status(Response.Status.FORBIDDEN.getStatusCode())

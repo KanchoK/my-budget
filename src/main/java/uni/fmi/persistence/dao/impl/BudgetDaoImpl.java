@@ -8,6 +8,8 @@ import uni.fmi.persistence.dao.BudgetDao;
 
 import javax.inject.Inject;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BudgetDaoImpl implements BudgetDao {
 
@@ -18,6 +20,12 @@ public class BudgetDaoImpl implements BudgetDao {
 
     private static final String ADD_BUDGET_STATEMENT = "INSERT INTO budgets(name, validForMonth, userId) " +
                                                 "VALUES (?, ?, ?)";
+    private static final String GET_BUDGETS_STATEMENT =
+            "SELECT b.id, b.name, b.plannedAmount, b.spentAmount, b.validForMonth, u.id, u.username " +
+                    "FROM budgets AS b " +
+                    "INNER JOIN users AS u " +
+                    "ON b.userId = u.id " +
+                    "WHERE b.userId=?";
     private static final String GET_BUDGET_STATEMENT =
             "SELECT b.id, b.name, b.plannedAmount, b.spentAmount, b.validForMonth, u.id, u.username " +
             "FROM budgets AS b " +
@@ -48,6 +56,27 @@ public class BudgetDaoImpl implements BudgetDao {
             LOG.error("Exception was thrown", e);
         }
         return budgetId;
+    }
+
+    @Override
+    public List<Budget> getBudgetsForUser(int userId) {
+        List<Budget> budgets = new ArrayList<>();
+
+        try (Connection conn = databaseManager.getDataSource().getConnection();
+             PreparedStatement preparedStatement = conn
+                     .prepareStatement(GET_BUDGETS_STATEMENT)) {
+
+            preparedStatement.setInt(1, userId);
+            try (ResultSet rs = preparedStatement.executeQuery()) {
+                while (rs.next()) {
+                    budgets.add(buildBudgetFromResultSet(rs));
+                }
+            }
+        } catch (SQLException e) {
+            LOG.error("Exception was thrown", e);
+        }
+
+        return budgets;
     }
 
     @Override

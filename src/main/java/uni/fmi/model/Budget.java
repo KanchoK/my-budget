@@ -24,6 +24,12 @@ public class Budget {
         this.user = user;
     }
 
+    public Budget(int id, String validForMonth, String name) {
+        this.id = id;
+        this.validForMonth = validForMonth;
+        this.name = name;
+    }
+
     public int getId() {
         return id;
     }

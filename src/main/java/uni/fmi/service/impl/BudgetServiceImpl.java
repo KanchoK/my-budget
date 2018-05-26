@@ -5,6 +5,7 @@ import uni.fmi.persistence.dao.BudgetDao;
 import uni.fmi.service.BudgetService;
 
 import javax.inject.Inject;
+import java.util.List;
 
 public class BudgetServiceImpl implements BudgetService {
 
@@ -15,6 +16,11 @@ public class BudgetServiceImpl implements BudgetService {
     public boolean createBudget(Budget budget) {
         int budgetId = budgetDao.createBudget(budget);
         return budgetId > 0;
+    }
+
+    @Override
+    public List<Budget> getBudgetsForUser(int userId) {
+        return budgetDao.getBudgetsForUser(userId);
     }
 
     @Override

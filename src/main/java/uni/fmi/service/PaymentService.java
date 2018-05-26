@@ -7,9 +7,13 @@ package uni.fmi.service;
 
 import uni.fmi.model.Payment;
 
+import java.util.List;
+
 public interface PaymentService {
     
     boolean createPayment(Payment payment);
+
+    List<Payment> getPaymentsForCategory(int paymentId);
 
     boolean removePayment(int id);
 }

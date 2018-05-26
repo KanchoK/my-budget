@@ -5,10 +5,12 @@
  */
 package uni.fmi.service.impl;
 
-import javax.inject.Inject;
 import uni.fmi.model.Payment;
 import uni.fmi.persistence.dao.PaymentDao;
 import uni.fmi.service.PaymentService;
+
+import javax.inject.Inject;
+import java.util.List;
 
 public class PaymentServiceImpl implements PaymentService {
 
@@ -19,6 +21,11 @@ public class PaymentServiceImpl implements PaymentService {
     public boolean createPayment(Payment payment) {
         int paymentId = paymentDao.createPayment(payment);
         return paymentId > 0;
+    }
+
+    @Override
+    public List<Payment> getPaymentsForCategory(int paymentId) {
+        return paymentDao.getPaymentsForCategory(paymentId);
     }
 
     @Override

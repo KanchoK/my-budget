@@ -5,23 +5,19 @@
  */
 package uni.fmi.endpoint;
 
-import java.math.BigDecimal;
-import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.HeaderParam;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import org.apache.log4j.Logger;
 import uni.fmi.annotation.Secured;
 import uni.fmi.model.Payment;
 import uni.fmi.model.StatusMessage;
 import uni.fmi.model.StatusMessageBuilder;
 import uni.fmi.service.PaymentService;
+
+import javax.inject.Inject;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.math.BigDecimal;
+import java.util.List;
 
 @Secured
 @Path("payments")
@@ -66,10 +62,22 @@ public class PaymentManager{
         }
     }
 
-    @DELETE
-    @Path("remove")
+    @GET
+    @Path("{categoryId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getPayment(@HeaderParam("id") int id) {
+    public Response getBudgetsForUser(@PathParam("categoryId") int categoryId) {
+        List<Payment> paymentsForCategory = paymentService.getPaymentsForCategory(categoryId);
+
+        LOG.info("Budgets successfully retrieved: " + paymentsForCategory);
+
+        return Response.status(Response.Status.OK.getStatusCode())
+                .entity(paymentsForCategory).build();
+    }
+
+    @DELETE
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response removePayment(@PathParam("id") int id) {
         boolean result = paymentService.removePayment(id);
 
         LOG.info("Payment successfully deleted: " + result);
