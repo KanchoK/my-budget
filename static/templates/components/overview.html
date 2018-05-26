@@ -1,0 +1,22 @@
+<div class="overview">
+    <div class="wrap">
+        <div class="title" data-bind="text: monthlyIncome">Monthly income</div>
+        <div class="money"></div>
+        <button data-bind="click: toggleEdit">Edit</button>
+        <input type="number" data-bind="visible: editMonthly, textInput: setMonthly" />
+        <button data-bind="visible: editMonthly, click: saveMonthly">Save</button>
+    </div>
+    <div class="wrap">
+        <div class="title" data-bind="text: monthlyPlanned">Monthly planned</div>
+        <div class="money"></div>
+    </div>
+    <div class="wrap">
+        <div class="title" data-bind="text: monthlySpent">Monthly spent</div>
+        <div class="money"></div>
+    </div>
+    <div class="wrap">
+        <div class="title">Monthly diff</div>
+        <div class="money" data-bind="text: monthlyDiff"></div>
+    </div>
+
+</div>

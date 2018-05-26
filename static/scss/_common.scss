@@ -1,0 +1,49 @@
+@import './variables';
+@import './mixins';
+
+
+.flex-row {
+    display: flex;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+}
+
+.flex-start {
+    display: flex;
+    align-items: flex-start;
+}
+
+.pad-top-7 {
+    padding-top: 7px;
+}
+
+.btn--default {
+    @include box-props;
+    @include active-hover;
+    @include text-collapse;
+
+    height: 42px;
+}
+
+.select--lang {
+    @include box-props;
+    height: 42px;
+}
+
+.input--default {
+    @include box-props;
+    height: 42px;
+}
+
+.input--wrap {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+
+    div {
+        width: 150px;
+    }
+}

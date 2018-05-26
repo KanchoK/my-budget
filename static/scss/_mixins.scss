@@ -1,0 +1,22 @@
+@import './variables';
+
+@mixin box-props {
+    padding: 0 7px;
+    margin: 0 7px;
+    border: 1px solid lightgrey;
+    background-color: white;
+    border-radius: 3px;
+}
+
+@mixin active-hover {
+    &:hover {
+        cursor: pointer;
+        background: rgba($site-color, 0.5);
+    }
+}
+
+@mixin text-collapse {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

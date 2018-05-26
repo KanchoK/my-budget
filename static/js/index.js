@@ -7,11 +7,19 @@ Router.setConfig({
   hashbang: false
 });
 
+const requiresLogin = function () {
+    if (!sessionStorage.getItem('USER_SESSION_TOKEN')) {
+        location.href = '/login'
+    }
+};
+
 Router.useRoutes({
-    '/': 'home-view',
+    '/': [requiresLogin, 'home-view'],
     '/register': 'register-view',
-    '/budgets/:id': 'budget-view',
-    '/categories/:id/': 'category-view'
+    '/login': 'login-view',
+    '/profile': [requiresLogin, 'profile-view'],
+    '/budgets/:id': [requiresLogin, 'budget-view'],
+    '/categories/:id/': [requiresLogin, 'category-view']
 });
 
 window.Router = Router;
@@ -20,5 +28,7 @@ require('./views/home-view');
 require('./views/budget-view');
 require('./views/category-view');
 require('./views/register-view');
+require('./views/login-view');
+require('./views/profile-view');
 
 ko.applyBindings();
