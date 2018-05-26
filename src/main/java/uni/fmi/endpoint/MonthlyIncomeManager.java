@@ -41,7 +41,7 @@ public class MonthlyIncomeManager {
         }
 
         MonthlyIncome newMonthlyIncome = monthlyIncomeService.createMonthlyIncome(monthlyIncome);
-        if (newMonthlyIncome != null) {
+        if (newMonthlyIncome.getId() != -1) {
             StatusMessage statusMessage = new StatusMessageBuilder()
                     .status(Response.Status.OK.getStatusCode())
                     .message("Monthly income was created successfully.").build();

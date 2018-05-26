@@ -41,7 +41,7 @@ public class BudgetManager {
         }
 
         Budget newBudget = budgetService.createBudget(budget);
-        if (newBudget != null) {
+        if (newBudget.getId() != -1) {
             StatusMessage statusMessage = new StatusMessageBuilder()
                     .status(Response.Status.OK.getStatusCode())
                     .message("Budget was created successfully.").build();

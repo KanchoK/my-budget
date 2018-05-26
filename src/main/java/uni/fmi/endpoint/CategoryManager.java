@@ -46,7 +46,7 @@ public class CategoryManager {
         }
 
         Category newCategory = categoryService.createCategory(category);
-        if (categoryService.createCategory(category) != null) {
+        if (newCategory.getId() != -1) {
             StatusMessage statusMessage = new StatusMessageBuilder()
                     .status(Response.Status.OK.getStatusCode())
                     .message("Category was created successfully.").build();
