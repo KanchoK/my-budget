@@ -13,9 +13,9 @@ public class MonthlyIncomeServiceImpl implements MonthlyIncomeService {
     private MonthlyIncomeDao monthlyIncomeDao;
 
     @Override
-    public boolean createMonthlyIncome(MonthlyIncome monthlyIncome) {
-        int monthlyIncomeId = monthlyIncomeDao.createMonthlyIncome(monthlyIncome);
-        return monthlyIncomeId > 0;
+    public MonthlyIncome createMonthlyIncome(MonthlyIncome monthlyIncome) {
+        MonthlyIncome newMonthlyIncome = monthlyIncomeDao.createMonthlyIncome(monthlyIncome);
+        return newMonthlyIncome;
     }
 
     @Override

@@ -11,7 +11,7 @@ import java.util.List;
 import uni.fmi.model.Budget;
 
 public interface CategoryDao {
-    int createCategory(Category category);
+    Category createCategory(Category category);
 
     List<Category> getCategoriesForBudget(int budgetId);
     

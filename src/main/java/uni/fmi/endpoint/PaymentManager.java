@@ -44,14 +44,15 @@ public class PaymentManager{
             return Response.status(Response.Status.PRECONDITION_FAILED.getStatusCode())
                     .entity(statusMessage).build();
         }
-
-        if (paymentService.createPayment(payment)) {
+        
+        Payment newPayment = paymentService.createPayment(payment);
+        if (newPayment.getId() != -1) {
             StatusMessage statusMessage = new StatusMessageBuilder()
                     .status(Response.Status.OK.getStatusCode())
                     .message("Payment was created successfully.").build();
             LOG.info("Service status message: " + statusMessage);
             return Response.status(Response.Status.OK.getStatusCode())
-                    .entity(statusMessage).build();
+                    .entity(newPayment).build();
         } else {
             StatusMessage statusMessage = new StatusMessageBuilder()
                     .status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode())

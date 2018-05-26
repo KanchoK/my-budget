@@ -6,7 +6,7 @@ import uni.fmi.model.Budget;
 import java.util.List;
 
 public interface BudgetService {
-    boolean createBudget(Budget budget);
+    Budget createBudget(Budget budget);
 
     List<Budget> getBudgetsForUser(int userId);
     

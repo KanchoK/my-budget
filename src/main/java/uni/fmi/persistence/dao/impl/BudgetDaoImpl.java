@@ -52,7 +52,7 @@ public class BudgetDaoImpl implements BudgetDao {
     private static final String REMOVE_BUDGET_STATEMENT = "DELETE FROM budgets WHERE id=?";
 
     @Override
-    public int createBudget(Budget budget) {
+    public Budget createBudget(Budget budget) {
         int budgetId = -1;
         if (budget.getPlannedAmount() != BigDecimal.ZERO) {
             try (Connection conn = databaseManager.getDataSource().getConnection();
@@ -90,7 +90,9 @@ public class BudgetDaoImpl implements BudgetDao {
                 LOG.error("Exception was thrown", e);
             }
         }
-        return budgetId;
+        
+        budget.setId(budgetId);
+        return budget;
     }
 
     @Override
@@ -178,7 +180,8 @@ public class BudgetDaoImpl implements BudgetDao {
                 budgetById.getPlannedAmount(), BigDecimal.ZERO, month,
                 budgetById.getUser());
 
-        int newBudgetId = createBudget(newBudget);
+        Budget newBudgetReturned = createBudget(newBudget);
+        int newBudgetId = newBudgetReturned.getId();
         newBudget.setId(newBudgetId);
 
         return newBudget;

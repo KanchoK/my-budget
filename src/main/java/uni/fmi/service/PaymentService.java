@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface PaymentService {
     
-    boolean createPayment(Payment payment);
+    Payment createPayment(Payment payment);
 
     List<Payment> getPaymentsForCategory(int categoryId);
     

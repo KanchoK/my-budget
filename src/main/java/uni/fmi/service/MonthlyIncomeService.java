@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface MonthlyIncomeService {
     
-    boolean createMonthlyIncome(MonthlyIncome monthlyIncome);
+    MonthlyIncome createMonthlyIncome(MonthlyIncome monthlyIncome);
 
     List<MonthlyIncome> getMonthlyIncomesForUser(int userId);
 

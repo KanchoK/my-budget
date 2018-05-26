@@ -18,9 +18,9 @@ public class PaymentServiceImpl implements PaymentService {
     private PaymentDao paymentDao;
 
     @Override
-    public boolean createPayment(Payment payment) {
-        int paymentId = paymentDao.createPayment(payment);
-        return paymentId > 0;
+    public Payment createPayment(Payment payment) {
+        Payment newPayment = paymentDao.createPayment(payment);
+        return newPayment;
     }
 
     @Override

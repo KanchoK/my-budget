@@ -26,6 +26,8 @@ create table monthly_incomes
 		unique (userId, validForMonth),
 	constraint user_monthly_incomes
 		foreign key (userId) references my_budget.users (id)
+        on delete cascade
+        on update cascade
 )
 ;
 
@@ -34,14 +36,16 @@ create table budgets
 	id int auto_increment
 		primary key,
 	name varchar(50) not null,
-	plannedAmount decimal(5,2) null,
-	spentAmount decimal(5,2) null,
+	plannedAmount decimal(10,2) null,
+	spentAmount decimal(10,2) null,
 	validForMonth varchar(15) null,
 	userId int not null,
 	constraint name_validForMonth_UNIQUE
 		unique (name, validForMonth),
 	constraint user_budgets
 		foreign key (userId) references my_budget.users (id)
+        on delete cascade
+        on update cascade
 )
 ;
 
@@ -50,13 +54,15 @@ create table categories
 	id int auto_increment
 		primary key,
 	name varchar(50) not null,
-	plannedAmount decimal(5,2) null,
-	spentAmount decimal(5,2) null,
+	plannedAmount decimal(10,2) null,
+	spentAmount decimal(10,2) null,
 	budgetId int not null,
 	constraint name_budgetId_UNIQUE
 		unique (name, budgetId),
 	constraint budget
 		foreign key (budgetId) references my_budget.budgets (id)
+        on delete cascade
+        on update cascade
 )
 ;
 
@@ -67,13 +73,15 @@ create table payments
 	title varchar(50) not null,
     `comment`  varchar(150) null,
 	`date` varchar(15) not null,
-	amount decimal(5,2) not null,
+	amount decimal(10,2) not null,
 	categoryId int not null,
 	constraint title_UNIQUE
 		unique (title),
 	constraint category
 		foreign key (categoryId) references my_budget.categories (id)
-)
+        on delete cascade
+        on update cascade
+)        
 ;
 
 create index id_idx

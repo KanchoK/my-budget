@@ -40,13 +40,14 @@ public class MonthlyIncomeManager {
                     .entity(statusMessage).build();
         }
 
-        if (monthlyIncomeService.createMonthlyIncome(monthlyIncome)) {
+        MonthlyIncome newMonthlyIncome = monthlyIncomeService.createMonthlyIncome(monthlyIncome);
+        if (newMonthlyIncome.getId() != -1) {
             StatusMessage statusMessage = new StatusMessageBuilder()
                     .status(Response.Status.OK.getStatusCode())
                     .message("Monthly income was created successfully.").build();
             LOG.info("Service status message: " + statusMessage);
             return Response.status(Response.Status.OK.getStatusCode())
-                    .entity(statusMessage).build();
+                    .entity(newMonthlyIncome).build();
         } else {
             StatusMessage statusMessage = new StatusMessageBuilder()
                     .status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode())

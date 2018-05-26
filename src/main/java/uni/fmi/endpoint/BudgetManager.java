@@ -40,13 +40,14 @@ public class BudgetManager {
                     .entity(statusMessage).build();
         }
 
-        if (budgetService.createBudget(budget)) {
+        Budget newBudget = budgetService.createBudget(budget);
+        if (newBudget.getId() != -1) {
             StatusMessage statusMessage = new StatusMessageBuilder()
                     .status(Response.Status.OK.getStatusCode())
                     .message("Budget was created successfully.").build();
             LOG.info("Service status message: " + statusMessage);
             return Response.status(Response.Status.OK.getStatusCode())
-                    .entity(statusMessage).build();
+                    .entity(newBudget).build();
         } else {
             StatusMessage statusMessage = new StatusMessageBuilder()
                     .status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode())
