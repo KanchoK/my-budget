@@ -5,7 +5,7 @@ import uni.fmi.model.MonthlyIncome;
 import java.util.List;
 
 public interface MonthlyIncomeDao {
-    int createMonthlyIncome(MonthlyIncome monthlyIncome);
+    MonthlyIncome createMonthlyIncome(MonthlyIncome monthlyIncome);
 
     List<MonthlyIncome> getMonthlyIncomesForUser(int userId);
 

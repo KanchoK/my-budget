@@ -10,7 +10,7 @@ import uni.fmi.model.Payment;
 import java.util.List;
 
 public interface PaymentDao {
-    int createPayment(Payment payment);
+    Payment createPayment(Payment payment);
 
     List<Payment> getPaymentsForCategory(int categoryId);
     

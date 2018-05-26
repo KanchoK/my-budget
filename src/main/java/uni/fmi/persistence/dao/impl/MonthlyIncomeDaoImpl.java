@@ -1,5 +1,6 @@
 package uni.fmi.persistence.dao.impl;
 
+import java.math.BigDecimal;
 import org.apache.log4j.Logger;
 import uni.fmi.model.MonthlyIncome;
 import uni.fmi.model.User;
@@ -36,7 +37,7 @@ public class MonthlyIncomeDaoImpl implements MonthlyIncomeDao {
 
 
     @Override
-    public int createMonthlyIncome(MonthlyIncome monthlyIncome) {
+    public MonthlyIncome createMonthlyIncome(MonthlyIncome monthlyIncome) {
         int monthlyIncomeId = -1;
 
         try (Connection conn = databaseManager.getDataSource().getConnection();
@@ -55,7 +56,9 @@ public class MonthlyIncomeDaoImpl implements MonthlyIncomeDao {
         } catch (SQLException e) {
             LOG.error("Exception was thrown", e);
         }
-        return monthlyIncomeId;
+        
+        monthlyIncome.setId(monthlyIncomeId);
+        return monthlyIncome;
     }
 
     @Override
@@ -97,6 +100,10 @@ public class MonthlyIncomeDaoImpl implements MonthlyIncomeDao {
         } catch (SQLException e) {
             LOG.error("Exception was thrown", e);
         }
+        
+//        if (monthlyIncome == null) {
+//            monthlyIncome = new MonthlyIncome(0, BigDecimal.ZERO, "", new User());
+//        }
 
         return monthlyIncome;
     }

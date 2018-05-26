@@ -19,9 +19,9 @@ public class CategoryServiceImpl implements CategoryService {
     private CategoryDao categoryDao;
 
     @Override
-    public boolean createCategory(Category category) {
-        int categoryId = categoryDao.createCategory(category);
-        return categoryId > 0;
+    public Category createCategory(Category category) {
+        Category newCategory = categoryDao.createCategory(category);
+        return newCategory;
     }
 
     @Override

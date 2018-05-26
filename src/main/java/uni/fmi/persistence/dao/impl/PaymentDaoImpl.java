@@ -87,7 +87,7 @@ public class PaymentDaoImpl implements PaymentDao{
                     "WHERE p.id = ?";
     
     @Override
-    public int createPayment(Payment payment) {
+    public Payment createPayment(Payment payment) {
         int paymentId = -1;
 
         try (Connection conn = databaseManager.getDataSource().getConnection();
@@ -114,7 +114,9 @@ public class PaymentDaoImpl implements PaymentDao{
         } catch (SQLException e) {
             LOG.error("Exception was thrown", e);
         }
-        return paymentId;
+        
+        payment.setId(paymentId);
+        return payment;
     }
 
     @Override

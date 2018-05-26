@@ -14,9 +14,9 @@ public class BudgetServiceImpl implements BudgetService {
     private BudgetDao budgetDao;
 
     @Override
-    public boolean createBudget(Budget budget) {
-        int budgetId = budgetDao.createBudget(budget);
-        return budgetId > 0;
+    public Budget createBudget(Budget budget) {
+        Budget newBudget = budgetDao.createBudget(budget);
+        return newBudget;
     }
 
     @Override

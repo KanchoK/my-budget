@@ -49,7 +49,7 @@ public class CategoryDaoImpl implements CategoryDao{
     private static final String REMOVE_CATEGORY_STATEMENT = "DELETE FROM categories WHERE id=?";
     
     @Override
-    public int createCategory(Category category) {
+    public Category createCategory(Category category) {
         int categoryId = -1;
 
         try (Connection conn = databaseManager.getDataSource().getConnection();
@@ -69,7 +69,9 @@ public class CategoryDaoImpl implements CategoryDao{
         } catch (SQLException e) {
             LOG.error("Exception was thrown", e);
         }
-        return categoryId;
+        
+        category.setId(categoryId);
+        return category;
     }
 
     @Override
@@ -143,7 +145,8 @@ public class CategoryDaoImpl implements CategoryDao{
             category.setBudget(budget);
             category.setSpentAmount(BigDecimal.ZERO);
 //            maxCategoryId += 1;
-            int newCategoryId = createCategory(category);
+            Category newCategoryReturned = createCategory(category);
+            int newCategoryId = newCategoryReturned.getId();
             LOG.info("Created category with id = " + newCategoryId);
             category.setId(1);
             newCategories.add(category);

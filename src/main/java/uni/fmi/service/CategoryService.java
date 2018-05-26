@@ -12,7 +12,7 @@ import uni.fmi.model.Budget;
 
 public interface CategoryService {
     
-    boolean createCategory(Category category);
+    Category createCategory(Category category);
 
     List<Category> getCategoriesForBudget(int budgetId);
     
