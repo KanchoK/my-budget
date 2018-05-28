@@ -23,7 +23,7 @@
                 <span class="attr" data-bind="text: month"></span>
                 <span class="attr" data-bind="text: plannedAmount"></span>
                 <span class="attr" data-bind="text: spentAmount"></span>
-                <span class="attr" data-bind="text: percSpent"></span>
+                <span class="attr" data-bind="text: percSpent() + '%', css: { 'text--warning': percSpent() > 80 }"></span>
             </div>
             <button class="btn--default btn-remove" data-bind="click: function() { $parent.removeBudget($data) }, clickBubble: false">Remove budget</button>
         </div>
@@ -53,7 +53,7 @@
                 <span class="attr" data-bind="text: budget"></span>
                 <span class="attr" data-bind="text: plannedAmount"></span>
                 <span class="attr" data-bind="text: spentAmount"></span>
-                <span class="attr" data-bind="text: difference"></span>
+                <span class="attr" data-bind="text: difference() + '%', css: { 'text--warning': difference() > 80 }"></span>
             </div>
             <button class="btn--default btn-remove" data-bind="click: function() { $parent.removeCategory(id) }, clickBubble: false">Remove category</button>
         </div>
@@ -83,7 +83,7 @@
 
 <div class="payments-container">
     <h2>Payments for "
-        <u data-bind="text: selectedBudget() && selectedBudget().name"></u>
+        <u data-bind="text: selectedBudget() && selectedBudget().name"></u> /
         <u data-bind="text: selectedCategory() && selectedCategory().name"></u>"
     </h2>
     <button class="btn--default" data-bind="click: toggleNewPaymentForm">+ New payment</button>

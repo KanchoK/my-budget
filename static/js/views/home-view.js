@@ -89,12 +89,6 @@ class HomeView {
     }
 
     addBudget () {
-        const params = {
-            'name': this.form.name(),
-            'month': this.form.month(),
-            'plannedAmount': this.form.plannedAmount()
-        };
-
         $.ajax({
             type: "POST",
             url: `/api/budgets/create`,
@@ -111,16 +105,21 @@ class HomeView {
                 'Authorization': 'Bearer ' + sessionStorage.getItem('USER_SESSION_TOKEN')
             }
         })
-            .then(() => {
-                const newBudget = new Budget(params);
+            .then(data => {
+                const newBudget = new Budget(data);
                 this.budgets.unshift(newBudget);
+                this.selectBudget(newBudget);
                 this.resetNewBudgetForm();
             })
     }
 
     addCategory () {
         categoryApi.create(this.categoryForm.name(), this.categoryForm.plannedAmount(), this.selectedBudget().id)
-            .then(() => this.categories.unshift(Category.fromApi(data)));
+            .then(data => {
+                const newCategory = Category.fromApi(data)
+                this.categories.unshift(newCategory);
+                this.selectCategory(newCategory);
+            });
     }
 
     addPayment () {

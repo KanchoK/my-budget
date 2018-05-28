@@ -10,7 +10,7 @@ class Category {
         this.spentAmount = params.spentAmount;
 
         this.difference = ko.computed(
-            () => parseInt(this.spentAmount ? this.spentAmount*100 / this.plannedAmount : 0) + '%'
+            () => parseInt(this.spentAmount ? this.spentAmount*100 / this.plannedAmount : 0)
         )
     }
 
