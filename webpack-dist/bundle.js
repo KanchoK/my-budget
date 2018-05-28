@@ -3707,7 +3707,7 @@ module.exports = "<h2>Dashboard</h2>\r\n<button class=\"btn--default\" data-bind
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Login</h1>\r\n\r\n<div class=\"registration-form\">\r\n\r\n    <div class=\"input--wrap\">\r\n        <div>Username:</div>\r\n        <input class=\"input--default\" type=\"text\" data-bind=\"textInput: username\">\r\n    </div>\r\n    <div class=\"input--wrap\">\r\n        <div>Password:</div>\r\n        <input class=\"input--default\" type=\"password\" data-bind=\"textInput: password\">\r\n    </div>\r\n\r\n    <button class=\"btn--default\" data-bind=\"click: login\">Login</button>\r\n</div>";
+module.exports = "<h1>Login</h1>\r\n\r\n<div class=\"registration-form\">\r\n\r\n    <div class=\"input--wrap\">\r\n        <div>Username:</div>\r\n        <input class=\"input--default\" type=\"text\" data-bind=\"textInput: username\">\r\n    </div>\r\n    <div class=\"input--wrap\">\r\n        <div>Password:</div>\r\n        <input class=\"input--default\" type=\"password\" data-bind=\"textInput: password\">\r\n    </div>\r\n\r\n    <button class=\"btn--default\" data-bind=\"click: login\">Login</button>\r\n    <button class=\"btn--default\" data-bind=\"click: function () { location.href = '/register' }\">Register</button>\r\n\r\n</div>";
 
 /***/ }),
 
