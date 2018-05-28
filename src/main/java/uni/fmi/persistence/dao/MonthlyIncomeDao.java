@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface MonthlyIncomeDao {
     MonthlyIncome createMonthlyIncome(MonthlyIncome monthlyIncome);
+    
+    MonthlyIncome updateMonthlyIncome(int id, MonthlyIncome monthlyIncome);
 
     List<MonthlyIncome> getMonthlyIncomesForUser(int userId);
 

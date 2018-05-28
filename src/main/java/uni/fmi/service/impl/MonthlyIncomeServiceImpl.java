@@ -17,6 +17,12 @@ public class MonthlyIncomeServiceImpl implements MonthlyIncomeService {
         MonthlyIncome newMonthlyIncome = monthlyIncomeDao.createMonthlyIncome(monthlyIncome);
         return newMonthlyIncome;
     }
+    
+    @Override
+    public MonthlyIncome updateMonthlyIncome(int id, MonthlyIncome monthlyIncome) {
+        MonthlyIncome updatedMonthlyIncome = monthlyIncomeDao.updateMonthlyIncome(id, monthlyIncome);
+        return updatedMonthlyIncome;
+    }
 
     @Override
     public List<MonthlyIncome> getMonthlyIncomesForUser(int userId) {

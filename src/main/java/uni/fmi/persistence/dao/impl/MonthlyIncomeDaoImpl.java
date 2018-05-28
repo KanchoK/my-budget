@@ -21,6 +21,11 @@ public class MonthlyIncomeDaoImpl implements MonthlyIncomeDao {
 
     private static final String ADD_MONTHLY_INCOME_STATEMENT = "INSERT INTO monthly_incomes(monthlyIncome, validForMonth, userId) " +
                                                 "VALUES (?, ?, ?)";
+    
+    private static final String UPDATE_MONTHLY_INCOME_STATEMENT =
+            "UPDATE monthly_incomes " +
+            "SET monthlyIncome = ?, validForMonth = ? " +
+            "WHERE id = ?";
     private static final String GET_MONTHLY_INCOMES_STATEMENT =
             "SELECT m.id, m.monthlyIncome, m.validForMonth, u.id, u.username " +
                     "FROM monthly_incomes AS m " +
@@ -58,6 +63,28 @@ public class MonthlyIncomeDaoImpl implements MonthlyIncomeDao {
         }
         
         monthlyIncome.setId(monthlyIncomeId);
+        return monthlyIncome;
+    }
+    
+    @Override
+    public MonthlyIncome updateMonthlyIncome(int id, MonthlyIncome monthlyIncome) {
+        MonthlyIncome updatedMonthlyIncome = null;
+
+        try (Connection conn = databaseManager.getDataSource().getConnection();
+             PreparedStatement preparedStatement = conn
+                     .prepareStatement(UPDATE_MONTHLY_INCOME_STATEMENT)) {
+
+            preparedStatement.setBigDecimal(1, monthlyIncome.getMonthlyIncome());
+            preparedStatement.setString(2, monthlyIncome.getValidForMonth());
+            preparedStatement.setInt(3, id);
+            preparedStatement.executeUpdate();
+
+            updatedMonthlyIncome = getMonthlyIncomeForUserAndMonth(monthlyIncome.getUser().getId(),
+            monthlyIncome.getValidForMonth());
+        } catch (SQLException e) {
+            LOG.error("Exception was thrown", e);
+        }     
+        
         return monthlyIncome;
     }
 

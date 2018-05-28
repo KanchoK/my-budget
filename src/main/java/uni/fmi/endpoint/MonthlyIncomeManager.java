@@ -57,6 +57,42 @@ public class MonthlyIncomeManager {
                     .entity(statusMessage).build();
         }
     }
+    
+    @PUT
+    @Path("update/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateMonthlyIncome(@PathParam("id") int id,
+            MonthlyIncome monthlyIncome) {
+        LOG.info("MonthlyIncome creation initiated...");
+        if (monthlyIncome.getValidForMonth() == null || monthlyIncome.getValidForMonth().equals("")
+                || monthlyIncome.getMonthlyIncome().compareTo(BigDecimal.ZERO) != 1) {
+            StatusMessage statusMessage = new StatusMessageBuilder()
+                    .status(Response.Status.PRECONDITION_FAILED.getStatusCode())
+                    .message("Monthly income must have MonthlyIncome and Valid Month!").build();
+            LOG.info("Service status message: " + statusMessage);
+            return Response.status(Response.Status.PRECONDITION_FAILED.getStatusCode())
+                    .entity(statusMessage).build();
+        }
+        
+
+        MonthlyIncome newMonthlyIncome = monthlyIncomeService.updateMonthlyIncome(id, monthlyIncome);
+        if (newMonthlyIncome != null && newMonthlyIncome.getId() != -1) {
+            StatusMessage statusMessage = new StatusMessageBuilder()
+                    .status(Response.Status.OK.getStatusCode())
+                    .message("Monthly income was updated successfully.").build();
+            LOG.info("Service status message: " + statusMessage);
+            return Response.status(Response.Status.OK.getStatusCode())
+                    .entity(newMonthlyIncome).build();
+        } else {
+            StatusMessage statusMessage = new StatusMessageBuilder()
+                    .status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode())
+                    .message("There was some problem with monthly income update!").build();
+            LOG.info("Service status message: " + statusMessage);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode())
+                    .entity(statusMessage).build();
+        }
+    }
 
     @GET
     @Path("{userId}")
