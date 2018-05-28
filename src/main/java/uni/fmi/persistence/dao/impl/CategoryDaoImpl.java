@@ -48,6 +48,19 @@ public class CategoryDaoImpl implements CategoryDao{
     
     private static final String REMOVE_CATEGORY_STATEMENT = "DELETE FROM categories WHERE id=?";
     
+    private static final String GET_CATEGORY_BY_ID_STATEMENT = 
+            "SELECT c.id, c.name, c.plannedAmount, c.spentAmount, " +
+            "b.id, b.validForMonth, b.name, b.plannedAmount, b.spentAmount " +
+                    "FROM categories AS c " +
+                    "INNER JOIN budgets AS b " +
+                    "ON c.budgetId = b.id " +
+                    "WHERE c.id = ?";
+
+    private static final String CHANGE_BUDGET_SPENT_AMOUNT_ON_CATEGORY_REMOVAL_STATEMENT = 
+            "UPDATE budgets " +
+            "SET spentAmount = spentAmount - ? " +
+            "WHERE id = ?";
+    
     @Override
     public Category createCategory(Category category) {
         int categoryId = -1;
@@ -157,6 +170,12 @@ public class CategoryDaoImpl implements CategoryDao{
 
     @Override
     public boolean removeCategory(int id) {
+        Category category = getCategoryById(id);
+        LOG.info("category to delete: " + category);
+        if (category == null) {
+            return false;
+        }
+        
         try (Connection conn = databaseManager.getDataSource().getConnection();
              PreparedStatement preparedStatement = conn
                      .prepareStatement(REMOVE_CATEGORY_STATEMENT)) {
@@ -166,8 +185,40 @@ public class CategoryDaoImpl implements CategoryDao{
         } catch (SQLException e) {
             LOG.error("Exception was thrown", e);
             return false;
+        }   
+         
+         try (Connection conn = databaseManager.getDataSource().getConnection();
+             PreparedStatement preparedStatement = conn
+                     .prepareStatement(CHANGE_BUDGET_SPENT_AMOUNT_ON_CATEGORY_REMOVAL_STATEMENT)) {
+
+            preparedStatement.setBigDecimal(1, category.getSpentAmount());
+            preparedStatement.setInt(2, category.getBudget().getId());
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            LOG.error("Exception was thrown", e);
+            return false;
         }
+         
         return true;
+    }
+    
+    private Category getCategoryById(int id){
+        Category category = null;
+          try (Connection conn = databaseManager.getDataSource().getConnection();
+             PreparedStatement preparedStatement = conn
+                     .prepareStatement(GET_CATEGORY_BY_ID_STATEMENT)) {
+
+            preparedStatement.setInt(1, id);
+          try (ResultSet rs = preparedStatement.executeQuery()) {
+                if (rs.next()) {
+                    category = buildCategoryFromResultSet(rs);
+                }
+            }
+        } catch (SQLException e) {
+            LOG.error("Exception was thrown", e);
+        }
+          
+        return category;
     }
 
     private Category buildCategoryFromResultSet(ResultSet rs) throws SQLException {

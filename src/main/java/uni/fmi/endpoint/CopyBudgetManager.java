@@ -26,7 +26,7 @@ public class CopyBudgetManager {
     @Inject
     private CategoryService categoryService;
     
-    @GET 
+    @POST
     @Path("{userId}/{validForMonth}/{budgetId}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response copyBudgetUserBudgetAndMonth(@PathParam("validForMonth") String month,
