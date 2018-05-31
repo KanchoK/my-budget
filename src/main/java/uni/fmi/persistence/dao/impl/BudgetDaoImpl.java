@@ -233,6 +233,7 @@ public class BudgetDaoImpl implements BudgetDao {
     private Budget buildBudgetFromResultSet(ResultSet rs) throws SQLException {
         User user = new User(rs.getInt("u.id"),
                 rs.getString("u.username"));
+        LOG.info("user: " + user);
 
         return new Budget(rs.getInt("b.id"),
                 rs.getString("b.name"),

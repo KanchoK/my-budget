@@ -1,5 +1,5 @@
 INSERT INTO users (username, `password`)
-VALUES ("testUser", "123");
+VALUES ("testUser", "123456");
 
 INSERT INTO monthly_incomes (monthlyIncome, validForMonth, userId)
 VALUES (1200, "05-2018", 1),

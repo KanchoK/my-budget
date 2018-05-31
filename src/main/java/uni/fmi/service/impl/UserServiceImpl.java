@@ -1,5 +1,6 @@
 package uni.fmi.service.impl;
 
+import java.math.BigDecimal;
 import uni.fmi.model.User;
 import uni.fmi.persistence.dao.UserDao;
 import uni.fmi.service.PasswordService;
@@ -29,5 +30,17 @@ public class UserServiceImpl implements UserService {
             return user;
         }
         return null;
+    }
+    
+    @Override
+    public User getUserForId(int id){
+        User user = userDao.getUserForId(id);
+        return user;
+    }
+    
+    @Override
+    public User updateUserForId(int id, User user){
+        User updatedUser = userDao.updateUserForId(id, user);
+        return updatedUser;
     }
 }

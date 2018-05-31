@@ -1,6 +1,7 @@
 package uni.fmi.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.math.BigDecimal;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -11,6 +12,11 @@ public class User {
     private int id;
     private String username;
     private String password;
+    private String email;
+    private BigDecimal overallExpensesAlertLimit = new BigDecimal(80.00);
+    private BigDecimal categoryExpensesAlertLimit =  new BigDecimal(80.00);
+    private boolean overallExpensesAlert = true;
+    private boolean categoryExpensesAlert = true;
 
     public User () {}
 
@@ -23,6 +29,20 @@ public class User {
         this.id = id;
         this.username = username;
         this.password = password;
+    }
+    
+     public User(int id, String username, String email,
+             BigDecimal overallExpensesAlertLimit,
+             BigDecimal categoryExpensesAlertLimit,
+             boolean overallExpensesAlert,
+             boolean categoryExpensesAlert) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.overallExpensesAlertLimit =  overallExpensesAlertLimit;
+        this.categoryExpensesAlertLimit = categoryExpensesAlertLimit;
+        this.overallExpensesAlert =  overallExpensesAlert;
+        this.categoryExpensesAlert = categoryExpensesAlert;
     }
 
     public int getId() {
@@ -44,10 +64,51 @@ public class User {
     public String getPassword() {
         return password;
     }
-
-    public void setPassword(String password) {
+    
+     public void setPassword(String password) {
         this.password = password;
     }
+    
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    public BigDecimal getOverallExpensesAlertLimit() {
+        return overallExpensesAlertLimit;
+    }
+
+    public void setOverallExpensesAlertLimit(BigDecimal categoryExpensesAlertLimit) {
+        this.overallExpensesAlertLimit = categoryExpensesAlertLimit;
+    }
+    
+    public BigDecimal getCategoryExpensesAlertLimit() {
+        return categoryExpensesAlertLimit;
+    }
+
+    public void setCategoryExpensesAlertLimit(BigDecimal categoryExpensesAlertLimit) {
+        this.categoryExpensesAlertLimit = categoryExpensesAlertLimit;
+    }
+    
+      public boolean getOverallExpensesAlert() {
+        return overallExpensesAlert;
+    }
+
+    public void setOverallExpensesAlert(boolean categoryExpensesAlert) {
+        this.overallExpensesAlert = categoryExpensesAlert;
+    }
+    
+    public boolean getCategoryExpensesAlert() {
+        return categoryExpensesAlert;
+    }
+
+    public void setCategoryExpensesAlert(boolean categoryExpensesAlert) {
+        this.categoryExpensesAlert = categoryExpensesAlert;
+    }
+    
 
     @Override
     public int hashCode() {
@@ -74,7 +135,8 @@ public class User {
 
     @Override
     public String toString() {
-        return String.format("[Id: %s; Username: %s]",
-                id, username);
+        
+        return String.format("[Id: %s; Username: %s, Email: %s]",
+                id, username, email);
     }
 }
