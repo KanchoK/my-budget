@@ -41,7 +41,7 @@ create table budgets
 	validForMonth varchar(15) null,
 	userId int not null,
 	constraint name_validForMonth_UNIQUE
-		unique (name, validForMonth),
+		unique (name, validForMonth, userId),
 	constraint user_budgets
 		foreign key (userId) references my_budget.users (id)
         on delete cascade
@@ -76,7 +76,7 @@ create table payments
 	amount decimal(10,2) not null,
 	categoryId int not null,
 	constraint title_UNIQUE
-		unique (title),
+		unique (title, date),
 	constraint category
 		foreign key (categoryId) references my_budget.categories (id)
         on delete cascade
