@@ -28,8 +28,10 @@ public class PaymentDaoImpl implements PaymentDao{
 
     private static final String ADD_PAYMENT_STATEMENT = "INSERT INTO payments(title, date, amount, categoryId) " +
                                                 "VALUES (?, ?, ?, ?)";
+    
     private static final String ADD_PAYMENT_WITH_COMMENT_STATEMENT = "INSERT INTO payments(title, date, amount, categoryId, comment) " +
                                                 "VALUES (?, ?, ?, ?, ?)";
+    
     private static final String GET_PAYMENTS_FOR_CATEGORY_STATEMENT =
             "SELECT p.id, p.title, p.date, p.amount, p.comment, c.id, c.name, " +
                     "c.plannedAmount, c.spentAmount, b.id, b.validForMonth, b.name, " +
@@ -76,23 +78,36 @@ public class PaymentDaoImpl implements PaymentDao{
             "SET spentAmount = spentAmount - ? " +
             "WHERE id = ?";
      
-     private static final String GET_BUDGET_FOR_PAYMENT_STATEMENT =
+    private static final String GET_BUDGET_FOR_PAYMENT_STATEMENT =
             "SELECT c.budgetId " +
                     "FROM payments AS p " +
                     "INNER JOIN categories AS c " +
                     "ON p.categoryId = c.id " +
                     "WHERE p.id = ?";
      
-     private static final String GET_BUDGET_BY_ID_STATEMENT =
+    private static final String GET_BUDGET_BY_ID_STATEMENT =
             "SELECT p.id, p.categoryId, p.amount " +
                     "FROM payments AS p " +
+                    "WHERE p.id = ?";
+     
+    private static final String GET_PATMENT_BY_ID_STATEMENT = 
+             "SELECT p.id, p.title, p.date, p.amount, p.comment, c.id, c.name, " +
+                    "c.plannedAmount, c.spentAmount, b.id, b.validForMonth, b.name, " +
+                    "b.plannedAmount, b.spentAmount " +
+                    "FROM payments AS p " +
+                    "INNER JOIN categories AS c " +
+                    "ON p.categoryId = c.id " +
+                    "INNER JOIN budgets AS b " +
+                    "ON c.budgetId = b.id " +
+                    "INNER JOIN users AS u " +
+                    "ON b.userId = u.id " +
                     "WHERE p.id = ?";
     
     @Override
     public Payment createPayment(Payment payment) {
         int paymentId = -1;
 
-        if (payment.getComment() == null || payment.getComment() == ""){
+        if (payment.getComment() == null || "".equals(payment.getComment())){
             try (Connection conn = databaseManager.getDataSource().getConnection();
                  PreparedStatement preparedStatement = conn
                          .prepareStatement(ADD_PAYMENT_STATEMENT, Statement.RETURN_GENERATED_KEYS)) {
@@ -336,5 +351,23 @@ public class PaymentDaoImpl implements PaymentDao{
         }
     }
      
-     
+    @Override
+    public Payment getPaymentForId(int id){
+        Payment payment = null;
+          try (Connection conn = databaseManager.getDataSource().getConnection();
+             PreparedStatement preparedStatement = conn
+                     .prepareStatement(GET_PATMENT_BY_ID_STATEMENT)) {
+
+            preparedStatement.setInt(1, id);
+          try (ResultSet rs = preparedStatement.executeQuery()) {
+                if (rs.next()) {
+                    payment = buildPaymentFromResultSet(rs);
+                }
+            }
+        } catch (SQLException e) {
+            LOG.error("Exception was thrown", e);
+        }
+          
+        return payment;
+    }
 }

@@ -106,7 +106,7 @@ public class CategoryManager {
     public Response getCategoryForId(Category category) {
         Category categoryById = categoryService.getCategoryForId(category.getId());
 
-        LOG.info("Budget for id = " + categoryById.getId()+ " is successfully retrieved: " + categoryById);
+        LOG.info("Category for id = " + categoryById.getId()+ " is successfully retrieved: " + categoryById);
 
         return Response.status(Response.Status.OK.getStatusCode())
                 .entity(categoryById).build();
