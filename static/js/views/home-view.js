@@ -1,6 +1,7 @@
 require('../../scss/overview.scss');
 require('../../scss/budget.scss');
 
+const budgetApi = require('../api/budget');
 const categoryApi = require('../api/category');
 const paymentApi = require('../api/payment');
 
@@ -120,7 +121,7 @@ class HomeView {
     addCategory () {
         categoryApi.create(this.categoryForm.name(), this.categoryForm.plannedAmount(), this.selectedBudget().id)
             .then(data => {
-                const newCategory = Category.fromApi(data)
+                const newCategory = Category.fromApi(data);
                 this.categories.unshift(newCategory);
                 this.selectCategory(newCategory);
                 this.toggleNewCategoryForm();
@@ -140,8 +141,29 @@ class HomeView {
             this.payments.unshift(Payment.fromApi(data));
             this.toggleNewPaymentForm();
 
+            this.updateSelectedBudget();
+            this.updateSelectedCategory();
+
             overview.updateAll();
         });
+    }
+
+    updateSelectedBudget () {
+        const id = this.selectedBudget().id;
+        budgetApi.getById(id)
+            .then(res => {
+                this.budgets(this.budgets()
+                    .map(b => b.id === id ? Budget.fromApi(res) : b));
+            });
+    }
+
+    updateSelectedCategory () {
+        const id = this.selectedCategory().id;
+        categoryApi.getById(id)
+            .then(res => {
+                this.categories(this.categories()
+                    .map(c => c.id === id ? Category.fromApi(res) : c));
+            });
     }
 
     resetNewBudgetForm () {
@@ -160,6 +182,7 @@ class HomeView {
         })
             .then(() => {
                 this.budgets.remove(budget);
+
                 overview.updateAll();
             })
 
@@ -169,6 +192,8 @@ class HomeView {
         categoryApi.deleteCategory(id)
             .then(() => {
                 this.categories(this.categories().filter(c => c.id !== id));
+
+                this.updateSelectedBudget();
                 overview.updateAll();
             });
     }
@@ -177,6 +202,9 @@ class HomeView {
         paymentApi.delete(id)
             .then(() => {
                 this.payments(this.payments().filter(p => p.id !== id));
+
+                this.updateSelectedBudget();
+                this.updateSelectedCategory();
                 overview.updateAll();
             });
     }

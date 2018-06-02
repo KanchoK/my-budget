@@ -17,6 +17,10 @@ class Budget {
     open () {
         Router.update(this.url);
     }
+
+    static fromApi(params) {
+        return new Budget(params);
+    }
 }
 
 ko.components.register('budget', {
