@@ -2655,7 +2655,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, ".overview {\n  margin: 40px auto;\n  font-size: 18px;\n  display: flex; }\n\n.wrap {\n  width: 150px;\n  display: flex;\n  flex-direction: column; }\n", ""]);
+exports.push([module.i, ".overview {\n  margin: 40px auto;\n  font-size: 18px;\n  display: flex; }\n\n.overview div {\n  width: 50%; }\n\nh2.title {\n  margin-right: 10%;\n  margin-top: 0; }\n\n.overview .wrap .title {\n  font-weight: bold;\n  font-style: italic; }\n\n.planned, .income {\n  color: green; }\n\n.spent {\n  color: red; }\n\n.diff {\n  color: blue; }\n\n.wrap {\n  text-align: center; }\n\n.wrap {\n  width: 150px;\n  display: flex;\n  flex-direction: column; }\n", ""]);
 
 // exports
 
@@ -3652,7 +3652,7 @@ module.exports = "<div class=\"category\">\r\n    <div><span> Category name: </s
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"overview\">\r\n    <div class=\"wrap\">\r\n        <div class=\"title\">Monthly income</div>\r\n        <div class=\"money\" data-bind=\"text: monthlyIncome\"></div>\r\n        <button class=\"btn--default\" data-bind=\"click: toggleEdit\">Edit</button>\r\n        <input class=\"input--default\" type=\"number\" data-bind=\"visible: editMonthly, textInput: setMonthly\" style=\"margin-top: 7px;\"/>\r\n        <button class=\"btn--default\" data-bind=\"visible: editMonthly, click: saveMonthly\">Save</button>\r\n    </div>\r\n    <div class=\"wrap\">\r\n        <div class=\"title\" >Monthly planned</div>\r\n        <div class=\"money\" data-bind=\"text: monthlyPlanned\"></div>\r\n    </div>\r\n    <div class=\"wrap\">\r\n        <div class=\"title\">Monthly spent</div>\r\n        <div class=\"money\" data-bind=\"text: monthlySpent\"></div>\r\n    </div>\r\n    <div class=\"wrap\">\r\n        <div class=\"title\">Monthly diff</div>\r\n        <div class=\"money\" data-bind=\"text: monthlyDiff\"></div>\r\n    </div>\r\n</div>";
+module.exports = "<div class=\"overview\">\r\n    <h2 class=\"title\">Dashboard</h2>\r\n    <div class=\"wrap\">\r\n        <div class=\"title\">Monthly Income</div>\r\n        <div class=\"money income\" data-bind=\"text: monthlyIncome\"></div>\r\n        <button class=\"btn--default\" data-bind=\"click: toggleEdit\">Edit</button>\r\n        <input class=\"input--default\" type=\"number\" data-bind=\"visible: editMonthly, textInput: setMonthly\" style=\"margin-top: 7px;\"/>\r\n        <button class=\"btn--default\" data-bind=\"visible: editMonthly, click: saveMonthly\">Save</button>\r\n    </div>\r\n    <div class=\"wrap\">\r\n        <div class=\"title\" >Monthly Planned</div>\r\n        <div class=\"money planned\" data-bind=\"text: monthlyPlanned\"></div>\r\n    </div>\r\n    <div class=\"wrap\">\r\n        <div class=\"title\">Monthly Spent</div>\r\n        <div class=\"money spent\" data-bind=\"text: monthlySpent\"></div>\r\n    </div>\r\n    <div class=\"wrap\">\r\n        <div class=\"title\">Monthly Diff</div>\r\n        <div class=\"money diff\" data-bind=\"text: monthlyDiff\"></div>\r\n    </div>\r\n</div>";
 
 /***/ }),
 
@@ -3696,7 +3696,7 @@ module.exports = "<h2>Payments</h2>\r\n\r\n<button data-bind=\"click: toggleNewP
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h2>Dashboard</h2>\r\n<button class=\"btn--default\" data-bind=\"click: logout\" style=\"float: right;\">Logout</button>\r\n\r\n<overview></overview>\r\n\r\n<div class=\"layover\" data-bind=\"visible: newBudgetForm(), click: toggleNewBudgetForm\">\r\n    <div class=\"creation-form\" data-bind=\"click: function () {}, clickBubble: false;\">\r\n        <input class=\"input--default\" placeholder=\"Name\" data-bind=\"textInput: form.name\" />\r\n        <input class=\"input--default\" placeholder=\"Date mm-yyyy\" data-bind=\"textInput: form.month\" />\r\n        <input class=\"input--default\" placeholder=\"Amount\" data-bind=\"textInput: form.plannedAmount\" />\r\n        <button class=\"btn--default\" data-bind=\"click: addBudget\">Add budget</button>\r\n    </div>\r\n</div>\r\n\r\n\r\n<div class=\"budgets-container\">\r\n    <h2>Budgets</h2>\r\n    <button class=\"btn--default\" data-bind=\"click: toggleNewBudgetForm\">+ New Budget</button>\r\n    <div class=\"list\" data-bind=\"foreach: budgets\">\r\n        <div class=\"list-item\" data-bind=\"click: function() { $parent.selectBudget($data) }, css: { 'item-selected': $parent.selectedBudget() && $parent.selectedBudget().id === id }\">\r\n            <div class=\"attrs\">\r\n                <span class=\"attr\" data-bind=\"text: name\"></span>\r\n                <span class=\"attr\" data-bind=\"text: month\"></span>\r\n                <span class=\"attr\" data-bind=\"text: plannedAmount\"></span>\r\n                <span class=\"attr\" data-bind=\"text: spentAmount\"></span>\r\n                <span class=\"attr\" data-bind=\"text: percSpent() + '%', css: { 'text--warning': percSpent() > 80 }\"></span>\r\n            </div>\r\n            <button class=\"btn--default btn-remove\" data-bind=\"click: function() { $parent.removeBudget($data) }, clickBubble: false\">Remove budget</button>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n\r\n<!--Categories-->\r\n<!-- ko if: budgets().length -->\r\n\r\n<div class=\"layover\" data-bind=\"visible: newCategoryForm(), click: toggleNewCategoryForm\">\r\n    <div class=\"creation-form\" data-bind=\"click: function () {}, clickBubble: false;\">\r\n        <input class=\"input--default\" placeholder=\"Name\" data-bind=\"textInput: categoryForm.name\" />\r\n        <input disabled class=\"input--default\" placeholder=\"Budget\" data-bind=\"textInput: categoryForm.budget\" />\r\n        <input class=\"input--default\" placeholder=\"Planned Amount\" data-bind=\"textInput: categoryForm.plannedAmount\" />\r\n        <button class=\"btn--default\" data-bind=\"click: addCategory\">Add category</button>\r\n    </div>\r\n</div>\r\n\r\n<div class=\"categories-container\">\r\n    <h2>Categories for <u data-bind=\"text: selectedBudget() && selectedBudget().name\"></u></h2>\r\n    <button class=\"btn--default\" data-bind=\"click: toggleNewCategoryForm\">+ New category</button>\r\n    <div class=\"list\" data-bind=\"foreach: categories\">\r\n        <div class=\"list-item\" data-bind=\"click: function() { $parent.selectCategory($data) }, css: { 'item-selected': $parent.selectedCategory() && $parent.selectedCategory().id === id }\">\r\n            <div class=\"attrs\">\r\n                <span class=\"attr\" data-bind=\"text: name\"></span>\r\n                <span class=\"attr\" data-bind=\"text: budget\"></span>\r\n                <span class=\"attr\" data-bind=\"text: plannedAmount\"></span>\r\n                <span class=\"attr\" data-bind=\"text: spentAmount\"></span>\r\n                <span class=\"attr\" data-bind=\"text: difference() + '%', css: { 'text--warning': difference() > 80 }\"></span>\r\n            </div>\r\n            <button class=\"btn--default btn-remove\" data-bind=\"click: function() { $parent.removeCategory(id) }, clickBubble: false\">Remove category</button>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n\r\n\r\n<!-- /ko -->\r\n\r\n\r\n<!--Payments-->\r\n<!-- ko if: categories().length -->\r\n\r\n<div class=\"layover\" data-bind=\"visible: newPaymentForm(), click: toggleNewPaymentForm\">\r\n    <div class=\"creation-form\" data-bind=\"click: function () {}, clickBubble: false;\">\r\n        <input class=\"input--default\" placeholder=\"Name\" data-bind=\"textInput: paymentForm.name\" />\r\n        <input disabled class=\"input--default\" placeholder=\"Budget\" data-bind=\"textInput: paymentForm.budget\" />\r\n        <input disabled class=\"input--default\" placeholder=\"Category\" data-bind=\"textInput: paymentForm.category\" />\r\n        <input disabled class=\"input--default\" placeholder=\"Date\" data-bind=\"textInput: paymentForm.date\" />\r\n        <input class=\"input--default\" placeholder=\"Planned Amount\" data-bind=\"textInput: paymentForm.plannedAmount\" />\r\n        <textarea class=\"textarea--default\" placeholder=\"Description\" data-bind=\"textInput: paymentForm.description\"></textarea>\r\n        <button class=\"btn--default\" data-bind=\"click: addPayment\">Add payment</button>\r\n\r\n    </div>\r\n</div>\r\n\r\n<div class=\"payments-container\">\r\n    <h2>Payments for \"\r\n        <u data-bind=\"text: selectedBudget() && selectedBudget().name\"></u> /\r\n        <u data-bind=\"text: selectedCategory() && selectedCategory().name\"></u>\"\r\n    </h2>\r\n    <button class=\"btn--default\" data-bind=\"click: toggleNewPaymentForm\">+ New payment</button>\r\n    <div class=\"list\" data-bind=\"foreach: payments\">\r\n        <div class=\"list-item\">\r\n            <div class=\"attrs\">\r\n                <span class=\"attr\" data-bind=\"text: name\"></span>\r\n                <span class=\"attr\" data-bind=\"text: budget\"></span>\r\n                <span class=\"attr\" data-bind=\"text: category\"></span>\r\n                <span class=\"attr\" data-bind=\"text: amount\"></span>\r\n                <span class=\"attr\" data-bind=\"text: description\"></span>\r\n            </div>\r\n            <button class=\"btn--default btn-remove\" data-bind=\"click: function() { $parent.removePayment(id) }, clickBubble: false\">Remove payment</button>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<!-- /ko -->\r\n";
+module.exports = "<h2>My Personal Budget</h2>\r\n<button class=\"btn--default\" data-bind=\"click: logout\" style=\"float: right;\">Logout</button>\r\n\r\n<overview></overview>\r\n\r\n<div class=\"layover\" data-bind=\"visible: newBudgetForm(), click: toggleNewBudgetForm\">\r\n    <div class=\"creation-form\" data-bind=\"click: function () {}, clickBubble: false;\">\r\n        <input class=\"input--default\" placeholder=\"Name\" data-bind=\"textInput: form.name\" />\r\n        <input class=\"input--default\" placeholder=\"Date mm-yyyy\" data-bind=\"textInput: form.month\" />\r\n        <input class=\"input--default\" placeholder=\"Amount\" data-bind=\"textInput: form.plannedAmount\" />\r\n        <button class=\"btn--default\" data-bind=\"click: addBudget\">Add budget</button>\r\n    </div>\r\n</div>\r\n\r\n\r\n<div class=\"budgets-container\">\r\n    <h2>Budgets</h2>\r\n    <button class=\"btn--default\" data-bind=\"click: toggleNewBudgetForm\">+ New Budget</button>\r\n    <div class=\"list\" data-bind=\"foreach: budgets\">\r\n        <div class=\"list-item\" data-bind=\"click: function() { $parent.selectBudget($data) }, css: { 'item-selected': $parent.selectedBudget() && $parent.selectedBudget().id === id }\">\r\n            <div class=\"attrs\">\r\n                <span class=\"attr\" data-bind=\"text: name\"></span>\r\n                <span class=\"attr\" data-bind=\"text: month\"></span>\r\n                <span class=\"attr\" data-bind=\"text: plannedAmount\"></span>\r\n                <span class=\"attr\" data-bind=\"text: spentAmount\"></span>\r\n                <span class=\"attr\" data-bind=\"text: percSpent() + '%', css: { 'text--warning': percSpent() > 80 }\"></span>\r\n            </div>\r\n            <button class=\"btn--default btn-remove\" data-bind=\"click: function() { $parent.removeBudget($data) }, clickBubble: false\">Remove budget</button>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n\r\n<!--Categories-->\r\n<!-- ko if: budgets().length -->\r\n\r\n<div class=\"layover\" data-bind=\"visible: newCategoryForm(), click: toggleNewCategoryForm\">\r\n    <div class=\"creation-form\" data-bind=\"click: function () {}, clickBubble: false;\">\r\n        <input class=\"input--default\" placeholder=\"Name\" data-bind=\"textInput: categoryForm.name\" />\r\n        <input disabled class=\"input--default\" placeholder=\"Budget\" data-bind=\"textInput: categoryForm.budget\" />\r\n        <input class=\"input--default\" placeholder=\"Planned Amount\" data-bind=\"textInput: categoryForm.plannedAmount\" />\r\n        <button class=\"btn--default\" data-bind=\"click: addCategory\">Add category</button>\r\n    </div>\r\n</div>\r\n\r\n<div class=\"categories-container\">\r\n    <h2>Categories for <u data-bind=\"text: selectedBudget() && selectedBudget().name\"></u></h2>\r\n    <button class=\"btn--default\" data-bind=\"click: toggleNewCategoryForm\">+ New category</button>\r\n    <div class=\"list\" data-bind=\"foreach: categories\">\r\n        <div class=\"list-item\" data-bind=\"click: function() { $parent.selectCategory($data) }, css: { 'item-selected': $parent.selectedCategory() && $parent.selectedCategory().id === id }\">\r\n            <div class=\"attrs\">\r\n                <span class=\"attr\" data-bind=\"text: name\"></span>\r\n                <span class=\"attr\" data-bind=\"text: budget\"></span>\r\n                <span class=\"attr\" data-bind=\"text: plannedAmount\"></span>\r\n                <span class=\"attr\" data-bind=\"text: spentAmount\"></span>\r\n                <span class=\"attr\" data-bind=\"text: difference() + '%', css: { 'text--warning': difference() > 80 }\"></span>\r\n            </div>\r\n            <button class=\"btn--default btn-remove\" data-bind=\"click: function() { $parent.removeCategory(id) }, clickBubble: false\">Remove category</button>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n\r\n\r\n<!-- /ko -->\r\n\r\n\r\n<!--Payments-->\r\n<!-- ko if: categories().length -->\r\n\r\n<div class=\"layover\" data-bind=\"visible: newPaymentForm(), click: toggleNewPaymentForm\">\r\n    <div class=\"creation-form\" data-bind=\"click: function () {}, clickBubble: false;\">\r\n        <input class=\"input--default\" placeholder=\"Name\" data-bind=\"textInput: paymentForm.name\" />\r\n        <input disabled class=\"input--default\" placeholder=\"Budget\" data-bind=\"textInput: paymentForm.budget\" />\r\n        <input disabled class=\"input--default\" placeholder=\"Category\" data-bind=\"textInput: paymentForm.category\" />\r\n        <input disabled class=\"input--default\" placeholder=\"Date\" data-bind=\"textInput: paymentForm.date\" />\r\n        <input class=\"input--default\" placeholder=\"Planned Amount\" data-bind=\"textInput: paymentForm.plannedAmount\" />\r\n        <textarea class=\"textarea--default\" placeholder=\"Description\" data-bind=\"textInput: paymentForm.description\"></textarea>\r\n        <button class=\"btn--default\" data-bind=\"click: addPayment\">Add payment</button>\r\n\r\n    </div>\r\n</div>\r\n\r\n<div class=\"payments-container\">\r\n    <h2>Payments for \"\r\n        <u data-bind=\"text: selectedBudget() && selectedBudget().name\"></u> /\r\n        <u data-bind=\"text: selectedCategory() && selectedCategory().name\"></u>\"\r\n    </h2>\r\n    <button class=\"btn--default\" data-bind=\"click: toggleNewPaymentForm\">+ New payment</button>\r\n    <div class=\"list\" data-bind=\"foreach: payments\">\r\n        <div class=\"list-item\">\r\n            <div class=\"attrs\">\r\n                <span class=\"attr\" data-bind=\"text: name\"></span>\r\n                <span class=\"attr\" data-bind=\"text: date\"></span>\r\n                <span class=\"attr\" data-bind=\"text: category\"></span>\r\n                <span class=\"attr\" data-bind=\"text: amount\"></span>\r\n                <span class=\"attr\" data-bind=\"text: description\"></span>\r\n            </div>\r\n            <button class=\"btn--default btn-remove\" data-bind=\"click: function() { $parent.removePayment(id) }, clickBubble: false\">Remove payment</button>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<!-- /ko -->\r\n";
 
 /***/ }),
 
@@ -31792,7 +31792,7 @@ module.exports = categoryApi;
 /***/ (function(module, exports) {
 
 const paymentApi = {
-    create: function (name, date, amount, categoryId) {
+	create: function (name, date, amount, categoryId, comment) {
         return $.ajax({
             type: "POST",
             url: `/api/payments/create`,
@@ -31802,7 +31802,8 @@ const paymentApi = {
                 "amount": amount,
                 "category": {
                     "id": categoryId
-                }
+                },
+				"description": comment
             }),
             contentType: "application/json",
             headers: {
@@ -32305,6 +32306,8 @@ const { Category } = __webpack_require__(/*! ../category.vm */ "./static/js/cate
 const { Payment } = __webpack_require__(/*! ../payment.vm */ "./static/js/payment.vm.js");
 const common = __webpack_require__(/*! ../common */ "./static/js/common.js");
 
+let overview = null;
+
 class HomeView {
     constructor(ctx) {
         this.router = ctx.router;
@@ -32389,7 +32392,7 @@ class HomeView {
             url: `/api/budgets/create`,
             data: JSON.stringify({
                 "name": this.form.name(),
-                "validForMonth": this.form.month(),
+                "month": this.form.month(),
                 "plannedAmount": this.form.plannedAmount(),
                 "user": {
                     "id": sessionStorage.getItem('USER_ID')
@@ -32405,6 +32408,8 @@ class HomeView {
                 this.budgets.unshift(newBudget);
                 this.selectBudget(newBudget);
                 this.resetNewBudgetForm();
+
+                overview.updateAll();
             })
     }
 
@@ -32414,6 +32419,9 @@ class HomeView {
                 const newCategory = Category.fromApi(data)
                 this.categories.unshift(newCategory);
                 this.selectCategory(newCategory);
+                this.toggleNewCategoryForm();
+
+                overview.updateAll();
             });
     }
 
@@ -32422,8 +32430,14 @@ class HomeView {
             this.paymentForm.name(),
             this.paymentForm.date(),
             this.paymentForm.plannedAmount(),
-            this.selectedCategory().id
-        ).then(data => this.payments.unshift(Payment.fromApi(data)));
+            this.selectedCategory().id,
+		    this.paymentForm.description()
+        ).then(data => {
+            this.payments.unshift(Payment.fromApi(data));
+            this.toggleNewPaymentForm();
+
+            overview.updateAll();
+        });
     }
 
     resetNewBudgetForm () {
@@ -32442,18 +32456,25 @@ class HomeView {
         })
             .then(() => {
                 this.budgets.remove(budget);
+                overview.updateAll();
             })
 
     }
 
     removeCategory (id) {
         categoryApi.deleteCategory(id)
-            .then(() => this.categories(this.categories().filter(c => c.id !== id)));
+            .then(() => {
+                this.categories(this.categories().filter(c => c.id !== id));
+                overview.updateAll();
+            });
     }
 
     removePayment (id) {
         paymentApi.delete(id)
-            .then(() => this.payments(this.payments().filter(p => p.id !== id)));
+            .then(() => {
+                this.payments(this.payments().filter(p => p.id !== id));
+                overview.updateAll();
+            });
     }
 
     selectBudget (budget) {
@@ -32487,6 +32508,12 @@ class Overview {
         this.editMonthly = ko.observable(false);
         this.setMonthly = ko.observable('');
 
+        this.updateAll();
+
+        overview = this;
+    }
+
+    updateAll () {
         this.getIncome();
         this.getPlanned();
         this.getSpent();
@@ -32542,6 +32569,7 @@ class Overview {
         })
             .then(() => {
                 this.monthlyIncome(this.setMonthly());
+                this.toggleEdit();
             })
     }
 

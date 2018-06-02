@@ -10,6 +10,8 @@ const { Category } = require('../category.vm');
 const { Payment } = require('../payment.vm');
 const common = require('../common');
 
+let overview = null;
+
 class HomeView {
     constructor(ctx) {
         this.router = ctx.router;
@@ -110,6 +112,8 @@ class HomeView {
                 this.budgets.unshift(newBudget);
                 this.selectBudget(newBudget);
                 this.resetNewBudgetForm();
+
+                overview.updateAll();
             })
     }
 
@@ -120,6 +124,8 @@ class HomeView {
                 this.categories.unshift(newCategory);
                 this.selectCategory(newCategory);
                 this.toggleNewCategoryForm();
+
+                overview.updateAll();
             });
     }
 
@@ -133,6 +139,8 @@ class HomeView {
         ).then(data => {
             this.payments.unshift(Payment.fromApi(data));
             this.toggleNewPaymentForm();
+
+            overview.updateAll();
         });
     }
 
@@ -152,18 +160,25 @@ class HomeView {
         })
             .then(() => {
                 this.budgets.remove(budget);
+                overview.updateAll();
             })
 
     }
 
     removeCategory (id) {
         categoryApi.deleteCategory(id)
-            .then(() => this.categories(this.categories().filter(c => c.id !== id)));
+            .then(() => {
+                this.categories(this.categories().filter(c => c.id !== id));
+                overview.updateAll();
+            });
     }
 
     removePayment (id) {
         paymentApi.delete(id)
-            .then(() => this.payments(this.payments().filter(p => p.id !== id)));
+            .then(() => {
+                this.payments(this.payments().filter(p => p.id !== id));
+                overview.updateAll();
+            });
     }
 
     selectBudget (budget) {
@@ -197,6 +212,12 @@ class Overview {
         this.editMonthly = ko.observable(false);
         this.setMonthly = ko.observable('');
 
+        this.updateAll();
+
+        overview = this;
+    }
+
+    updateAll () {
         this.getIncome();
         this.getPlanned();
         this.getSpent();
