@@ -1,5 +1,5 @@
-# INSERT INTO users (username, `password`)
-# VALUES ("testUser", "123");
+INSERT INTO users (username, `password`)
+VALUES ("testUser", "$2a$12$TRWqP4L1o4DTFCGCVpf80eKWq3qUtC4asrxXygggINuPc9jmjTE0G");
 
 INSERT INTO monthly_incomes (monthlyIncome, validForMonth, userId)
 VALUES (1200, "06-2018", 1),
