@@ -57,7 +57,7 @@
     }
 }
 
-.list-item {
+@mixin list-item {
     height: 40px;
     line-height: 40px;
     border-bottom: 1px solid lightgrey;
@@ -79,6 +79,15 @@
         margin: 0 5px;
         height: 32px;
     }
+}
+
+.list-item-static {
+    @include list-item;
+    padding-right: 47px;
+}
+
+.list-item {
+    @include list-item;
 
     &:hover {
         cursor: pointer;

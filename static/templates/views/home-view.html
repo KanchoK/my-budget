@@ -16,6 +16,15 @@
 <div class="budgets-container">
     <h2>Budgets</h2>
     <button class="btn--default" data-bind="click: toggleNewBudgetForm">+ New Budget</button>
+    <div class="list-item-static">
+        <div class="attrs">
+            <span class="attr">Name</span>
+            <span class="attr">Month</span>
+            <span class="attr">Planned</span>
+            <span class="attr">Spent</span>
+            <span class="attr">%</span>
+        </div>
+    </div>
     <div class="list" data-bind="foreach: budgets">
         <div class="list-item" data-bind="click: function() { $parent.selectBudget($data) }, css: { 'item-selected': $parent.selectedBudget() && $parent.selectedBudget().id === id }">
             <div class="attrs">
@@ -25,7 +34,7 @@
                 <span class="attr" data-bind="text: spentAmount"></span>
                 <span class="attr" data-bind="text: percSpent() + '%', css: { 'text--warning': percSpent() > 80 }"></span>
             </div>
-            <button class="btn--default btn-remove" data-bind="click: function() { $parent.removeBudget($data) }, clickBubble: false">Remove budget</button>
+            <button class="btn--default btn-remove" data-bind="click: function() { $parent.removeBudget($data) }, clickBubble: false">X</button>
         </div>
     </div>
 </div>
@@ -45,23 +54,29 @@
 
 <div class="categories-container">
     <h2>Categories for <u data-bind="text: selectedBudget() && selectedBudget().name"></u></h2>
-    <button class="btn--default" data-bind="click: toggleNewCategoryForm">+ New category</button>
+    <button class="btn--default" data-bind="click: toggleNewCategoryForm">+ New Category</button>
+
+    <div class="list-item-static">
+        <div class="attrs">
+            <span class="attr">Name</span>
+            <span class="attr">Planned</span>
+            <span class="attr">Spent</span>
+            <span class="attr">%</span>
+        </div>
+    </div>
+
     <div class="list" data-bind="foreach: categories">
         <div class="list-item" data-bind="click: function() { $parent.selectCategory($data) }, css: { 'item-selected': $parent.selectedCategory() && $parent.selectedCategory().id === id }">
             <div class="attrs">
                 <span class="attr" data-bind="text: name"></span>
-                <span class="attr" data-bind="text: budget"></span>
                 <span class="attr" data-bind="text: plannedAmount"></span>
                 <span class="attr" data-bind="text: spentAmount"></span>
                 <span class="attr" data-bind="text: difference() + '%', css: { 'text--warning': difference() > 80 }"></span>
             </div>
-            <button class="btn--default btn-remove" data-bind="click: function() { $parent.removeCategory(id) }, clickBubble: false">Remove category</button>
+            <button class="btn--default btn-remove" data-bind="click: function() { $parent.removeCategory(id) }, clickBubble: false">X</button>
         </div>
     </div>
 </div>
-
-
-
 <!-- /ko -->
 
 
@@ -87,6 +102,17 @@
         <u data-bind="text: selectedCategory() && selectedCategory().name"></u>"
     </h2>
     <button class="btn--default" data-bind="click: toggleNewPaymentForm">+ New payment</button>
+
+    <div class="list-item-static">
+        <div class="attrs">
+            <span class="attr">Name</span>
+            <span class="attr">Date</span>
+            <span class="attr">Category</span>
+            <span class="attr">Amount</span>
+            <span class="attr">Description</span>
+        </div>
+    </div>
+
     <div class="list" data-bind="foreach: payments">
         <div class="list-item">
             <div class="attrs">
@@ -96,7 +122,7 @@
                 <span class="attr" data-bind="text: amount"></span>
                 <span class="attr" data-bind="text: description"></span>
             </div>
-            <button class="btn--default btn-remove" data-bind="click: function() { $parent.removePayment(id) }, clickBubble: false">Remove payment</button>
+            <button class="btn--default btn-remove" data-bind="click: function() { $parent.removePayment(id) }, clickBubble: false">X</button>
         </div>
     </div>
 </div>
