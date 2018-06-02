@@ -16,10 +16,10 @@ VALUES ("Food", 100.50, 14.80, 1),
 	   ("Food", 100, 4.90, 2);
 
 INSERT INTO payments (title, `date`, `comment`, amount, categoryId)
-VALUES ("Pizza Margarita", "06-02-2018", "from Pizza Victoria", 11.90, 1),
-       ("Shopska Salad", "06-02-2018", "from Happy", 2.90, 1),
-       ("Beer Shumensko", "06-03-2018", "500 ml, pretty expensive", 5.30, 2),
-       ("Coca-Cola", "06-03-2018", "500 ml", 2.50, 2),
-	   ("Hotel Paradise", "06-10-2018", "for 3 day and for 2 people", 150, 3),
-       ("Tarator", "06-11-2018", "from Tavern Misho, pretty expensive", 4.90, 4);
+VALUES ("Pizza Margarita", "01-06-2018", "from Pizza Victoria", 11.90, 1),
+       ("Shopska Salad", "01-06-2018", "from Happy", 2.90, 1),
+       ("Beer Shumensko", "01-06-2018", "500 ml, pretty expensive", 5.30, 2),
+       ("Coca-Cola", "02-06-2018", "500 ml", 2.50, 2),
+	   ("Hotel Paradise", "22-06-2018", "for 3 days and for 2 people", 150, 3),
+       ("Breakfast", "23-06-2018", "from Hotel Paradise, pretty expensive", 4.90, 4);
 
