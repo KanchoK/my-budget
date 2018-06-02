@@ -251,6 +251,7 @@ class Overview {
         })
             .then(() => {
                 this.monthlyIncome(this.setMonthly());
+                this.toggleEdit();
             })
     }
 
