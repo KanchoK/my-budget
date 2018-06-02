@@ -28,6 +28,8 @@ public class PaymentDaoImpl implements PaymentDao{
 
     private static final String ADD_PAYMENT_STATEMENT = "INSERT INTO payments(title, date, amount, categoryId) " +
                                                 "VALUES (?, ?, ?, ?)";
+    private static final String ADD_PAYMENT_WITH_COMMENT_STATEMENT = "INSERT INTO payments(title, date, amount, categoryId, comment) " +
+                                                "VALUES (?, ?, ?, ?, ?)";
     private static final String GET_PAYMENTS_FOR_CATEGORY_STATEMENT =
             "SELECT p.id, p.title, p.date, p.amount, p.comment, c.id, c.name, " +
                     "c.plannedAmount, c.spentAmount, b.id, b.validForMonth, b.name, " +
@@ -90,29 +92,57 @@ public class PaymentDaoImpl implements PaymentDao{
     public Payment createPayment(Payment payment) {
         int paymentId = -1;
 
-        try (Connection conn = databaseManager.getDataSource().getConnection();
-             PreparedStatement preparedStatement = conn
-                     .prepareStatement(ADD_PAYMENT_STATEMENT, Statement.RETURN_GENERATED_KEYS)) {
+        if (payment.getComment() == null || payment.getComment() == ""){
+            try (Connection conn = databaseManager.getDataSource().getConnection();
+                 PreparedStatement preparedStatement = conn
+                         .prepareStatement(ADD_PAYMENT_STATEMENT, Statement.RETURN_GENERATED_KEYS)) {
 
-            preparedStatement.setString(1, payment.getTitle());
-            preparedStatement.setString(2, payment.getDate());
-            preparedStatement.setBigDecimal(3, payment.getAmount());
-            preparedStatement.setInt(4, payment.getCategory().getId());
-            preparedStatement.executeUpdate();
+                preparedStatement.setString(1, payment.getTitle());
+                preparedStatement.setString(2, payment.getDate());
+                preparedStatement.setBigDecimal(3, payment.getAmount());
+                preparedStatement.setInt(4, payment.getCategory().getId());
+                preparedStatement.executeUpdate();
 
-            try (ResultSet rs = preparedStatement.getGeneratedKeys()) {
-                rs.next();
-                paymentId = rs.getInt(1);
+                try (ResultSet rs = preparedStatement.getGeneratedKeys()) {
+                    rs.next();
+                    paymentId = rs.getInt(1);
+                }
+
+                addPaymentAmountToCategory(payment.getCategory().getId(),
+                        payment.getAmount());
+                LOG.info("payment id"  + paymentId);
+                addPaymentAmountToBudget(paymentId, payment.getAmount());
+
+
+            } catch (SQLException e) {
+                LOG.error("Exception was thrown", e);
             }
-            
-            addPaymentAmountToCategory(payment.getCategory().getId(),
-                    payment.getAmount());
-            LOG.info("payment id"  + paymentId);
-            addPaymentAmountToBudget(paymentId, payment.getAmount());
-            
-            
-        } catch (SQLException e) {
-            LOG.error("Exception was thrown", e);
+        } else {
+              try (Connection conn = databaseManager.getDataSource().getConnection();
+                 PreparedStatement preparedStatement = conn
+                         .prepareStatement(ADD_PAYMENT_WITH_COMMENT_STATEMENT, Statement.RETURN_GENERATED_KEYS)) {
+
+                preparedStatement.setString(1, payment.getTitle());
+                preparedStatement.setString(2, payment.getDate());
+                preparedStatement.setBigDecimal(3, payment.getAmount());
+                preparedStatement.setInt(4, payment.getCategory().getId());
+                preparedStatement.setString(5, payment.getComment());
+                preparedStatement.executeUpdate();
+
+                try (ResultSet rs = preparedStatement.getGeneratedKeys()) {
+                    rs.next();
+                    paymentId = rs.getInt(1);
+                }
+
+                addPaymentAmountToCategory(payment.getCategory().getId(),
+                        payment.getAmount());
+                LOG.info("payment id"  + paymentId);
+                addPaymentAmountToBudget(paymentId, payment.getAmount());
+
+
+            } catch (SQLException e) {
+                LOG.error("Exception was thrown", e);
+            }
         }
         
         payment.setId(paymentId);

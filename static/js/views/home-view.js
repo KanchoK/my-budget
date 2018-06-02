@@ -128,7 +128,8 @@ class HomeView {
             this.paymentForm.name(),
             this.paymentForm.date(),
             this.paymentForm.plannedAmount(),
-            this.selectedCategory().id
+            this.selectedCategory().id,
+		    this.paymentForm.description()
         ).then(data => {
             this.payments.unshift(Payment.fromApi(data));
             this.toggleNewPaymentForm();

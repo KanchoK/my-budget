@@ -69,7 +69,7 @@ public class CategoryManager {
     public Response getCategoriesForBudget(@PathParam("budgetId") int budgetId) {
         List<Category> categoriesForBudget = categoryService.getCategoriesForBudget(budgetId);
 
-        LOG.info("Budgets for categoriy's id successfully retrieved: " + categoriesForBudget);
+        LOG.info("Categories for budget's id successfully retrieved: " + categoriesForBudget);
 
         return Response.status(Response.Status.OK.getStatusCode())
                 .entity(categoriesForBudget).build();
@@ -82,7 +82,8 @@ public class CategoryManager {
             @PathParam("validForMonth") String validForMonth) {
         List<Category> categoriesForBudget = categoryService.getCategoriesForUserAndMonth(userId, validForMonth);
 
-        LOG.info("Budgets for user's id and month successfully retrieved: " + categoriesForBudget);
+        LOG.info("Categories for user's id = " + userId + " and month " +
+                validForMonth + " are successfully retrieved: " + categoriesForBudget);
 
         return Response.status(Response.Status.OK.getStatusCode())
                 .entity(categoriesForBudget).build();
@@ -94,7 +95,7 @@ public class CategoryManager {
     public Response removeCategory(@PathParam("id") int id) {
         boolean result = categoryService.removeCategory(id);
 
-        LOG.info("Category successfully deleted: " + result);
+        LOG.info("Category for id = " + id + " is successfully deleted: " + result);
 
         return Response.status(Response.Status.OK.getStatusCode())
                 .build();

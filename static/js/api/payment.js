@@ -1,5 +1,5 @@
 const paymentApi = {
-    create: function (name, date, amount, categoryId) {
+	create: function (name, date, amount, categoryId, comment) {
         return $.ajax({
             type: "POST",
             url: `/api/payments/create`,
@@ -9,7 +9,8 @@ const paymentApi = {
                 "amount": amount,
                 "category": {
                     "id": categoryId
-                }
+                },
+				"comment": comment
             }),
             contentType: "application/json",
             headers: {

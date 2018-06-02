@@ -100,7 +100,7 @@ public class MonthlyIncomeManager {
     public Response getMonthlyIncomesForUser(@PathParam("userId") int userId) {
         List<MonthlyIncome> monthlyIncomesForUser = monthlyIncomeService.getMonthlyIncomesForUser(userId);
 
-        LOG.info("Monthly incomes for user's id successfully retrieved: " + monthlyIncomesForUser);
+        LOG.info("Monthly incomes for user's id " + userId + " are successfully retrieved: " + monthlyIncomesForUser);
 
         return Response.status(Response.Status.OK.getStatusCode())
                 .entity(monthlyIncomesForUser).build();
@@ -113,7 +113,8 @@ public class MonthlyIncomeManager {
             @PathParam("validForMonth") String validForMonth) {
         MonthlyIncome monthlyIncomesForUserForMonth = monthlyIncomeService.getMonthlyIncomeForUserAndMonth(userId, validForMonth);
 
-        LOG.info("Monthly income for user's id and month successfully retrieved: " + monthlyIncomesForUserForMonth);
+        LOG.info("Monthly income for user's id = " + userId + " and month = " +
+                validForMonth + " is successfully retrieved: " + monthlyIncomesForUserForMonth);
 
         return Response.status(Response.Status.OK.getStatusCode())
                 .entity(monthlyIncomesForUserForMonth).build();

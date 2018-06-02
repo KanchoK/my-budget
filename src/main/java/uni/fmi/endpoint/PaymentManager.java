@@ -69,7 +69,8 @@ public class PaymentManager{
     public Response getPaymentsForCategory(@PathParam("categoryId") int categoryId) {
         List<Payment> paymentsForCategory = paymentService.getPaymentsForCategory(categoryId);
 
-        LOG.info("Payments successfully retrieved: " + paymentsForCategory);
+        LOG.info("Payments fro category's id = " + categoryId + 
+                " are successfully retrieved: " + paymentsForCategory);
 
         return Response.status(Response.Status.OK.getStatusCode())
                 .entity(paymentsForCategory).build();
@@ -82,7 +83,8 @@ public class PaymentManager{
             @PathParam("validForMonth") String month) {
         List<Payment> paymentsForCategory = paymentService.getPaymentsForUserAndMonth(userId, month);
 
-        LOG.info("Payments for user and month successfully retrieved: " + paymentsForCategory);
+        LOG.info("Payments for user's id = " + userId + " and month = " + month +
+                " is successfully retrieved: " + paymentsForCategory);
 
         return Response.status(Response.Status.OK.getStatusCode())
                 .entity(paymentsForCategory).build();
@@ -96,7 +98,7 @@ public class PaymentManager{
     public Response removePayment(@PathParam("id") int id) {
         boolean result = paymentService.removePayment(id);
 
-        LOG.info("Payment successfully deleted: " + result);
+        LOG.info("Payment for id = " + id + " is successfully deleted: " + result);
 
         return Response.status(Response.Status.OK.getStatusCode())
                 .build();

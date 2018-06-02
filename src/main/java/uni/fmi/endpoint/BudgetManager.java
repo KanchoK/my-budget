@@ -64,7 +64,7 @@ public class BudgetManager {
     public Response getBudgetsForUser(@PathParam("userId") int userId) {
         List<Budget> budgetsForUser = budgetService.getBudgetsForUser(userId);
 
-        LOG.info("Budgets successfully retrieved: " + budgetsForUser);
+        LOG.info("Budgets for user's id = " + userId + " are successfully retrieved: " + budgetsForUser);
 
         return Response.status(Response.Status.OK.getStatusCode())
                 .entity(budgetsForUser).build();
@@ -89,7 +89,7 @@ public class BudgetManager {
                               @PathParam("userId") int userId) {
         List<Budget> budgetsForUserAndMonth = budgetService.getBudgetsForUserAndMonth(userId, month);
 
-        LOG.info("Budget successfully retrieved: " + budgetsForUserAndMonth);
+        LOG.info("Budgets for user id = " + userId + " are successfully retrieved: " + budgetsForUserAndMonth);
 
         return Response.status(Response.Status.OK.getStatusCode())
                 .entity(budgetsForUserAndMonth).build();
@@ -116,8 +116,8 @@ public class BudgetManager {
         BigDecimal budgetsPlannedAmount = budgetService.getBudgetsPlannedAmountForUserAndMonth(userId, month);
         LOG.info(budgetsPlannedAmount);
 
-        LOG.info("Overall planned amount for user with id = " + userId + 
-                " and month = " + month + " successfully retrieved: " + 
+        LOG.info("Overall planned amount for user's id = " + userId + 
+                " and month = " + month + " is successfully retrieved: " + 
                 budgetsPlannedAmount);
 
         return Response.status(Response.Status.OK.getStatusCode())
@@ -131,8 +131,8 @@ public class BudgetManager {
                               @PathParam("userId") int userId) {
         BigDecimal budgetsSpentAmount = budgetService.getBudgetsSpentAmountForUserAndMonth(userId, month);
 
-        LOG.info("Overall spent amount for user with id = " + userId + 
-                " and month = " + month + " successfully retrieved: " + 
+        LOG.info("Overall spent amount for user's id = " + userId + 
+                " and month = " + month + " is successfully retrieved: " + 
                 budgetsSpentAmount);
 
         return Response.status(Response.Status.OK.getStatusCode())
@@ -145,7 +145,7 @@ public class BudgetManager {
     public Response removeBudget(@PathParam("id") int id) {
         boolean result = budgetService.removeBudget(id);
 
-        LOG.info("Budget successfully deleted: " + result);
+        LOG.info("Budget for id = " + id + " is successfully deleted: " + result);
 
         return Response.status(Response.Status.OK.getStatusCode())
                 .build();
