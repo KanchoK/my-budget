@@ -22,7 +22,7 @@ import java.util.List;
 @Secured
 @Path("categories")
 public class CategoryManager {
-    
+
     private static final Logger LOG = Logger.getLogger(CategoryManager.class);
 
     @Inject
@@ -46,7 +46,7 @@ public class CategoryManager {
         }
 
         Category newCategory = categoryService.createCategory(category);
-        if (newCategory != null || newCategory.getId() != -1) {
+        if (newCategory != null && newCategory.getId() != -1) {
             StatusMessage statusMessage = new StatusMessageBuilder()
                     .status(Response.Status.OK.getStatusCode())
                     .message("Category was created successfully.").build();
@@ -74,7 +74,7 @@ public class CategoryManager {
         return Response.status(Response.Status.OK.getStatusCode())
                 .entity(categoriesForBudget).build();
     }
-    
+
     @GET
     @Path("{userId}/{validForMonth}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -82,8 +82,8 @@ public class CategoryManager {
             @PathParam("validForMonth") String validForMonth) {
         List<Category> categoriesForBudget = categoryService.getCategoriesForUserAndMonth(userId, validForMonth);
 
-        LOG.info("Categories for user's id = " + userId + " and month " +
-                validForMonth + " are successfully retrieved: " + categoriesForBudget);
+        LOG.info("Categories for user's id = " + userId + " and month "
+                + validForMonth + " are successfully retrieved: " + categoriesForBudget);
 
         return Response.status(Response.Status.OK.getStatusCode())
                 .entity(categoriesForBudget).build();
@@ -100,15 +100,26 @@ public class CategoryManager {
         return Response.status(Response.Status.OK.getStatusCode())
                 .build();
     }
-    
+
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCategoryForId(Category category) {
         Category categoryById = categoryService.getCategoryForId(category.getId());
 
-        LOG.info("Category for id = " + categoryById.getId()+ " is successfully retrieved: " + categoryById);
+        if (categoryById != null && categoryById.getId() != -1) {
+            LOG.info("Category for id = " + categoryById.getId() + " is successfully retrieved: " + categoryById);
+            
+            return Response.status(Response.Status.OK.getStatusCode())
+                    .entity(categoryById).build();
 
-        return Response.status(Response.Status.OK.getStatusCode())
-                .entity(categoryById).build();
+        } else {
+            StatusMessage statusMessage = new StatusMessageBuilder()
+                    .status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode())
+                    .message("There is no category for the id = " + category.getId() + " !").build();
+            LOG.info("Service status message: " + statusMessage);
+            
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode())
+                    .entity(statusMessage).build();
+        }
     }
 }

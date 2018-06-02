@@ -41,7 +41,7 @@ public class BudgetManager {
         }
 
         Budget newBudget = budgetService.createBudget(budget);
-        if (newBudget.getId() != -1) {
+        if (newBudget != null && newBudget.getId() != -1) {
             StatusMessage statusMessage = new StatusMessageBuilder()
                     .status(Response.Status.OK.getStatusCode())
                     .message("Budget was created successfully.").build();
@@ -69,7 +69,7 @@ public class BudgetManager {
         return Response.status(Response.Status.OK.getStatusCode())
                 .entity(budgetsForUser).build();
     }
-    
+
 //    @GET
 //    @Path("{budgetId}")
 //    @Produces(MediaType.APPLICATION_JSON)
@@ -81,12 +81,11 @@ public class BudgetManager {
 //        return Response.status(Response.Status.OK.getStatusCode())
 //                .entity(budgetForId).build();
 //    }
-    
     @GET
     @Path("{userId}/{validForMonth}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getBudgetsForUserAndMonth(@PathParam("validForMonth") String month,
-                              @PathParam("userId") int userId) {
+            @PathParam("userId") int userId) {
         List<Budget> budgetsForUserAndMonth = budgetService.getBudgetsForUserAndMonth(userId, month);
 
         LOG.info("Budgets for user id = " + userId + " are successfully retrieved: " + budgetsForUserAndMonth);
@@ -94,7 +93,7 @@ public class BudgetManager {
         return Response.status(Response.Status.OK.getStatusCode())
                 .entity(budgetsForUserAndMonth).build();
     }
-    
+
 //    @GET 
 //    @Path("copy/{userId}/{validForMonth}/{budgetId}")
 //    @Produces(MediaType.APPLICATION_JSON)
@@ -107,33 +106,32 @@ public class BudgetManager {
 //        return Response.status(Response.Status.OK.getStatusCode())
 //                .entity(copiedBudgetUserBudgetAndMonth).build();
 //    }
-    
     @GET
     @Path("plannedAmount/{userId}/{validForMonth}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getBudgetsPlannedAmountForUserAndMonth(@PathParam("validForMonth") String month,
-                              @PathParam("userId") int userId) {
+            @PathParam("userId") int userId) {
         BigDecimal budgetsPlannedAmount = budgetService.getBudgetsPlannedAmountForUserAndMonth(userId, month);
         LOG.info(budgetsPlannedAmount);
 
-        LOG.info("Overall planned amount for user's id = " + userId + 
-                " and month = " + month + " is successfully retrieved: " + 
-                budgetsPlannedAmount);
+        LOG.info("Overall planned amount for user's id = " + userId
+                + " and month = " + month + " is successfully retrieved: "
+                + budgetsPlannedAmount);
 
         return Response.status(Response.Status.OK.getStatusCode())
                 .entity(budgetsPlannedAmount).build();
     }
-    
+
     @GET
     @Path("spentAmount/{userId}/{validForMonth}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getBudgetsSpentAmountForUserAndMonth(@PathParam("validForMonth") String month,
-                              @PathParam("userId") int userId) {
+            @PathParam("userId") int userId) {
         BigDecimal budgetsSpentAmount = budgetService.getBudgetsSpentAmountForUserAndMonth(userId, month);
 
-        LOG.info("Overall spent amount for user's id = " + userId + 
-                " and month = " + month + " is successfully retrieved: " + 
-                budgetsSpentAmount);
+        LOG.info("Overall spent amount for user's id = " + userId
+                + " and month = " + month + " is successfully retrieved: "
+                + budgetsSpentAmount);
 
         return Response.status(Response.Status.OK.getStatusCode())
                 .entity(budgetsSpentAmount).build();
@@ -150,15 +148,24 @@ public class BudgetManager {
         return Response.status(Response.Status.OK.getStatusCode())
                 .build();
     }
-    
+
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     public Response getBudgetForId(Budget budget) {
         Budget budgetById = budgetService.getBudgetForId(budget.getId());
 
-        LOG.info("Budget for id = " + budget.getId()+ " is successfully retrieved: " + budgetById);
+        if (budgetById != null && budgetById.getId() != -1) {
+            LOG.info("Budget for id = " + budget.getId() + " is successfully retrieved: " + budgetById);
 
-        return Response.status(Response.Status.OK.getStatusCode())
-                .entity(budgetById).build();
+            return Response.status(Response.Status.OK.getStatusCode())
+                    .entity(budgetById).build();
+        } else {
+            StatusMessage statusMessage = new StatusMessageBuilder()
+                    .status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode())
+                    .message("There is no budget for id = " + budget.getId() + " !").build();
+            LOG.info("Service status message: " + statusMessage);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode())
+                    .entity(statusMessage).build();
+        }
     }
 }

@@ -75,7 +75,7 @@ public class CategoryDaoImpl implements CategoryDao{
                 LOG.error("The planned amount of this category = " + categoryPlannedAmount +
                         " is greater than its budget's planned amount = " + 
                         budgetPlannedAmount + " !");
-                return new Category(-1, "");
+                return null;
             }
 
             // Checks if the sum of the categoy's panned amount and the planned amounts of the previous categories
@@ -90,7 +90,7 @@ public class CategoryDaoImpl implements CategoryDao{
                         "the previous ones = " + plannedAmountSum + 
                         " is greater than its budget's planned amount = " +
                         budgetPlannedAmount + " !");
-                return new Category(-1, "");
+                return null;
             }
         }
         
