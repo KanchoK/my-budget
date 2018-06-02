@@ -75,8 +75,6 @@ create table payments
 	`date` varchar(15) not null,
 	amount decimal(10,2) not null,
 	categoryId int not null,
-	constraint title_UNIQUE
-		unique (title, date),
 	constraint category
 		foreign key (categoryId) references my_budget.categories (id)
         on delete cascade
