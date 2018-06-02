@@ -43,4 +43,9 @@ public class CategoryServiceImpl implements CategoryService {
     public boolean removeCategory(int id) {
         return categoryDao.removeCategory(id);
     }
+    
+    @Override
+    public Category getCategoryForId(int id) {
+        return categoryDao.getCategoryForId(id);
+    }
 }

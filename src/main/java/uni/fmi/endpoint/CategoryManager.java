@@ -46,7 +46,7 @@ public class CategoryManager {
         }
 
         Category newCategory = categoryService.createCategory(category);
-        if (newCategory.getId() != -1) {
+        if (newCategory != null || newCategory.getId() != -1) {
             StatusMessage statusMessage = new StatusMessageBuilder()
                     .status(Response.Status.OK.getStatusCode())
                     .message("Category was created successfully.").build();
@@ -99,5 +99,16 @@ public class CategoryManager {
 
         return Response.status(Response.Status.OK.getStatusCode())
                 .build();
+    }
+    
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getCategoryForId(Category category) {
+        Category categoryById = categoryService.getCategoryForId(category.getId());
+
+        LOG.info("Budget for id = " + categoryById.getId()+ " is successfully retrieved: " + categoryById);
+
+        return Response.status(Response.Status.OK.getStatusCode())
+                .entity(categoryById).build();
     }
 }

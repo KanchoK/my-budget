@@ -81,7 +81,7 @@ public class Payment {
         return category;
     }
 
-    public void setCaegory(Category caegory) {
+    public void setCategory(Category caegory) {
         this.category = caegory;
     }
     

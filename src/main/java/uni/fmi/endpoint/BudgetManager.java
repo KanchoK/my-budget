@@ -150,4 +150,15 @@ public class BudgetManager {
         return Response.status(Response.Status.OK.getStatusCode())
                 .build();
     }
+    
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getBudgetForId(Budget budget) {
+        Budget budgetById = budgetService.getBudgetForId(budget.getId());
+
+        LOG.info("Budget for id = " + budget.getId()+ " is successfully retrieved: " + budgetById);
+
+        return Response.status(Response.Status.OK.getStatusCode())
+                .entity(budgetById).build();
+    }
 }

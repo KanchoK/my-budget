@@ -21,5 +21,5 @@ public interface CategoryDao {
 
     boolean removeCategory(int id);
 
-    Category getCategoryById(int id);
+    Category getCategoryForId(int id);
 }

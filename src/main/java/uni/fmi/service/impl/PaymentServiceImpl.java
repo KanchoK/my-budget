@@ -24,7 +24,7 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public Payment createPayment(Payment payment) {
         Payment newPayment = paymentDao.createPayment(payment);
-        newPayment.setCaegory(categoryDao.getCategoryById(newPayment.getCategory().getId()));
+        newPayment.setCategory(categoryDao.getCategoryForId(newPayment.getCategory().getId()));
         return newPayment;
     }
 

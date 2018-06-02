@@ -13,6 +13,7 @@ import uni.fmi.persistence.dao.CategoryDao;
 
 import javax.inject.Inject;
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +64,33 @@ public class CategoryDaoImpl implements CategoryDao{
     @Override
     public Category createCategory(Category category) {
         int categoryId = -1;
+        
+        // Checks if the categoy's panned amount is greater than its budget's planned amount
+        List<Category> categories  = getCategoriesForBudget(category.getBudget().getId());
+        BigDecimal budgetPlannedAmount = categories.get(0).getBudget().getPlannedAmount();
+        BigDecimal categoryPlannedAmount = category.getPlannedAmount();
+        if (categoryPlannedAmount.compareTo(budgetPlannedAmount) == 1) {
+            LOG.error("The planned amount of this category = " + categoryPlannedAmount +
+                    " is greater than its budget's planned amount = " + 
+                    budgetPlannedAmount + " !");
+            return new Category(-1, "");
+        }
+        
+        // Checks if the sum of the categoy's panned amount and the planned amounts of the previous categories
+        // is greater than its budget's planned amount
+        BigDecimal plannedAmountSum = categoryPlannedAmount;      
+        for(Category item:categories){
+            plannedAmountSum = plannedAmountSum.add(item.getPlannedAmount(), 
+                    MathContext.DECIMAL32);
+        }
+        if (plannedAmountSum.compareTo(budgetPlannedAmount) == 1) {
+            LOG.error("The sum of the planned amounts of this category and " +
+                    "the previous ones = " + plannedAmountSum + 
+                    " is greater than its budget's planned amount = " +
+                    budgetPlannedAmount + " !");
+            return new Category(-1, "");
+        }
+        
 
         try (Connection conn = databaseManager.getDataSource().getConnection();
              PreparedStatement preparedStatement = conn
@@ -169,7 +197,7 @@ public class CategoryDaoImpl implements CategoryDao{
 
     @Override
     public boolean removeCategory(int id) {
-        Category category = getCategoryById(id);
+        Category category = getCategoryForId(id);
         LOG.info("category to delete: " + category);
         if (category == null) {
             return false;
@@ -202,7 +230,7 @@ public class CategoryDaoImpl implements CategoryDao{
     }
 
     @Override
-    public Category getCategoryById(int id){
+    public Category getCategoryForId(int id){
         Category category = null;
           try (Connection conn = databaseManager.getDataSource().getConnection();
              PreparedStatement preparedStatement = conn

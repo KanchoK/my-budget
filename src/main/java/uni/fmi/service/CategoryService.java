@@ -21,4 +21,8 @@ public interface CategoryService {
     List<Category> copyCategoriesForUserBudgetAndMonth(int userId, int budgetId, String month, Budget budget);
 
     boolean removeCategory(int id);
+    
+    Category getCategoryForId(int id);
+    
+    
 }
