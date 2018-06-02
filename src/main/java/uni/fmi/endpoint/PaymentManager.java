@@ -21,8 +21,8 @@ import java.util.List;
 
 @Secured
 @Path("payments")
-public class PaymentManager{
-    
+public class PaymentManager {
+
     private static final Logger LOG = Logger.getLogger(PaymentManager.class);
 
     @Inject
@@ -44,9 +44,9 @@ public class PaymentManager{
             return Response.status(Response.Status.PRECONDITION_FAILED.getStatusCode())
                     .entity(statusMessage).build();
         }
-        
+
         Payment newPayment = paymentService.createPayment(payment);
-        if (newPayment.getId() != -1) {
+        if (newPayment != null && newPayment.getId() != -1) {
             StatusMessage statusMessage = new StatusMessageBuilder()
                     .status(Response.Status.OK.getStatusCode())
                     .message("Payment was created successfully.").build();
@@ -69,13 +69,13 @@ public class PaymentManager{
     public Response getPaymentsForCategory(@PathParam("categoryId") int categoryId) {
         List<Payment> paymentsForCategory = paymentService.getPaymentsForCategory(categoryId);
 
-        LOG.info("Payments fro category's id = " + categoryId + 
-                " are successfully retrieved: " + paymentsForCategory);
+        LOG.info("Payments fro category's id = " + categoryId
+                + " are successfully retrieved: " + paymentsForCategory);
 
         return Response.status(Response.Status.OK.getStatusCode())
                 .entity(paymentsForCategory).build();
     }
-    
+
     @GET
     @Path("{userId}/{validForMonth}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -83,14 +83,12 @@ public class PaymentManager{
             @PathParam("validForMonth") String month) {
         List<Payment> paymentsForCategory = paymentService.getPaymentsForUserAndMonth(userId, month);
 
-        LOG.info("Payments for user's id = " + userId + " and month = " + month +
-                " is successfully retrieved: " + paymentsForCategory);
+        LOG.info("Payments for user's id = " + userId + " and month = " + month
+                + " is successfully retrieved: " + paymentsForCategory);
 
         return Response.status(Response.Status.OK.getStatusCode())
                 .entity(paymentsForCategory).build();
     }
-    
-    
 
     @DELETE
     @Path("{id}")
@@ -103,15 +101,24 @@ public class PaymentManager{
         return Response.status(Response.Status.OK.getStatusCode())
                 .build();
     }
-    
+
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCategoryForId(Payment payment) {
         Payment paymentById = paymentService.getPaymentForId(payment.getId());
+        
+        if (paymentById != null && paymentById.getId() != -1) {
+            LOG.info("Payment for id = " + paymentById.getId() + " is successfully retrieved: " + paymentById);
 
-        LOG.info("Payment for id = " + paymentById.getId()+ " is successfully retrieved: " + paymentById);
-
-        return Response.status(Response.Status.OK.getStatusCode())
-                .entity(paymentById).build();
+            return Response.status(Response.Status.OK.getStatusCode())
+                    .entity(paymentById).build();
+        } else {
+            StatusMessage statusMessage = new StatusMessageBuilder()
+                    .status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode())
+                    .message("There is no payment for id = " + payment.getId() + " !").build();
+            LOG.info("Service status message: " + statusMessage);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode())
+                    .entity(statusMessage).build();
+        }
     }
 }
