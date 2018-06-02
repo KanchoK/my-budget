@@ -5,10 +5,10 @@
  */
 package uni.fmi.persistence.dao;
 
+import uni.fmi.model.Budget;
 import uni.fmi.model.Category;
 
 import java.util.List;
-import uni.fmi.model.Budget;
 
 public interface CategoryDao {
     Category createCategory(Category category);
@@ -20,4 +20,6 @@ public interface CategoryDao {
     List<Category> copyCategoriesForUserBudgetAndMonth(int userId, int budgetId, String month, Budget budget);
 
     boolean removeCategory(int id);
+
+    Category getCategoryById(int id);
 }

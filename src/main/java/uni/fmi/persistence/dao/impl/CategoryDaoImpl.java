@@ -5,7 +5,6 @@
  */
 package uni.fmi.persistence.dao.impl;
 
-import java.math.BigDecimal;
 import org.apache.log4j.Logger;
 import uni.fmi.model.Budget;
 import uni.fmi.model.Category;
@@ -13,9 +12,9 @@ import uni.fmi.persistence.DatabaseManager;
 import uni.fmi.persistence.dao.CategoryDao;
 
 import javax.inject.Inject;
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class CategoryDaoImpl implements CategoryDao{
@@ -201,8 +200,9 @@ public class CategoryDaoImpl implements CategoryDao{
          
         return true;
     }
-    
-    private Category getCategoryById(int id){
+
+    @Override
+    public Category getCategoryById(int id){
         Category category = null;
           try (Connection conn = databaseManager.getDataSource().getConnection();
              PreparedStatement preparedStatement = conn

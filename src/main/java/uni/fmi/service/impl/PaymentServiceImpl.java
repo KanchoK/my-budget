@@ -6,6 +6,7 @@
 package uni.fmi.service.impl;
 
 import uni.fmi.model.Payment;
+import uni.fmi.persistence.dao.CategoryDao;
 import uni.fmi.persistence.dao.PaymentDao;
 import uni.fmi.service.PaymentService;
 
@@ -17,9 +18,13 @@ public class PaymentServiceImpl implements PaymentService {
     @Inject
     private PaymentDao paymentDao;
 
+    @Inject
+    private CategoryDao categoryDao;
+
     @Override
     public Payment createPayment(Payment payment) {
         Payment newPayment = paymentDao.createPayment(payment);
+        newPayment.setCaegory(categoryDao.getCategoryById(newPayment.getCategory().getId()));
         return newPayment;
     }
 

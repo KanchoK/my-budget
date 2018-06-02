@@ -5,14 +5,21 @@
  */
 package uni.fmi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigDecimal;
 
+@XmlRootElement
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Payment {
     private int id;
     private String title;
     private String date;
     private BigDecimal amount = BigDecimal.ZERO;
     private Category category;
+    @XmlElement(name = "description")
     private String comment = ""; 
 
 

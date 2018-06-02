@@ -1,13 +1,20 @@
 package uni.fmi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigDecimal;
 
+@XmlRootElement
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Budget {
 
     private int id;
     private String name;
     private BigDecimal plannedAmount = BigDecimal.ZERO;
     private BigDecimal spentAmount = BigDecimal.ZERO;
+    @XmlElement(name = "month")
     private String validForMonth;
     private User user;
 

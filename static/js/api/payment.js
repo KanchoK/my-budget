@@ -10,7 +10,7 @@ const paymentApi = {
                 "category": {
                     "id": categoryId
                 },
-				"comment": comment
+				"description": comment
             }),
             contentType: "application/json",
             headers: {
