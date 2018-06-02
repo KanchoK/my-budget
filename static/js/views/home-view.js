@@ -94,7 +94,7 @@ class HomeView {
             url: `/api/budgets/create`,
             data: JSON.stringify({
                 "name": this.form.name(),
-                "validForMonth": this.form.month(),
+                "month": this.form.month(),
                 "plannedAmount": this.form.plannedAmount(),
                 "user": {
                     "id": sessionStorage.getItem('USER_ID')
