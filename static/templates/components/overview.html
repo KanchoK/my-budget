@@ -1,21 +1,22 @@
 <div class="overview">
+    <h2 class="title">Dashboard</h2>
     <div class="wrap">
-        <div class="title">Monthly income</div>
-        <div class="money" data-bind="text: monthlyIncome"></div>
+        <div class="title">Monthly Income</div>
+        <div class="money income" data-bind="text: monthlyIncome"></div>
         <button class="btn--default" data-bind="click: toggleEdit">Edit</button>
         <input class="input--default" type="number" data-bind="visible: editMonthly, textInput: setMonthly" style="margin-top: 7px;"/>
         <button class="btn--default" data-bind="visible: editMonthly, click: saveMonthly">Save</button>
     </div>
     <div class="wrap">
-        <div class="title" >Monthly planned</div>
-        <div class="money" data-bind="text: monthlyPlanned"></div>
+        <div class="title" >Monthly Planned</div>
+        <div class="money planned" data-bind="text: monthlyPlanned"></div>
     </div>
     <div class="wrap">
-        <div class="title">Monthly spent</div>
-        <div class="money" data-bind="text: monthlySpent"></div>
+        <div class="title">Monthly Spent</div>
+        <div class="money spent" data-bind="text: monthlySpent"></div>
     </div>
     <div class="wrap">
-        <div class="title">Monthly diff</div>
-        <div class="money" data-bind="text: monthlyDiff"></div>
+        <div class="title">Monthly Diff</div>
+        <div class="money diff" data-bind="text: monthlyDiff"></div>
     </div>
 </div>

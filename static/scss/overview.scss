@@ -1,9 +1,40 @@
 .overview {
     margin: 40px auto;
     font-size: 18px;
-
+	
     display: flex;
 }
+
+.overview div {
+	width: 50%;
+}
+
+h2.title {
+	margin-right: 10%;
+	margin-top: 0;
+}
+
+.overview .wrap .title {
+	font-weight: bold;
+	font-style: italic;
+}
+
+.planned, .income{
+	color: green;
+}
+
+.spent {
+	color: red;
+}
+
+.diff{
+	color: blue;
+}
+
+.wrap{
+	text-align: center;
+}
+
 
 .wrap {
     width: 150px;
