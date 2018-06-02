@@ -119,6 +119,7 @@ class HomeView {
                 const newCategory = Category.fromApi(data)
                 this.categories.unshift(newCategory);
                 this.selectCategory(newCategory);
+                this.toggleNewCategoryForm();
             });
     }
 
@@ -128,7 +129,10 @@ class HomeView {
             this.paymentForm.date(),
             this.paymentForm.plannedAmount(),
             this.selectedCategory().id
-        ).then(data => this.payments.unshift(Payment.fromApi(data)));
+        ).then(data => {
+            this.payments.unshift(Payment.fromApi(data));
+            this.toggleNewPaymentForm();
+        });
     }
 
     resetNewBudgetForm () {
