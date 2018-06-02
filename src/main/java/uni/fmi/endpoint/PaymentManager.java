@@ -103,4 +103,15 @@ public class PaymentManager{
         return Response.status(Response.Status.OK.getStatusCode())
                 .build();
     }
+    
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getCategoryForId(Payment payment) {
+        Payment paymentById = paymentService.getPaymentForId(payment.getId());
+
+        LOG.info("Payment for id = " + paymentById.getId()+ " is successfully retrieved: " + paymentById);
+
+        return Response.status(Response.Status.OK.getStatusCode())
+                .entity(paymentById).build();
+    }
 }

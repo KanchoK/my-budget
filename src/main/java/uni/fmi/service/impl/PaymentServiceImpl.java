@@ -42,4 +42,9 @@ public class PaymentServiceImpl implements PaymentService {
     public boolean removePayment(int id) {
         return paymentDao.removePayment(id);
     }
+    
+    @Override
+    public Payment getPaymentForId(int id) {
+        return paymentDao.getPaymentForId(id);
+    }
 }

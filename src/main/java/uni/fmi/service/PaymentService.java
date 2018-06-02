@@ -18,4 +18,6 @@ public interface PaymentService {
     List<Payment> getPaymentsForUserAndMonth(int userId, String month);
 
     boolean removePayment(int id);
+    
+    Payment getPaymentForId(int id);
 }
