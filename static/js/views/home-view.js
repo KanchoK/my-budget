@@ -1,5 +1,6 @@
 require('../../scss/overview.scss');
 require('../../scss/budget.scss');
+require('../../scss/home-view.scss');
 
 const budgetApi = require('../api/budget');
 const categoryApi = require('../api/category');

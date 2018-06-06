@@ -1,0 +1,27 @@
+.input-info {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.input-info input{
+    margin: 0.2em;
+}
+
+.input-info textarea{
+    height: 42px;
+    margin: 0.2em;
+    resize: both;
+}
+
+.input-info label{
+    margin-right: 0.3em;
+}
+
+.align-center {
+  text-align: center; 
+}
+
+.creation-form .btn--default {
+    margin-left: 35%;
+}

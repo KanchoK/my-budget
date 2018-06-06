@@ -2,13 +2,22 @@
 <button class="btn--default" data-bind="click: logout" style="float: right;">Logout</button>
 
 <overview></overview>
-
 <div class="layover" data-bind="visible: newBudgetForm(), click: toggleNewBudgetForm">
     <div class="creation-form" data-bind="click: function () {}, clickBubble: false;">
-        <input class="input--default" placeholder="Name" data-bind="textInput: form.name" />
-        <input class="input--default" placeholder="Date mm-yyyy" data-bind="textInput: form.month" />
-        <input class="input--default" placeholder="Amount" data-bind="textInput: form.plannedAmount" />
-        <button class="btn--default" data-bind="click: addBudget">Add budget</button>
+        <h3 class="align-center">Create Budget</h3>
+		<div class="input-info">
+			<label for="name">Name:</label>
+			<input id="name" class="input--default" placeholder="Name" data-bind="textInput: form.name" />
+		</div>
+		<div class="input-info">
+			<label for="month">Month:</label>
+			<input id="month" class="input--default" placeholder="Date mm-yyyy" data-bind="textInput: form.month" />
+		</div>
+		<div class="input-info">
+			<label for="amount">Planned Amount:</label>
+			<input id="amount" class="input--default" placeholder="Amount" data-bind="textInput: form.plannedAmount" />
+		</div>
+        <button class="btn--default align-center" data-bind="click: addBudget">Add budget</button>
     </div>
 </div>
 
@@ -45,10 +54,20 @@
 
 <div class="layover" data-bind="visible: newCategoryForm(), click: toggleNewCategoryForm">
     <div class="creation-form" data-bind="click: function () {}, clickBubble: false;">
-        <input class="input--default" placeholder="Name" data-bind="textInput: categoryForm.name" />
-        <input disabled class="input--default" placeholder="Budget" data-bind="textInput: categoryForm.budget" />
-        <input class="input--default" placeholder="Planned Amount" data-bind="textInput: categoryForm.plannedAmount" />
-        <button class="btn--default" data-bind="click: addCategory">Add category</button>
+        <h3 class="align-center">Create Budget Category</h3>
+        <div class="input-info">
+            <label for="name">Name:</label>
+            <input id="name" class="input--default" placeholder="Name" data-bind="textInput: categoryForm.name" />
+        </div>
+        <div class="input-info">
+            <label for="budget">Budget:</label>
+            <input id="budget" disabled class="input--default" placeholder="Budget" data-bind="textInput: categoryForm.budget" />
+        </div>
+        <div class="input-info">
+            <label for="planned-amount">Planned Amount:</label>
+            <input id="planned-amount" class="input--default" placeholder="Planned Amount" data-bind="textInput: categoryForm.plannedAmount" />
+        </div>
+        <button class="btn--default align-center" data-bind="click: addCategory">Add category</button>
     </div>
 </div>
 
@@ -85,14 +104,32 @@
 
 <div class="layover" data-bind="visible: newPaymentForm(), click: toggleNewPaymentForm">
     <div class="creation-form" data-bind="click: function () {}, clickBubble: false;">
-        <input class="input--default" placeholder="Name" data-bind="textInput: paymentForm.name" />
-        <input disabled class="input--default" placeholder="Budget" data-bind="textInput: paymentForm.budget" />
-        <input disabled class="input--default" placeholder="Category" data-bind="textInput: paymentForm.category" />
-        <input disabled class="input--default" placeholder="Date" data-bind="textInput: paymentForm.date" />
-        <input class="input--default" placeholder="Planned Amount" data-bind="textInput: paymentForm.plannedAmount" />
-        <textarea class="textarea--default" placeholder="Description" data-bind="textInput: paymentForm.description"></textarea>
-        <button class="btn--default" data-bind="click: addPayment">Add payment</button>
-
+        <h3 class="align-center">Create Payment</h3>
+        <div class="input-info">
+            <label for="name">Name:</label>
+            <input class="input--default" placeholder="Name" data-bind="textInput: paymentForm.name" />
+        </div>
+        <div class="input-info">
+            <label for="budget">Budget:</label>
+            <input id="budget" disabled class="input--default" placeholder="Budget" data-bind="textInput: paymentForm.budget" />
+        </div>
+        <div class="input-info">
+            <label for="category">Category:</label>
+            <input id="category" disabled class="input--default" placeholder="Category" data-bind="textInput: paymentForm.category" />
+        </div>
+        <div class="input-info">
+            <label for="date">Date:</label>
+            <input id="date" disabled class="input--default" placeholder="Date" data-bind="textInput: paymentForm.date" />
+        </div>
+        <div class="input-info">
+            <label for="planned-amount">Planned Amount:</label>
+            <input id="planned-amount" class="input--default" placeholder="Planned Amount" data-bind="textInput: paymentForm.plannedAmount" />
+        </div>
+          <div class="input-info">
+            <label for="description">Description:</label>
+            <textarea id="description" class="textarea--default" placeholder="Description" data-bind="textInput: paymentForm.description"></textarea>
+        </div>
+        <button class="btn--default align-center" data-bind="click: addPayment">Add payment</button>
     </div>
 </div>
 
