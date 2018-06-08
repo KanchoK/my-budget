@@ -32498,7 +32498,7 @@ class HomeView {
                     throw "You already have a budget with this name!"
                 }
                 this.budgets.unshift(newBudget);
-                this.selectedBudget(newBudget);
+                this.selectBudget(newBudget);
                 alert(`Budget ${res.name} copies successfully!`);
                 this.toggleCopyBudgetDialog();
             })
