@@ -35,7 +35,7 @@ class HomeView {
         this.newPaymentForm = ko.observable(false);
 
         this.form = {
-            name: ko.observable('May budget'),
+            name: ko.observable('June budget'),
             month: ko.observable(common.getMonthString()),
             plannedAmount: ko.observable(200),
         };
