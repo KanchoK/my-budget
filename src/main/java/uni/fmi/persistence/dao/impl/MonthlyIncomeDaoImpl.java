@@ -69,7 +69,7 @@ public class MonthlyIncomeDaoImpl implements MonthlyIncomeDao {
     @Override
     public MonthlyIncome updateMonthlyIncome(int id, MonthlyIncome monthlyIncome) {
         MonthlyIncome updatedMonthlyIncome = null;
-
+        
         try (Connection conn = databaseManager.getDataSource().getConnection();
              PreparedStatement preparedStatement = conn
                      .prepareStatement(UPDATE_MONTHLY_INCOME_STATEMENT)) {
@@ -129,7 +129,7 @@ public class MonthlyIncomeDaoImpl implements MonthlyIncomeDao {
         }
         
 //        if (monthlyIncome == null) {
-//            monthlyIncome = new MonthlyIncome(0, BigDecimal.ZERO, "", new User());
+//            monthlyIncome = new MonthlyIncome(0, BigDecimal.ZERO, month, new User(userId, ""));
 //        }
 
         return monthlyIncome;

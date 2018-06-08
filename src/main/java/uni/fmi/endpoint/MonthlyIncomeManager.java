@@ -64,7 +64,7 @@ public class MonthlyIncomeManager {
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateMonthlyIncome(@PathParam("id") int id,
             MonthlyIncome monthlyIncome) {
-        LOG.info("MonthlyIncome creation initiated...");
+        LOG.info("MonthlyIncome update initiated...");
         if (monthlyIncome.getValidForMonth() == null || monthlyIncome.getValidForMonth().equals("")
                 || monthlyIncome.getMonthlyIncome().compareTo(BigDecimal.ZERO) != 1) {
             StatusMessage statusMessage = new StatusMessageBuilder()
@@ -80,7 +80,7 @@ public class MonthlyIncomeManager {
         if (newMonthlyIncome != null && newMonthlyIncome.getId() != -1) {
             StatusMessage statusMessage = new StatusMessageBuilder()
                     .status(Response.Status.OK.getStatusCode())
-                    .message("Monthly income was updated successfully.").build();
+                    .message("Monthly income was updated successfully to " + newMonthlyIncome.getMonthlyIncome()).build();
             LOG.info("Service status message: " + statusMessage);
             return Response.status(Response.Status.OK.getStatusCode())
                     .entity(newMonthlyIncome).build();

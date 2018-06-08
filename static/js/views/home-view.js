@@ -276,6 +276,7 @@ class Overview {
 
         this.editMonthly = ko.observable(false);
         this.setMonthly = ko.observable('');
+        this.monthlyIncomeId = ko.observable('');
 
         this.updateAll();
 
@@ -321,25 +322,47 @@ class Overview {
     }
 
     saveMonthly () {
-        $.ajax({
-            type: "POST",
-            url: `/api/monthly-incomes/create`,
-            data: JSON.stringify({
-                "monthlyIncome": this.setMonthly(),
-                "validForMonth": common.getMonthString(),
-                "user": {
-                    "id": sessionStorage.getItem('USER_ID')
-                }
-            }),
-            headers: {
-                'Authorization': 'Bearer ' + sessionStorage.getItem('USER_SESSION_TOKEN')
-            },
-            contentType: "application/json"
-        })
-            .then(() => {
-                this.monthlyIncome(this.setMonthly());
-                this.toggleEdit();
+        if (this.monthlyIncome() == undefined){
+            $.ajax({
+                type: "POST",
+                url: `/api/monthly-incomes/create`,
+                data: JSON.stringify({
+                    "monthlyIncome": this.setMonthly(),
+                    "validForMonth": common.getMonthString(),
+                    "user": {
+                        "id": sessionStorage.getItem('USER_ID')
+                    }
+                }),
+                headers: {
+                    'Authorization': 'Bearer ' + sessionStorage.getItem('USER_SESSION_TOKEN')
+                },
+                contentType: "application/json"
             })
+                .then(() => {
+                    this.monthlyIncome(this.setMonthly());
+                    this.toggleEdit();
+                })
+        } else {
+            $.ajax({
+                type: "PUT",
+                url: `/api/monthly-incomes/update/` + JSON.stringify(this.monthlyIncomeId()),
+                data: JSON.stringify({
+                    "monthlyIncome": this.setMonthly(),
+                    "validForMonth": common.getMonthString(),
+                    "user": {
+                        "id": sessionStorage.getItem('USER_ID')
+                    }
+                }),
+                headers: {
+                    'Authorization': 'Bearer ' + sessionStorage.getItem('USER_SESSION_TOKEN')
+                },
+                contentType: "application/json"
+            })
+                .then(() => {
+                    this.monthlyIncome(this.setMonthly());
+                    this.toggleEdit();
+                })
+        }    
     }
 
     getIncome () {
@@ -352,6 +375,7 @@ class Overview {
         })
             .then(res => {
                 this.monthlyIncome(res.monthlyIncome);
+                this.monthlyIncomeId(res.id);
             })
     }
 }
