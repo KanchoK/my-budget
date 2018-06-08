@@ -2,21 +2,47 @@
 <button class="btn--default" data-bind="click: logout" style="float: right;">Logout</button>
 
 <overview></overview>
+<div class="layover" data-bind="visible: copyBudgetDialog(), click: toggleCopyBudgetDialog">
+    <div class="creation-form" data-bind="click: function () {}, clickBubble: false;">
+        <p class="align-center">You can choose a previous budget template and copy it to your monthly budgets.</p>
+
+        <div class="list-item-static">
+            <div class="attrs">
+                <span class="attr">Name</span>
+                <span class="attr">Planned</span>
+            </div>
+        </div>
+
+        <div class="list" data-bind="foreach: oldBudgets">
+            <div class="list-item" data-bind="click: function() { $parent.copyBudget(id) }">
+                <div class="attrs">
+                    <span class="attr" data-bind="text: name"></span>
+                    <span class="attr" data-bind="text: plannedAmount"></span>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn--default align-center" data-bind="click: toggleCopyBudgetDialog">Close</button>
+    </div>
+</div>
+
+
+
 <div class="layover" data-bind="visible: newBudgetForm(), click: toggleNewBudgetForm">
     <div class="creation-form" data-bind="click: function () {}, clickBubble: false;">
         <h3 class="align-center">Create Budget</h3>
-		<div class="input-info">
-			<label for="name">Name:</label>
-			<input id="name" class="input--default" placeholder="Name" data-bind="textInput: form.name" />
-		</div>
-		<div class="input-info">
-			<label for="month">Month:</label>
-			<input id="month" class="input--default" placeholder="Date mm-yyyy" data-bind="textInput: form.month" />
-		</div>
-		<div class="input-info">
-			<label for="amount">Planned Amount:</label>
-			<input id="amount" class="input--default" placeholder="Amount" data-bind="textInput: form.plannedAmount" />
-		</div>
+        <div class="input-info">
+            <label for="name">Name:</label>
+            <input id="name" class="input--default" placeholder="Name" data-bind="textInput: form.name" />
+        </div>
+        <div class="input-info">
+            <label for="month">Month:</label>
+            <input id="month" class="input--default" placeholder="Date mm-yyyy" data-bind="textInput: form.month" />
+        </div>
+        <div class="input-info">
+            <label for="amount">Planned Amount:</label>
+            <input id="amount" class="input--default" placeholder="Amount" data-bind="textInput: form.plannedAmount" />
+        </div>
         <button class="btn--default align-center" data-bind="click: addBudget">Add budget</button>
     </div>
 </div>
@@ -24,7 +50,10 @@
 
 <div class="budgets-container">
     <h2>Budgets</h2>
-    <button class="btn--default" data-bind="click: toggleNewBudgetForm">+ New Budget</button>
+    <div class="flex-center">
+        <button class="btn--default" data-bind="click: toggleNewBudgetForm">+ New Budget</button>
+        <button class="btn--default" data-bind="click: promptCopyBudget">Copy old budget</button>
+    </div>
     <div class="list-item-static">
         <div class="attrs">
             <span class="attr">Name</span>
@@ -125,7 +154,7 @@
             <label for="planned-amount">Planned Amount:</label>
             <input id="planned-amount" class="input--default" placeholder="Planned Amount" data-bind="textInput: paymentForm.plannedAmount" />
         </div>
-          <div class="input-info">
+        <div class="input-info">
             <label for="description">Description:</label>
             <textarea id="description" class="textarea--default" placeholder="Description" data-bind="textInput: paymentForm.description"></textarea>
         </div>

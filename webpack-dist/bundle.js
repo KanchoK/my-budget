@@ -2636,7 +2636,26 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, ".category-wrap {\n  margin: 3px 10px;\n  padding: 7px;\n  background-color: #e8e8e8; }\n", ""]);
+exports.push([module.i, ".category-wrap {\n  margin: 3px 10px;\n  padding: 7px;\n  background-color: #e8e8e8; }\n\n.list-item .btn-remove:hover {\n  background-color: red;\n  color: white; }\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./static/scss/home-view.scss":
+/*!*******************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/sass-loader/lib/loader.js!./static/scss/home-view.scss ***!
+  \*******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".input-info {\n  display: flex;\n  align-items: center;\n  justify-content: flex-end; }\n\n.input-info input {\n  margin: 0.2em; }\n\n.input-info textarea {\n  height: 42px;\n  margin: 0.2em;\n  resize: both; }\n\n.input-info label {\n  margin-right: 0.3em; }\n\n.align-center {\n  text-align: center; }\n\n.creation-form .btn--default {\n  margin-left: 35%; }\n", ""]);
 
 // exports
 
@@ -2674,7 +2693,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, ".flex-row {\n  display: flex; }\n\n.flex-center {\n  display: flex;\n  align-items: center; }\n\n.flex-start {\n  display: flex;\n  align-items: flex-start; }\n\n.pad-top-7 {\n  padding-top: 7px; }\n\n.btn--default {\n  padding: 0 7px;\n  margin: 0 7px;\n  border: 1px solid lightgrey;\n  background-color: white;\n  border-radius: 3px;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  background-color: white;\n  height: 42px; }\n  .btn--default:hover {\n    cursor: pointer;\n    background: rgba(144, 238, 144, 0.5); }\n\n.select--lang {\n  padding: 0 7px;\n  margin: 0 7px;\n  border: 1px solid lightgrey;\n  background-color: white;\n  border-radius: 3px;\n  height: 42px; }\n\n.input--default {\n  padding: 0 7px;\n  margin: 0 7px;\n  border: 1px solid lightgrey;\n  background-color: white;\n  border-radius: 3px;\n  height: 42px; }\n  .input--default:hover {\n    cursor: text; }\n\n.textarea--default {\n  padding: 0 7px;\n  margin: 0 7px;\n  border: 1px solid lightgrey;\n  background-color: white;\n  border-radius: 3px; }\n\n.input--wrap {\n  margin-top: 10px;\n  display: flex;\n  align-items: center; }\n  .input--wrap div {\n    width: 150px; }\n\n.list-item-static {\n  height: 40px;\n  line-height: 40px;\n  border-bottom: 1px solid lightgrey;\n  display: flex;\n  padding-right: 47px; }\n  .list-item-static .attrs {\n    flex: 1;\n    display: flex; }\n  .list-item-static .attr {\n    flex: 1;\n    margin-left: 5px; }\n  .list-item-static .btn-remove {\n    flex-shrink: 0;\n    align-self: center;\n    margin: 0 5px;\n    height: 32px; }\n\n.list-item {\n  height: 40px;\n  line-height: 40px;\n  border-bottom: 1px solid lightgrey;\n  display: flex; }\n  .list-item .attrs {\n    flex: 1;\n    display: flex; }\n  .list-item .attr {\n    flex: 1;\n    margin-left: 5px; }\n  .list-item .btn-remove {\n    flex-shrink: 0;\n    align-self: center;\n    margin: 0 5px;\n    height: 32px; }\n  .list-item:hover {\n    cursor: pointer;\n    background-color: lightgreen; }\n\n.item-selected {\n  background: rgba(144, 238, 144, 0.5); }\n\n.layover {\n  background: rgba(211, 211, 211, 0.5);\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  display: flex;\n  align-items: center;\n  justify-content: center; }\n\n.creation-form {\n  display: flex;\n  flex-direction: column;\n  padding: 20px;\n  border: 1px solid grey;\n  background-color: white; }\n\n.text--warning {\n  color: red;\n  font-weight: bold; }\n\n.budgets-container {\n  width: 47%;\n  height: 500px;\n  float: left;\n  display: flex;\n  flex-direction: column;\n  margin-right: 6%; }\n  .budgets-container .list {\n    flex: 1;\n    overflow-y: scroll; }\n\n.categories-container {\n  width: 47%;\n  height: 500px;\n  float: left;\n  display: flex;\n  flex-direction: column; }\n  .categories-container .list {\n    flex: 1;\n    overflow-y: scroll; }\n\n.payments-container {\n  width: 47%;\n  height: 500px;\n  float: left;\n  display: flex;\n  flex-direction: column;\n  width: 100%; }\n  .payments-container .list {\n    flex: 1;\n    overflow-y: scroll; }\n\n.registration-form {\n  display: flex;\n  flex-direction: column;\n  width: 600px; }\n\n.btn--default {\n  margin-top: 10px;\n  align-self: flex-start; }\n\n.category-wrap {\n  margin: 3px 10px;\n  padding: 7px;\n  background-color: #e8e8e8; }\n\na {\n  font-size: 55px;\n  background: red; }\n", ""]);
+exports.push([module.i, ".flex-row {\n  display: flex; }\n\n.flex-center {\n  display: flex;\n  align-items: center; }\n\n.flex-start {\n  display: flex;\n  align-items: flex-start; }\n\n.pad-top-7 {\n  padding-top: 7px; }\n\n.btn--default {\n  padding: 0 7px;\n  margin: 0 7px;\n  border: 1px solid lightgrey;\n  background-color: white;\n  border-radius: 3px;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  background-color: white;\n  height: 42px; }\n  .btn--default:hover {\n    cursor: pointer;\n    background: rgba(144, 238, 144, 0.5); }\n\n.select--lang {\n  padding: 0 7px;\n  margin: 0 7px;\n  border: 1px solid lightgrey;\n  background-color: white;\n  border-radius: 3px;\n  height: 42px; }\n\n.input--default {\n  padding: 0 7px;\n  margin: 0 7px;\n  border: 1px solid lightgrey;\n  background-color: white;\n  border-radius: 3px;\n  height: 42px; }\n  .input--default:hover {\n    cursor: text; }\n\n.textarea--default {\n  padding: 0 7px;\n  margin: 0 7px;\n  border: 1px solid lightgrey;\n  background-color: white;\n  border-radius: 3px; }\n\n.input--wrap {\n  margin-top: 10px;\n  display: flex;\n  align-items: center; }\n  .input--wrap div {\n    width: 150px; }\n\n.list-item-static {\n  height: 40px;\n  line-height: 40px;\n  border-bottom: 1px solid lightgrey;\n  display: flex;\n  padding-right: 47px; }\n  .list-item-static .attrs {\n    flex: 1;\n    display: flex; }\n  .list-item-static .attr {\n    flex: 1;\n    margin-left: 5px; }\n  .list-item-static .btn-remove {\n    flex-shrink: 0;\n    align-self: center;\n    margin: 0 5px;\n    height: 32px; }\n\n.list-item {\n  height: 40px;\n  line-height: 40px;\n  border-bottom: 1px solid lightgrey;\n  display: flex; }\n  .list-item .attrs {\n    flex: 1;\n    display: flex; }\n  .list-item .attr {\n    flex: 1;\n    margin-left: 5px; }\n  .list-item .btn-remove {\n    flex-shrink: 0;\n    align-self: center;\n    margin: 0 5px;\n    height: 32px; }\n  .list-item:hover {\n    cursor: pointer;\n    background-color: lightgreen; }\n\n.item-selected {\n  background: rgba(144, 238, 144, 0.5); }\n\n.layover {\n  background: rgba(211, 211, 211, 0.5);\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  display: flex;\n  align-items: center;\n  justify-content: center; }\n\n.creation-form {\n  display: flex;\n  flex-direction: column;\n  padding: 20px;\n  border: 1px solid grey;\n  background-color: white; }\n\n.text--warning {\n  color: red;\n  font-weight: bold; }\n\n.budgets-container {\n  width: 47%;\n  height: 500px;\n  float: left;\n  display: flex;\n  flex-direction: column;\n  margin-right: 6%; }\n  .budgets-container .list {\n    flex: 1;\n    overflow-y: scroll; }\n\n.categories-container {\n  width: 47%;\n  height: 500px;\n  float: left;\n  display: flex;\n  flex-direction: column; }\n  .categories-container .list {\n    flex: 1;\n    overflow-y: scroll; }\n\n.payments-container {\n  width: 47%;\n  height: 500px;\n  float: left;\n  display: flex;\n  flex-direction: column;\n  width: 100%; }\n  .payments-container .list {\n    flex: 1;\n    overflow-y: scroll; }\n\n.registration-form {\n  display: flex;\n  flex-direction: column;\n  width: 600px; }\n\n.btn--default {\n  margin-top: 10px;\n  align-self: flex-start; }\n\n.category-wrap {\n  margin: 3px 10px;\n  padding: 7px;\n  background-color: #e8e8e8; }\n\n.list-item .btn-remove:hover {\n  background-color: red;\n  color: white; }\n\na {\n  font-size: 55px;\n  background: red; }\n", ""]);
 
 // exports
 
@@ -3696,7 +3715,7 @@ module.exports = "<h2>Payments</h2>\r\n\r\n<button data-bind=\"click: toggleNewP
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h2>My Personal Budget</h2>\r\n<button class=\"btn--default\" data-bind=\"click: logout\" style=\"float: right;\">Logout</button>\r\n\r\n<overview></overview>\r\n\r\n<div class=\"layover\" data-bind=\"visible: newBudgetForm(), click: toggleNewBudgetForm\">\r\n    <div class=\"creation-form\" data-bind=\"click: function () {}, clickBubble: false;\">\r\n        <input class=\"input--default\" placeholder=\"Name\" data-bind=\"textInput: form.name\" />\r\n        <input class=\"input--default\" placeholder=\"Date mm-yyyy\" data-bind=\"textInput: form.month\" />\r\n        <input class=\"input--default\" placeholder=\"Amount\" data-bind=\"textInput: form.plannedAmount\" />\r\n        <button class=\"btn--default\" data-bind=\"click: addBudget\">Add budget</button>\r\n    </div>\r\n</div>\r\n\r\n\r\n<div class=\"budgets-container\">\r\n    <h2>Budgets</h2>\r\n    <button class=\"btn--default\" data-bind=\"click: toggleNewBudgetForm\">+ New Budget</button>\r\n    <div class=\"list-item-static\">\r\n        <div class=\"attrs\">\r\n            <span class=\"attr\">Name</span>\r\n            <span class=\"attr\">Month</span>\r\n            <span class=\"attr\">Planned</span>\r\n            <span class=\"attr\">Spent</span>\r\n            <span class=\"attr\">%</span>\r\n        </div>\r\n    </div>\r\n    <div class=\"list\" data-bind=\"foreach: budgets\">\r\n        <div class=\"list-item\" data-bind=\"click: function() { $parent.selectBudget($data) }, css: { 'item-selected': $parent.selectedBudget() && $parent.selectedBudget().id === id }\">\r\n            <div class=\"attrs\">\r\n                <span class=\"attr\" data-bind=\"text: name\"></span>\r\n                <span class=\"attr\" data-bind=\"text: month\"></span>\r\n                <span class=\"attr\" data-bind=\"text: plannedAmount\"></span>\r\n                <span class=\"attr\" data-bind=\"text: spentAmount\"></span>\r\n                <span class=\"attr\" data-bind=\"text: percSpent() + '%', css: { 'text--warning': percSpent() > 80 }\"></span>\r\n            </div>\r\n            <button class=\"btn--default btn-remove\" data-bind=\"click: function() { $parent.removeBudget($data) }, clickBubble: false\">X</button>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n\r\n<!--Categories-->\r\n<!-- ko if: budgets().length -->\r\n\r\n<div class=\"layover\" data-bind=\"visible: newCategoryForm(), click: toggleNewCategoryForm\">\r\n    <div class=\"creation-form\" data-bind=\"click: function () {}, clickBubble: false;\">\r\n        <input class=\"input--default\" placeholder=\"Name\" data-bind=\"textInput: categoryForm.name\" />\r\n        <input disabled class=\"input--default\" placeholder=\"Budget\" data-bind=\"textInput: categoryForm.budget\" />\r\n        <input class=\"input--default\" placeholder=\"Planned Amount\" data-bind=\"textInput: categoryForm.plannedAmount\" />\r\n        <button class=\"btn--default\" data-bind=\"click: addCategory\">Add category</button>\r\n    </div>\r\n</div>\r\n\r\n<div class=\"categories-container\">\r\n    <h2>Categories for <u data-bind=\"text: selectedBudget() && selectedBudget().name\"></u></h2>\r\n    <button class=\"btn--default\" data-bind=\"click: toggleNewCategoryForm\">+ New Category</button>\r\n\r\n    <div class=\"list-item-static\">\r\n        <div class=\"attrs\">\r\n            <span class=\"attr\">Name</span>\r\n            <span class=\"attr\">Planned</span>\r\n            <span class=\"attr\">Spent</span>\r\n            <span class=\"attr\">%</span>\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"list\" data-bind=\"foreach: categories\">\r\n        <div class=\"list-item\" data-bind=\"click: function() { $parent.selectCategory($data) }, css: { 'item-selected': $parent.selectedCategory() && $parent.selectedCategory().id === id }\">\r\n            <div class=\"attrs\">\r\n                <span class=\"attr\" data-bind=\"text: name\"></span>\r\n                <span class=\"attr\" data-bind=\"text: plannedAmount\"></span>\r\n                <span class=\"attr\" data-bind=\"text: spentAmount\"></span>\r\n                <span class=\"attr\" data-bind=\"text: difference() + '%', css: { 'text--warning': difference() > 80 }\"></span>\r\n            </div>\r\n            <button class=\"btn--default btn-remove\" data-bind=\"click: function() { $parent.removeCategory(id) }, clickBubble: false\">X</button>\r\n        </div>\r\n    </div>\r\n</div>\r\n<!-- /ko -->\r\n\r\n\r\n<!--Payments-->\r\n<!-- ko if: categories().length -->\r\n\r\n<div class=\"layover\" data-bind=\"visible: newPaymentForm(), click: toggleNewPaymentForm\">\r\n    <div class=\"creation-form\" data-bind=\"click: function () {}, clickBubble: false;\">\r\n        <input class=\"input--default\" placeholder=\"Name\" data-bind=\"textInput: paymentForm.name\" />\r\n        <input disabled class=\"input--default\" placeholder=\"Budget\" data-bind=\"textInput: paymentForm.budget\" />\r\n        <input disabled class=\"input--default\" placeholder=\"Category\" data-bind=\"textInput: paymentForm.category\" />\r\n        <input disabled class=\"input--default\" placeholder=\"Date\" data-bind=\"textInput: paymentForm.date\" />\r\n        <input class=\"input--default\" placeholder=\"Planned Amount\" data-bind=\"textInput: paymentForm.plannedAmount\" />\r\n        <textarea class=\"textarea--default\" placeholder=\"Description\" data-bind=\"textInput: paymentForm.description\"></textarea>\r\n        <button class=\"btn--default\" data-bind=\"click: addPayment\">Add payment</button>\r\n\r\n    </div>\r\n</div>\r\n\r\n<div class=\"payments-container\">\r\n    <h2>Payments for \"\r\n        <u data-bind=\"text: selectedBudget() && selectedBudget().name\"></u> /\r\n        <u data-bind=\"text: selectedCategory() && selectedCategory().name\"></u>\"\r\n    </h2>\r\n    <button class=\"btn--default\" data-bind=\"click: toggleNewPaymentForm\">+ New payment</button>\r\n\r\n    <div class=\"list-item-static\">\r\n        <div class=\"attrs\">\r\n            <span class=\"attr\">Name</span>\r\n            <span class=\"attr\">Date</span>\r\n            <span class=\"attr\">Category</span>\r\n            <span class=\"attr\">Amount</span>\r\n            <span class=\"attr\">Description</span>\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"list\" data-bind=\"foreach: payments\">\r\n        <div class=\"list-item\">\r\n            <div class=\"attrs\">\r\n                <span class=\"attr\" data-bind=\"text: name\"></span>\r\n                <span class=\"attr\" data-bind=\"text: date\"></span>\r\n                <span class=\"attr\" data-bind=\"text: category\"></span>\r\n                <span class=\"attr\" data-bind=\"text: amount\"></span>\r\n                <span class=\"attr\" data-bind=\"text: description\"></span>\r\n            </div>\r\n            <button class=\"btn--default btn-remove\" data-bind=\"click: function() { $parent.removePayment(id) }, clickBubble: false\">X</button>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<!-- /ko -->\r\n";
+module.exports = "<h2>My Personal Budget</h2>\r\n<button class=\"btn--default\" data-bind=\"click: logout\" style=\"float: right;\">Logout</button>\r\n\r\n<overview></overview>\r\n<div class=\"layover\" data-bind=\"visible: copyBudgetDialog(), click: toggleCopyBudgetDialog\">\r\n    <div class=\"creation-form\" data-bind=\"click: function () {}, clickBubble: false;\">\r\n        <p class=\"align-center\">You can choose a previous budget template and copy it to your monthly budgets.</p>\r\n\r\n        <div class=\"list-item-static\">\r\n            <div class=\"attrs\">\r\n                <span class=\"attr\">Name</span>\r\n                <span class=\"attr\">Planned</span>\r\n            </div>\r\n        </div>\r\n\r\n        <div class=\"list\" data-bind=\"foreach: oldBudgets\">\r\n            <div class=\"list-item\" data-bind=\"click: function() { $parent.copyBudget(id) }\">\r\n                <div class=\"attrs\">\r\n                    <span class=\"attr\" data-bind=\"text: name\"></span>\r\n                    <span class=\"attr\" data-bind=\"text: plannedAmount\"></span>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n        <button class=\"btn--default align-center\" data-bind=\"click: toggleCopyBudgetDialog\">Close</button>\r\n    </div>\r\n</div>\r\n\r\n\r\n\r\n<div class=\"layover\" data-bind=\"visible: newBudgetForm(), click: toggleNewBudgetForm\">\r\n    <div class=\"creation-form\" data-bind=\"click: function () {}, clickBubble: false;\">\r\n        <h3 class=\"align-center\">Create Budget</h3>\r\n        <div class=\"input-info\">\r\n            <label for=\"name\">Name:</label>\r\n            <input id=\"name\" class=\"input--default\" placeholder=\"Name\" data-bind=\"textInput: form.name\" />\r\n        </div>\r\n        <div class=\"input-info\">\r\n            <label for=\"month\">Month:</label>\r\n            <input id=\"month\" class=\"input--default\" placeholder=\"Date mm-yyyy\" data-bind=\"textInput: form.month\" />\r\n        </div>\r\n        <div class=\"input-info\">\r\n            <label for=\"amount\">Planned Amount:</label>\r\n            <input id=\"amount\" class=\"input--default\" placeholder=\"Amount\" data-bind=\"textInput: form.plannedAmount\" />\r\n        </div>\r\n        <button class=\"btn--default align-center\" data-bind=\"click: addBudget\">Add budget</button>\r\n    </div>\r\n</div>\r\n\r\n\r\n<div class=\"budgets-container\">\r\n    <h2>Budgets</h2>\r\n    <div class=\"flex-center\">\r\n        <button class=\"btn--default\" data-bind=\"click: toggleNewBudgetForm\">+ New Budget</button>\r\n        <button class=\"btn--default\" data-bind=\"click: promptCopyBudget\">Copy old budget</button>\r\n    </div>\r\n    <div class=\"list-item-static\">\r\n        <div class=\"attrs\">\r\n            <span class=\"attr\">Name</span>\r\n            <span class=\"attr\">Month</span>\r\n            <span class=\"attr\">Planned</span>\r\n            <span class=\"attr\">Spent</span>\r\n            <span class=\"attr\">%</span>\r\n        </div>\r\n    </div>\r\n    <div class=\"list\" data-bind=\"foreach: budgets\">\r\n        <div class=\"list-item\" data-bind=\"click: function() { $parent.selectBudget($data) }, css: { 'item-selected': $parent.selectedBudget() && $parent.selectedBudget().id === id }\">\r\n            <div class=\"attrs\">\r\n                <span class=\"attr\" data-bind=\"text: name\"></span>\r\n                <span class=\"attr\" data-bind=\"text: month\"></span>\r\n                <span class=\"attr\" data-bind=\"text: plannedAmount\"></span>\r\n                <span class=\"attr\" data-bind=\"text: spentAmount\"></span>\r\n                <span class=\"attr\" data-bind=\"text: percSpent() + '%', css: { 'text--warning': percSpent() > 80 }\"></span>\r\n            </div>\r\n            <button class=\"btn--default btn-remove\" data-bind=\"click: function() { $parent.removeBudget($data) }, clickBubble: false\">X</button>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n\r\n<!--Categories-->\r\n<!-- ko if: budgets().length -->\r\n\r\n<div class=\"layover\" data-bind=\"visible: newCategoryForm(), click: toggleNewCategoryForm\">\r\n    <div class=\"creation-form\" data-bind=\"click: function () {}, clickBubble: false;\">\r\n        <h3 class=\"align-center\">Create Budget Category</h3>\r\n        <div class=\"input-info\">\r\n            <label for=\"name\">Name:</label>\r\n            <input id=\"name\" class=\"input--default\" placeholder=\"Name\" data-bind=\"textInput: categoryForm.name\" />\r\n        </div>\r\n        <div class=\"input-info\">\r\n            <label for=\"budget\">Budget:</label>\r\n            <input id=\"budget\" disabled class=\"input--default\" placeholder=\"Budget\" data-bind=\"textInput: categoryForm.budget\" />\r\n        </div>\r\n        <div class=\"input-info\">\r\n            <label for=\"planned-amount\">Planned Amount:</label>\r\n            <input id=\"planned-amount\" class=\"input--default\" placeholder=\"Planned Amount\" data-bind=\"textInput: categoryForm.plannedAmount\" />\r\n        </div>\r\n        <button class=\"btn--default align-center\" data-bind=\"click: addCategory\">Add category</button>\r\n    </div>\r\n</div>\r\n\r\n<div class=\"categories-container\">\r\n    <h2>Categories for <u data-bind=\"text: selectedBudget() && selectedBudget().name\"></u></h2>\r\n    <button class=\"btn--default\" data-bind=\"click: toggleNewCategoryForm\">+ New Category</button>\r\n\r\n    <div class=\"list-item-static\">\r\n        <div class=\"attrs\">\r\n            <span class=\"attr\">Name</span>\r\n            <span class=\"attr\">Planned</span>\r\n            <span class=\"attr\">Spent</span>\r\n            <span class=\"attr\">%</span>\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"list\" data-bind=\"foreach: categories\">\r\n        <div class=\"list-item\" data-bind=\"click: function() { $parent.selectCategory($data) }, css: { 'item-selected': $parent.selectedCategory() && $parent.selectedCategory().id === id }\">\r\n            <div class=\"attrs\">\r\n                <span class=\"attr\" data-bind=\"text: name\"></span>\r\n                <span class=\"attr\" data-bind=\"text: plannedAmount\"></span>\r\n                <span class=\"attr\" data-bind=\"text: spentAmount\"></span>\r\n                <span class=\"attr\" data-bind=\"text: difference() + '%', css: { 'text--warning': difference() > 80 }\"></span>\r\n            </div>\r\n            <button class=\"btn--default btn-remove\" data-bind=\"click: function() { $parent.removeCategory(id) }, clickBubble: false\">X</button>\r\n        </div>\r\n    </div>\r\n</div>\r\n<!-- /ko -->\r\n\r\n\r\n<!--Payments-->\r\n<!-- ko if: categories().length -->\r\n\r\n<div class=\"layover\" data-bind=\"visible: newPaymentForm(), click: toggleNewPaymentForm\">\r\n    <div class=\"creation-form\" data-bind=\"click: function () {}, clickBubble: false;\">\r\n        <h3 class=\"align-center\">Create Payment</h3>\r\n        <div class=\"input-info\">\r\n            <label for=\"name\">Name:</label>\r\n            <input class=\"input--default\" placeholder=\"Name\" data-bind=\"textInput: paymentForm.name\" />\r\n        </div>\r\n        <div class=\"input-info\">\r\n            <label for=\"budget\">Budget:</label>\r\n            <input id=\"budget\" disabled class=\"input--default\" placeholder=\"Budget\" data-bind=\"textInput: paymentForm.budget\" />\r\n        </div>\r\n        <div class=\"input-info\">\r\n            <label for=\"category\">Category:</label>\r\n            <input id=\"category\" disabled class=\"input--default\" placeholder=\"Category\" data-bind=\"textInput: paymentForm.category\" />\r\n        </div>\r\n        <div class=\"input-info\">\r\n            <label for=\"date\">Date:</label>\r\n            <input id=\"date\" disabled class=\"input--default\" placeholder=\"Date\" data-bind=\"textInput: paymentForm.date\" />\r\n        </div>\r\n        <div class=\"input-info\">\r\n            <label for=\"planned-amount\">Planned Amount:</label>\r\n            <input id=\"planned-amount\" class=\"input--default\" placeholder=\"Planned Amount\" data-bind=\"textInput: paymentForm.plannedAmount\" />\r\n        </div>\r\n        <div class=\"input-info\">\r\n            <label for=\"description\">Description:</label>\r\n            <textarea id=\"description\" class=\"textarea--default\" placeholder=\"Description\" data-bind=\"textInput: paymentForm.description\"></textarea>\r\n        </div>\r\n        <button class=\"btn--default align-center\" data-bind=\"click: addPayment\">Add payment</button>\r\n    </div>\r\n</div>\r\n\r\n<div class=\"payments-container\">\r\n    <h2>Payments for \"\r\n        <u data-bind=\"text: selectedBudget() && selectedBudget().name\"></u> /\r\n        <u data-bind=\"text: selectedCategory() && selectedCategory().name\"></u>\"\r\n    </h2>\r\n    <button class=\"btn--default\" data-bind=\"click: toggleNewPaymentForm\">+ New payment</button>\r\n\r\n    <div class=\"list-item-static\">\r\n        <div class=\"attrs\">\r\n            <span class=\"attr\">Name</span>\r\n            <span class=\"attr\">Date</span>\r\n            <span class=\"attr\">Category</span>\r\n            <span class=\"attr\">Amount</span>\r\n            <span class=\"attr\">Description</span>\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"list\" data-bind=\"foreach: payments\">\r\n        <div class=\"list-item\">\r\n            <div class=\"attrs\">\r\n                <span class=\"attr\" data-bind=\"text: name\"></span>\r\n                <span class=\"attr\" data-bind=\"text: date\"></span>\r\n                <span class=\"attr\" data-bind=\"text: category\"></span>\r\n                <span class=\"attr\" data-bind=\"text: amount\"></span>\r\n                <span class=\"attr\" data-bind=\"text: description\"></span>\r\n            </div>\r\n            <button class=\"btn--default btn-remove\" data-bind=\"click: function() { $parent.removePayment(id) }, clickBubble: false\">X</button>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<!-- /ko -->\r\n";
 
 /***/ }),
 
@@ -31753,6 +31772,26 @@ const budgetsApi = {
                 'Authorization': 'Bearer ' + sessionStorage.getItem('USER_SESSION_TOKEN')
             }
         })
+    },
+    getBudgetsByUserId: function (id) {
+        return $.ajax({
+            type: "GET",
+            url: `/api/budgets/${id}`,
+            contentType: "application/json",
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('USER_SESSION_TOKEN')
+            }
+        })
+    },
+    copyBudget: function (userId, month, budgetId) {
+        return $.ajax({
+            type: "POST",
+            url: `/api/copyBudget/${userId}/${month}/${budgetId}`,
+            contentType: "application/json",
+            headers: {
+                'Authorization': 'Bearer ' + sessionStorage.getItem('USER_SESSION_TOKEN')
+            }
+        });
     }
 };
 
@@ -32341,6 +32380,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_auth__WEBPACK_IMPORTED_MODULE_0__);
 __webpack_require__(/*! ../../scss/overview.scss */ "./static/scss/overview.scss");
 __webpack_require__(/*! ../../scss/budget.scss */ "./static/scss/budget.scss");
+__webpack_require__(/*! ../../scss/home-view.scss */ "./static/scss/home-view.scss");
 
 const budgetApi = __webpack_require__(/*! ../api/budget */ "./static/js/api/budget.js");
 const categoryApi = __webpack_require__(/*! ../api/category */ "./static/js/api/category.js");
@@ -32360,6 +32400,8 @@ class HomeView {
 
         this.budgets = ko.observableArray([]);
         this.selectedBudget = ko.observable();
+        this.copyBudgetDialog = ko.observable(false);
+        this.oldBudgets = ko.observableArray();
 
         this.categories = ko.observableArray([]);
         this.selectedCategory = ko.observable();
@@ -32429,6 +32471,40 @@ class HomeView {
                                 this.selectedPayment(pays[0]);
                             })
                     });
+            })
+    }
+
+    promptCopyBudget () {
+        budgetApi.getBudgetsByUserId(sessionStorage.getItem('USER_ID'))
+            .then(res => {
+                if (res) {
+                    this.copyBudgetDialog(true);
+                    this.oldBudgets(res
+                        .filter(r => r.month !== common.getMonthString())
+                        .map(r => new Budget(r)));
+                }
+            });
+    }
+
+    toggleCopyBudgetDialog () {
+        this.copyBudgetDialog(!this.copyBudgetDialog());
+    }
+
+    copyBudget (budgetId) {
+        budgetApi.copyBudget(sessionStorage.getItem('USER_ID'), common.getMonthString(), budgetId)
+            .then(res => {
+                const newBudget = new Budget(res);
+                if (this.budgets().some(b => b.name === res.name)) {
+                    throw "You already have a budget with this name!"
+                }
+                this.budgets.unshift(newBudget);
+                this.selectedBudget(newBudget);
+                alert(`Budget ${res.name} copies successfully!`);
+                this.toggleCopyBudgetDialog();
+            })
+            .catch(err => {
+                this.toggleCopyBudgetDialog();
+                alert(`Budget copy failed!\n${err}`);
             })
     }
 
@@ -32780,6 +32856,36 @@ ko.components.register('register-view', {
 
 
 var content = __webpack_require__(/*! !../../node_modules/css-loader!../../node_modules/sass-loader/lib/loader.js!./budget.scss */ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./static/scss/budget.scss");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./static/scss/home-view.scss":
+/*!************************************!*\
+  !*** ./static/scss/home-view.scss ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../node_modules/css-loader!../../node_modules/sass-loader/lib/loader.js!./home-view.scss */ "./node_modules/css-loader/index.js!./node_modules/sass-loader/lib/loader.js!./static/scss/home-view.scss");
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 

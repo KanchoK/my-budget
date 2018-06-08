@@ -20,6 +20,8 @@ class HomeView {
 
         this.budgets = ko.observableArray([]);
         this.selectedBudget = ko.observable();
+        this.copyBudgetDialog = ko.observable(false);
+        this.oldBudgets = ko.observableArray();
 
         this.categories = ko.observableArray([]);
         this.selectedCategory = ko.observable();
@@ -89,6 +91,40 @@ class HomeView {
                                 this.selectedPayment(pays[0]);
                             })
                     });
+            })
+    }
+
+    promptCopyBudget () {
+        budgetApi.getBudgetsByUserId(sessionStorage.getItem('USER_ID'))
+            .then(res => {
+                if (res) {
+                    this.copyBudgetDialog(true);
+                    this.oldBudgets(res
+                        .filter(r => r.month !== common.getMonthString())
+                        .map(r => new Budget(r)));
+                }
+            });
+    }
+
+    toggleCopyBudgetDialog () {
+        this.copyBudgetDialog(!this.copyBudgetDialog());
+    }
+
+    copyBudget (budgetId) {
+        budgetApi.copyBudget(sessionStorage.getItem('USER_ID'), common.getMonthString(), budgetId)
+            .then(res => {
+                const newBudget = new Budget(res);
+                if (this.budgets().some(b => b.name === res.name)) {
+                    throw "You already have a budget with this name!"
+                }
+                this.budgets.unshift(newBudget);
+                this.selectedBudget(newBudget);
+                alert(`Budget ${res.name} copies successfully!`);
+                this.toggleCopyBudgetDialog();
+            })
+            .catch(err => {
+                this.toggleCopyBudgetDialog();
+                alert(`Budget copy failed!\n${err}`);
             })
     }
 
