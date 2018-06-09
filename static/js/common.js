@@ -7,7 +7,7 @@ const common = {
         return mStr + '-' + d.getFullYear();
     },
     getDate: function () {
-        const date = d.getDate() + 1;
+        const date = d.getDate();
         const dateStr = date < 10 ? '0' + date.toString() : date.toString();
         return dateStr + '-' + this.getMonthString();
     }
