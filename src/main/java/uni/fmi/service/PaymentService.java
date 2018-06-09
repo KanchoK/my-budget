@@ -20,4 +20,6 @@ public interface PaymentService {
     boolean removePayment(int id);
     
     Payment getPaymentForId(int id);
+    
+    Payment updatePaymentById(int id, Payment payment);
 }

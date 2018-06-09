@@ -39,7 +39,7 @@ public class PaymentManager {
                 || payment.getCategory() == null || payment.getCategory().getId() <= 0) {
             StatusMessage statusMessage = new StatusMessageBuilder()
                     .status(Response.Status.PRECONDITION_FAILED.getStatusCode())
-                    .message("Payment must have Name, Valid Month and User!").build();
+                    .message("Payment must have Name,Amount and Category!").build();
             LOG.info("Service status message: " + statusMessage);
             return Response.status(Response.Status.PRECONDITION_FAILED.getStatusCode())
                     .entity(statusMessage).build();
@@ -116,6 +116,39 @@ public class PaymentManager {
             StatusMessage statusMessage = new StatusMessageBuilder()
                     .status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode())
                     .message("There is no payment for id = " + payment.getId() + " !").build();
+            LOG.info("Service status message: " + statusMessage);
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode())
+                    .entity(statusMessage).build();
+        }
+    }
+    
+    @PUT
+    @Path("update/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updatePaymentById(@PathParam("id") int id,
+            Payment payment){
+          LOG.info("Payment update initiated...");
+        if (payment.getAmount().compareTo(BigDecimal.ZERO) != 1){
+            StatusMessage statusMessage = new StatusMessageBuilder()
+                    .status(Response.Status.PRECONDITION_FAILED.getStatusCode())
+                    .message("Payment must have Amount!").build();
+            LOG.info("Service status message: " + statusMessage);
+            return Response.status(Response.Status.PRECONDITION_FAILED.getStatusCode())
+                    .entity(statusMessage).build();
+        }
+
+        Payment updatedPayment = paymentService.updatePaymentById(id, payment);
+        if (updatedPayment != null && updatedPayment.getId() != -1) {
+            StatusMessage statusMessage = new StatusMessageBuilder()
+                    .status(Response.Status.OK.getStatusCode())
+                    .message("Payment was updated successfully.").build();
+            LOG.info("Service status message: " + statusMessage);
+            return Response.status(Response.Status.OK.getStatusCode())
+                    .entity(updatedPayment).build();
+        } else {
+            StatusMessage statusMessage = new StatusMessageBuilder()
+                    .status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode())
+                    .message("There was some problem with payment update!").build();
             LOG.info("Service status message: " + statusMessage);
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR.getStatusCode())
                     .entity(statusMessage).build();

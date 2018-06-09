@@ -31,10 +31,11 @@ public class BudgetManager {
         LOG.info("Budget creation initiated...");
         if (budget.getName() == null || budget.getValidForMonth() == null
                 || budget.getName().equals("") || budget.getValidForMonth().equals("")
-                || budget.getUser() == null || budget.getUser().getId() <= 0) {
+                || budget.getUser() == null || budget.getUser().getId() <= 0
+                || budget.getPlannedAmount().compareTo(BigDecimal.ZERO) != 1) {
             StatusMessage statusMessage = new StatusMessageBuilder()
                     .status(Response.Status.PRECONDITION_FAILED.getStatusCode())
-                    .message("Budget must have Name, Valid Month and User!").build();
+                    .message("Budget must have Name, Valid Month, Planned Amount and User!").build();
             LOG.info("Service status message: " + statusMessage);
             return Response.status(Response.Status.PRECONDITION_FAILED.getStatusCode())
                     .entity(statusMessage).build();

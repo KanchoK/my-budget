@@ -103,6 +103,11 @@ public class PaymentDaoImpl implements PaymentDao{
                     "ON b.userId = u.id " +
                     "WHERE p.id = ?";
     
+     private static final String UPDATE_PAYMENT_STATEMENT =
+            "UPDATE payments " +
+            "SET amount = ? " +
+            "WHERE id = ?";
+    
     @Override
     public Payment createPayment(Payment payment) {
         int paymentId = -1;
@@ -369,5 +374,25 @@ public class PaymentDaoImpl implements PaymentDao{
         }
           
         return payment;
+    }
+    
+    @Override
+    public Payment updatePaymentById(int id, Payment payment){
+          Payment updatedPayment = null;
+        
+        try (Connection conn = databaseManager.getDataSource().getConnection();
+             PreparedStatement preparedStatement = conn
+                     .prepareStatement(UPDATE_PAYMENT_STATEMENT)) {
+
+            preparedStatement.setBigDecimal(1, payment.getAmount());
+            preparedStatement.setInt(2, id);
+            preparedStatement.executeUpdate();
+
+            updatedPayment = getPaymentForId(id);
+        } catch (SQLException e) {
+            LOG.error("Exception was thrown", e);
+        }     
+        
+        return updatedPayment;
     }
 }

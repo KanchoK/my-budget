@@ -19,4 +19,6 @@ public interface PaymentDao {
     boolean removePayment(int id);
     
     Payment getPaymentForId(int id);
+    
+    Payment updatePaymentById(int id, Payment payment);
 }
